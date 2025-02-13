@@ -6,10 +6,7 @@ LABEL description="Container for use with Visual Studio"
 ENV USERNAME localizationtests
 ENV TESTDIR /home/${USERNAME}
 ENV REPOS_PATH  /home/tesseract_repos
-ENV NUSPELL /home/nuspell
 ENV CV2 /home/opencv
-ENV DEP ${TESTDIR}/dep
-ENV UTF8 ${DEP}/utfcpp
 
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
@@ -38,21 +35,6 @@ RUN apt-get install tesseract-ocr -y
 RUN apt-get install -y tesseract-ocr-spa
 RUN apt-get install -y tesseract-ocr-eng
 RUN apt-get install git -y
-RUN apt-get install hunspell-es -y
-RUN apt-get install hunspell-en-us -y
-RUN apt-get install hunspell-en-gb -y
-#install nuspell
-RUN mkdir $NUSPELL
-RUN git clone https://github.com/nuspell/nuspell $NUSPELL
-WORKDIR $NUSPELL
-RUN cd $NUSPELL
-RUN mkdir build
-WORKDIR $NUSPELL/build 
-RUN cd $NUSPELL/build
-RUN cmake ..
-RUN make -j
-RUN sudo make install 
-
 
 #install cv2
 RUN mkdir $CV2
@@ -66,7 +48,6 @@ RUN cd $CV2/build
 RUN cmake ..
 RUN make -j4
 RUN sudo make install
-
 
 #Python libraries 
 RUN apt-get install python3.11 python3.11-dev -y
@@ -134,7 +115,3 @@ EXPOSE 22
 RUN useradd -m -d ${TESTDIR} -s /bin/bash -G sudo ${USERNAME}
 RUN usermod -aG sudo ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-RUN mkdir ${DEP}
-RUN mkdir ${UTF8}
-RUN git clone https://github.com/nemtrif/utfcpp $UTF8 --branch v4.0.6
