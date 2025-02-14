@@ -22,14 +22,14 @@ void Truncation::test(const std::string& testString)
     for (int i = 0; i < palabrasEntrada.size(); i++) {
         for (int j = 0; j < palabrasEsperado.size(); j++) {
             if (palabrasEsperado[j] == palabrasEntrada[i]) {
-                string s = "El texto de entrada NO esta truncado." + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
+                string s = "El texto de entrada NO esta truncado. " + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
                 spdlog::info(s);
                 palabrasEsperado.erase(palabrasEsperado.begin());
                 j--;
                 break;
             }
             else if (palabrasEsperado[j].substr(0, palabrasEntrada[i].size()) == palabrasEntrada[i]) {
-                string s = "El texto de entrada esta truncado" + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
+                string s = "El texto de entrada esta truncado " + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
                 spdlog::warn(s);
                 palabrasEsperado.erase(palabrasEsperado.begin());
                 j--;
