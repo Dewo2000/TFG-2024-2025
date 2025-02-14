@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 using json = nlohmann::json;
 LocalizationTests::LocalizationTests() : state_(State::UNINITIALIZED), initTime_()
 {
@@ -132,7 +133,7 @@ bool LocalizationTests::getConfig()
 		}
 		
 		if (!archivo) {
-			throw std::runtime_error("No se puede o no existe el archivo de configuración");
+			throw std::runtime_error("No se puede o no existe el archivo de configuracion");
 			return false;
 		}
 
@@ -159,7 +160,8 @@ bool LocalizationTests::getConfig()
 		return true;
 	}
 	catch (const std::exception& e) {
-		std::cerr << "Error:  " << e.what() << std::endl;
+		
+		spdlog::error(e.what());
 		return false;
 	}
 }
