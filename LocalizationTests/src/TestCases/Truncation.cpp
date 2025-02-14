@@ -38,6 +38,9 @@ void Truncation::test(const std::string& testString)
         }
 
     }
+    if (palabrasEsperado.size() > 0) {
+        spdlog::warn("Falta palabras");
+    }
 
     //if (testString == _expected) {
     //    std::cout << "El texto de entrada NO está truncado.\n";
