@@ -124,11 +124,15 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\TestCases\Overlap.h" />
+    <ClInclude Include="..\..\src\TestCases\Placeholders.h" />
     <ClInclude Include="..\..\src\TestCases\TestsAssert.h" />
     <ClInclude Include="..\..\src\TestCases\TestCase.h" />
+    <ClInclude Include="..\..\src\TestCases\Truncation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\TestCases\Overlap.cpp" />
+    <ClCompile Include="..\..\src\TestCases\Placeholders.cpp" />
+    <ClCompile Include="..\..\src\TestCases\Truncation.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Lib />
