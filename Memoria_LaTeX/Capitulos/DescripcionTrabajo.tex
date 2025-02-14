@@ -422,21 +422,15 @@ Obteniendo estos nuevos resultados en el CER medio:
 	\end{tabular}
 \end{table}
 \section{Descripción de los tests}
-A continuación haremos una selección de los bugs presentados en la Sección \ref{bugs}, y explicaremos las razones por las que los hemos seleccionado, además de las restricciones y redefiniciones que haremos sobre ellos nuestra herramienta.
 
-Hemos seguido dos razonamientos principales a la hora de seleccionar los errores a evaluar por nuestra herramienta.
-\begin{itemize}
-	\item El error ha de tener que ver con texto y su representación, para que este pueda ser recogido por la herramienta de OCR y procesado. Por lo tanto, quedan descartados los errores que tengan que ver con audio o gráficos. (Errores \ref{ErrorSubtitulos}, \ref{ErrorAudio} y \ref{ErrorCultura})
-	\item El error no ha de requerir información sobre el contexto del videojuego, por lo tanto, quedan descartados los errores que tengan que ver con el uso correcto del lenguaje o el estilo de escritura. (Errores \ref{ErrorTraducción}, \ref{ErrorTermino} y \ref{ErrorDirectrices})
-\end{itemize}
 
-Siguiendo este razonamiento, hemos escogido los siguientes errores para que nuestra herramienta los evalúe:
+
 
 \subsection{Evaluación sobre problema de fuente (Error \ref{ErrorFuente})}
-Para evaluar este error, se comprobará que el texto no contiene ningún carácter como los de la Figura \ref{Notdef}, además de comprobar que los caracteres del texto esperado y el reconocido coinciden, pues este error también se puede manifestar, por ejemplo, eliminando signos extraños de letras, como puede ser cambiando una ``Ñ'' por una ``N''
+
 
 \subsection{Testing sobre idioma incorrecto}
-Debido a la ambigüedad entre las definiciones de los errores de ``Implementación Incorrecta'' y ´´Cadena no Localizada'' (\ref{ErrorNoLocalizada} y \ref{ErrorImpIncorrecta}), dado que ambas se refieren a la representación de un texto en un idioma incorrecto, hemos decidido combinarlas en una sola prueba. En esta prueba comprobaremos que el texto reconocido por el OCR está en el mismo idioma que el especificado por el usuario en la configuración de la prueba.
+
 
 \subsection{Testing sobre solapamiento de texto (Error \ref{ErrorSolapamiento})}
 Para resolver este problema se plantea usar el OCR para detectar las posiciones de los textos, seguido de una librería gráfica para detectar el contorno de la caja delimitadora guardado para ese texto, y obtener así sus posiciones. Comparando la posición del texto y la posición de la caja delimitadora obtenemos si el texto se está saliendo de la caja o no.
@@ -450,17 +444,15 @@ Para simplificar el test, damos algunas restricciones:
 \end{itemize} 
 	
 \subsection{Testing sobre detección de placeholders}
-Este es un error que no hemos definido previamente, pero es un error que hemos experimentado y hemos decidido evaluarlo. Este error ocurre cuando, por algún error de implementación, aparecen placeholders de localización en vez del texto traducido. Dado que es un error de implementación, se podría clasificar como un Error de ``Implementación Incorrecta'' (\ref{ErrorImpIncorrecta}).
 
-Para evaluarlo, comprobamos la cadena de texto en busca de los caracteres de placeholder, bajo la asunción de que estos no son utilizados como parte del lenguaje natural.
 
 \subsection{Testing sobre truncamiento de texto (Error \ref{ErrorTruncamiento})}
-Para evaluar este error, comprobaremos la longitud de la cadena reconocida contra la longitud de la cadena esperada, y las longitudes de las subcadenas más largas. 
+
 
 \subsection{Testing sobre error tipográfico (Error \ref{ErrorTypo})}
-TBD
+
 
 \subsection{Testing sobre error gramatical (Error \ref{ErrorGramatical})}
-TBD
+
  
 

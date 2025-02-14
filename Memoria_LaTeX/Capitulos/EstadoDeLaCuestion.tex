@@ -44,92 +44,51 @@ Comprobación cultural de imágenes e iconos: Algunos gestos, imágenes o iconos
 La \textbf{Localización} (o L10N), es el proceso por el cuál un producto audiovisual se adapta a un idioma y/o cultura diferente del idioma o cultura en el que el producto fue creado. Esto incluye, pero no se limita, a la traducción de los textos y audios. Aunque puede parecer que esto es lo único en lo que consiste la localización, en realidad también se incluyen cualquier tipo de adaptaciones culturales que haya que hacer al producto original para que se adapte correctamente a la cultura destino. Por ejemplo, es común en los diálogos de videojuegos que se utilicen juegos de palabras complejos, un buen localizador no ha de traducir literalmente estos juegos de palabras, sino que tendrá que buscar un equivalente adecuado a ellos en el nuevo idioma.
 
 
-\section{Language Quality Assurance}
+\section{Localization Quality Assurance}
 
-El \textbf{Language Quality Assurace} (de ahora en adelante \textbf{LQA}) es el proceso por el cual se verifica la calidad de la localización de un videojuego, comprobando que no haya \textit{bugs} visuales, fallos de traducción, o errores de sincronización entre audio y el texto.
-\section{\textit{Bugs} Linguísticos comunes} \label{bugs}
-A continuación haremos una enumeración de los distintos \textit{bugs} de localización que se pueden encontrar en un videojuego. \footnote{Las definiciones y nombres de estos bugs son sacados de \citet{LQAPSM2017}, a partir de la pág. 154}
+
+\section{\textit{Errores} Linguísticos comunes} \label{bugs}
+
 \subsection{Problema de fuente} \label{ErrorFuente}
-Este problema se da cuando la fuente utilizada no incluye alguno de los caracteres especiales de un idioma. Normalmente estos caracteres que faltan en la fuente se muestran como se puede ver en la Figura \ref{Notdef}
 
-\begin{figure}[H]
 
-	\centering
-	\includegraphics{Imagenes/BugsLQA/Notdef.png}
-	\caption{Glifos con los que se representan habitualmente los caracteres no incluidos en una fuente}
-	\label{Notdef}
-\end{figure}
+
 	
 \subsection{Implementación de texto incorrecta}\label{ErrorImpIncorrecta}
-Este error se produce cuando un texto que debería aparecer en un idioma se muestra en uno distinto, por ejemplo, alemán. Este error se puede producir porque hay texto equivocado documento de localización, o porque el programa tiene algún \textit{bug}. Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el texto adecuado.  
+
 \subsection{Cadena no localizada}\label{ErrorNoLocalizada}
-Este error se produce cuando un texto no está traducido. Puede deberse tanto a que el traductor no haya traducido el texto, como a que el desarrollador no haya facilitado dicho texto para la traducción. 
+
 \subsection{Error tipográfico o de ortografía}\label{ErrorTypo}
-Este error se produce cuando el texto tiene algún tipo de error ortográfico o errata.
+
 
 \subsection{Error gramatical}\label{ErrorGramatical}
-Este error se produce cuando el texto tiene un fallo gramatical.
+
 
 \subsection{Error de traducción}\label{ErrorTraducción}
-Este error se da cuando la traducción de un texto es errónea, ya sea por una traducción incorrecta (p. ej. ``Monedas de cobre'' a ``gold''); por falta de información u omisión de palabras; o porque el texto no tenga sentido en el contexto (p. ej al traducir desde el japonés).
 
 \subsection{Solapamiento de texto}\label{ErrorSolapamiento}
-Este error se produce cuando el texto sobresale de los límites de un botón o cuadro de diálogo. Puede deberse a una mala implementación por parte del desarrollador, o a que el traductor no ha respetado los límites de espacio que se le han dado.
+
 
 \subsection{Truncamiento de texto}\label{ErrorTruncamiento}
-Este error es el caso contrario al anterior. En este caso, el texto en lugar de salirse de los límites, queda cortado por ellos y no se muestra al completo.
+
 
 \subsection{Error terminológico o incoherencia}\label{ErrorTermino}
-Este error se produce cuando se usa una palabra incorrecta para referirse a una terminología clave (p. ej. utilizar el término ``grabar'' en lugar de ``guardar''). También puede darse cuando el mismo término no está escrito de la misma manera en dos lugares distintos (p. ej. Escribir un término importante en minúsculas en un lugar y en mayúsculas en otro.).
+
 
 \subsection{Incumplimiento de directrices}\label{ErrorDirectrices}
-Este error se da cuando una traducción no se cumplen las reglas de estilo que impone un distribuidor o plataforma para los videojuegos que se publiquen en ella. Por ejemplo, los mensajes del sistema en videojuegos en consolas deben de escribirse exactamente como aparecen en unas listas oficiales preparadas por las compañías que venden estas consolas.
+
 
 \subsection{Error de subtítulos}\label{ErrorSubtitulos}
-Este error tiene varias formas. Las más habituales son:
-\begin{itemize}
-	\item Los subtítulos no aparecen.
-	\item Los subtítulos están desicronizados con el audio.
-	\item No da tiempo a leer los subtítulos.
-	\item Los subtítulos no están bien segmentados.
-	\item Los subtítulos no coinciden con el contenido doblado. 
-\end{itemize}
+
+
 
 \subsection{Error de audio}\label{ErrorAudio}
-Al igual que con los subtítulos, este error tiene varias formas:
-\begin{itemize}
-	\item El diálogo no se escucha o está en el idioma original
-	\item El audio no está bien sincronizado con los gráficos.
-	\item El audio no coincide con el contexto.
-\end{itemize}
+
+
 
 \subsection{Problemas culturales}\label{ErrorCultura}
-Este error se suele dar cuando en un videojuego se utiliza alguna simbología o gesto que tiene un significado ofensivo en otra cultura. Un ejemplo puede ser la utilización del símbolo \textit{manji} en un juego japonés, que es muy parecido a la esvástica de la Alemania nazi.
-\begin{figure}[h]
-	
-	\centering
-	\includegraphics{Imagenes/BugsLQA/Manji.jpg}
-	\caption{Comparación entre el \textit{manji} y la esvástica.}
-	\label{Manji}
-\end{figure}
 
-%\begin{itemize}
-%	\item Problema de fuente: La fuente utilizada no incluye alguno de los caracteres especiales de un idioma, por ejemplo las tildes (á), la ñ en español.
-%	\item Implementación de texto incorrecta: Sucede cuando el texto debería aparecer en un idioma, aparece en un idioma diferente. Puede suceder por un descuido del desarrollador.
-%	\item Cadena no localizada: Tiene lugar cuando la cadena de texto no viene traducida en el juego, puede deberse a un fallo del desarrollador.
-	%\item Error tipográfico
-	%\item Error gramatical
-%	\item Error de traducción: Cuando el texto traducido no tiene el mismo significado que el texto original, o que no tiene sentido en ese contexto
-	%\item Solapamiento de texto: Cuando el texto escrito es más largo de lo esperado por el programador por lo que se sale de los límites del espacio guardado para ese texto y se solapan. 
-	%\item Texto truncado: Contrario al solapamiento de texto, el texto no se muestra de forma completa.
-%	\item Error terminológico
-%	\item Incoherencia
-%	\item Incumplimiento de instrucciones: Tiene que ver con no seguir unas instrucciones del proyecto, por ejemplo en el mundo de las consolas, un tipo de error tiene que escribirse de una forma en concreta, saltarse esa norma supone retrasos en la aprobación del producto.
-%	\item Error de estilo
-%	\item Error subtítulos
-%	\item Error de audio
-%	\item Problemas culturales
-%\end{itemize}
+
 
 \section{Reconocimiento Óptico de Caracteres (OCR)}
 El OCR (Reconocimiento Óptico de Caracteres, por sus siglas en inglés Optical Character Recognition) es una tecnología que convierte imágenes de texto manuscrito, impreso o mecanografiado en datos de texto que las computadoras pueden interpretar y manipular. En otras palabras, puede extraer el texto contenida en una imagen.
