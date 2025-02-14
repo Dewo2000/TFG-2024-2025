@@ -29,7 +29,7 @@ void Truncation::test(const std::string& testString)
                 break;
             }
             else if (palabrasEsperado[j].substr(0, palabrasEntrada[i].size()) == palabrasEntrada[i]) {
-                string s = "El texto de entrada está truncado" + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
+                string s = "El texto de entrada esta truncado" + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
                 spdlog::warn(s);
                 palabrasEsperado.erase(palabrasEsperado.begin());
                 j--;
