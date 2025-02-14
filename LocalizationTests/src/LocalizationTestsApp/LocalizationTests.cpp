@@ -1,6 +1,5 @@
 #include "LocalizationTests.h"
 #include "Tesseract.h"
-#include "BadlyImplemented.h"
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
