@@ -2,4 +2,4 @@
 Repositorio para el TFG sobre testing de localización de videojuegos, por Dewei Chen
 
 # Enlace a Drive
-https://drive.google.com/drive/folders/15sIrP1GRI9zSjT6wxZLI04MBIWrEEn_n?usp=sharing
+https://drive.google.com/drive/folders/1Wn1GmbrWT7fwgNyZp2FycqvL2Qh0WLyQ?usp=sharing
