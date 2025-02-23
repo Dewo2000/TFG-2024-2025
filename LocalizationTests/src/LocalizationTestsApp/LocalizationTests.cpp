@@ -7,6 +7,7 @@
 using json = nlohmann::json;
 LocalizationTests::LocalizationTests() : state_(State::UNINITIALIZED), initTime_()
 {
+
 }
 LocalizationTests::~LocalizationTests()
 {

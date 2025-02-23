@@ -7,6 +7,7 @@ ENV USERNAME localizationtests
 ENV TESTDIR /home/${USERNAME}
 ENV REPOS_PATH  /home/tesseract_repos
 ENV CV2 /home/opencv
+ENV CATCH2 /home/catch2
 
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
@@ -35,6 +36,14 @@ RUN apt-get install tesseract-ocr -y
 RUN apt-get install -y tesseract-ocr-spa
 RUN apt-get install -y tesseract-ocr-eng
 RUN apt-get install git -y
+
+#install catch2
+RUN mkdir $CATCH2
+RUN git clone --branch v2.13.8 https://github.com/catchorg/Catch2.git $CATCH2
+WORKDIR $CATCH2
+RUN cd $CATCH2
+RUN cmake -B build -S . -DBUILD_TESTING=OFF
+RUN sudo cmake --build build/ --target install
 
 #install cv2
 RUN mkdir $CV2

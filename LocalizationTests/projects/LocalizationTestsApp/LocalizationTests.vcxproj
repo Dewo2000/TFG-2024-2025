@@ -90,8 +90,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Application</ConfigurationType>
-    <RemoteRootDir>~/localizationtests</RemoteRootDir>
+    <RemoteRootDir>~</RemoteRootDir>
     <UseCompiler>true</UseCompiler>
+    <RemoteProjectRelDir />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -118,6 +119,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)bin\</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin/</RemoteOutRelDir>
+    <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(ProjectName)/$(Platform)/$(Configuration)</RemoteIntRelDir>
+    <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -141,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>/usr/include;/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/home/catch2/single_include;/usr/include;/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
@@ -154,7 +157,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>/usr/include;/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/home/catch2/single_include;/usr/include;/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
