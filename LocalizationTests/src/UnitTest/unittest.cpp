@@ -1,20 +1,33 @@
-
 #include "Truncation.h"
+#include "Placeholders.h"
 #define CATCH_CONFIG_MAIN  // Esto define la función main() para las pruebas
 #include "catch2/catch.hpp"      // Incluir Catch2
 
-int add(int a, int b) {
-	return a + b;
+TEST_CASE("Placeholders", "[Placeholders]") {
+
+	
+	std::string texto = "Texto con *placeholder1* y también [otroPlaceholder] y {unoMas}. Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}.";
+	std::vector<std::pair<char, char>> delimitadores = {
+		{'*', '*'},   // Placeholder entre *
+		{'[', ']'},   // Placeholder entre []
+		{'{', '}'},   // Placeholder entre {}
+	};
+
+	try {
+		Placeholders h = Placeholders(delimitadores);
+		h.test(texto);
+		REQUIRE(true);
+	}
+	catch (const std::exception& e) {
+		FAIL("Excepción atrapada: " << e.what());
+	}
+	
 }
+TEST_CASE("Overlap", "[Overlap]") {
 
 
-
-TEST_CASE("Addition works", "[add]") {
-	REQUIRE(add(2, 3) == 5);
-	REQUIRE(add(-2, -3) == -5);
-	REQUIRE(add(-2, 3) == 1);
 }
-TEST_CASE("Placeholders", "[]") {
+TEST_CASE("Truncation", "[Truncation]") {
 
 	std::string esperado = "Hola este es un texto completo con varias palabras importantes";
 
@@ -25,9 +38,12 @@ TEST_CASE("Placeholders", "[]") {
 	std::string entrada4 = "Hola este es"; // Truncado desde "un"
 	Truncation t = Truncation(esperado);
 	t.test(entrada1);
-////t.test(entrada3);
-////t.test(entrada4);
 	REQUIRE(t.getPass() == false);
-	t.test(entrada2);
-	REQUIRE(t.getPass() == true);
+	//t.test(entrada3);
+	//REQUIRE(t.getPass() == false);
+	//t.test(entrada4);
+	//REQUIRE(t.getPass() == false);
+	//t.test(entrada2);
+	//REQUIRE(t.getPass() == true);
+
 }

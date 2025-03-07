@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
 
 
-	std::string texto = "Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}. Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}.";
+	std::string texto = "Texto con *placeholder1* y también [otroPlaceholder] y {unoMas}. Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}.";
 	std::vector<std::pair<char, char>> delimitadores = {
 		{'*', '*'},   // Placeholder entre *
 		{'[', ']'},   // Placeholder entre []
