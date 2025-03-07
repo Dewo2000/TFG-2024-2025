@@ -2,9 +2,8 @@
 
 #include <fstream>
 #include <iostream>
-//#include <leptonica/allheaders.h>
+#include "OCR.h"
 //#include <opencv2/opencv.hpp>
-//#include <tesseract/baseapi.h>
 //using namespace cv;
 using namespace std;
 Overlap::Overlap()
@@ -15,12 +14,12 @@ Overlap::Overlap()
 
 Overlap::~Overlap()
 {
-	//_ocr->End();
+
 }
 
 void Overlap::test(const std::string& testString)
 {
-
+	_result = checkOverlap();
 }
 
 bool Overlap::checkOverlap()
@@ -51,48 +50,11 @@ bool Overlap::checkOverlap()
 	return false;  // El bounding box está dentro de los límites
 }
 
-bool Overlap::Init(std::string imageUrl)
+bool Overlap::Init(std::string imageUrl, OCR* ocr)
 {
-	//_imageUrl = imageUrl;
-	////Esto tiene que ir en tesseract
-	//_ocr = new tesseract::TessBaseAPI();
-	//if (_ocr->Init("/home/trainingFont/trainedModel", "Arial")) {
-	//	std::cout << "fallo Init tess" << std::endl;
-	//	return false;
-	//}
-	////----------------------------------------------------------------------
-	//Pix* image = pixRead(imageUrl.c_str());
-	//if (!image) {
-	//	std::cout << "fallo img" << std::endl;
-	//	return false;
-	//}
-	//_ocr->SetImage(image);
-	//int result = _ocr->Recognize(0);
-	//if (result != 0) {
-	//	std::cout << "Recognition failed with error code: " << result << std::endl;
-	//	return false;
-	//}
-	//tesseract::ResultIterator* ri = _ocr->GetIterator();
-	//tesseract::PageIteratorLevel level = tesseract::RIL_TEXTLINE;
-	//if (ri != nullptr) {
-	//	const char* word = ri->GetUTF8Text(level);
-	//	while (word != nullptr) {
-	//		float conf = ri->Confidence(level);
-	//		int x1, y1, x2, y2;
-	//		ri->BoundingBox(level, &x1, &y1, &x2, &y2);
-	//		/*std::cout << "Word: '" << word << "' at (" << x1 << ", " << y1 << ") -> ("
-	//			<< x2 << ", " << y2 << "), Confidence: " << conf << "\n";*/
-	//		_boxes.push_back({ x1, y1, x2, y2 });
-	//		delete[] word;
-
-	//		// Avanza al siguiente nivel de iteración
-	//		if (!ri->Next(level)) {
-	//			break;
-	//		}
-	//		word = ri->GetUTF8Text(level);
-	//	}
-	//}
-	//pixDestroy(&image);
+	_imageUrl = imageUrl;
+	_ocr = ocr;
+	_boxes = _ocr->getBoundingBoxes(imageUrl);
 	return true;
 }
 

@@ -134,6 +134,11 @@
     <ClCompile Include="..\..\src\TestCases\Placeholders.cpp" />
     <ClCompile Include="..\..\src\TestCases\Truncation.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OCR\OCR.vcxproj">
+      <Project>{ae18f8be-bbb1-4050-a8fa-d0a86a7bc9be}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Lib />
     <ClCompile>

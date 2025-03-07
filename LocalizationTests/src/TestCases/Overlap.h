@@ -11,31 +11,24 @@ struct ButtonLimits
 	int w;
 	int h;
 };
-struct BoudingBox {
-	int x;
-	int y;
-	int x2;
-	int y2;
-};
-
-namespace tesseract {
-	class TessBaseAPI;
-}
+class OCR;
+struct BoundingBox;
 
 class Overlap : TestCase {
 public:
 	Overlap();
 	~Overlap();
-	void test(const std::string& testString) override;
+	void test(const std::string& testString="") override;
 	bool checkOverlap();
-	bool Init(std::string imageUrl);
+	bool Init(std::string imageUrl, OCR* ocr);
 	bool getButtons();
 	void setMinButtonSize(int w, int h);
 private:
 	std::vector<ButtonLimits> _buttons;
-	std::vector<BoudingBox>_boxes;
-	tesseract::TessBaseAPI* _ocr = nullptr;
+	std::vector<BoundingBox> _boxes;
+	OCR* _ocr = nullptr;
 	std::string _imageUrl;
 	int _butMinW, _butMinH;
+	bool _result;
 };
 #endif

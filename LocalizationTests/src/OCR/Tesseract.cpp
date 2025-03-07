@@ -111,6 +111,42 @@ bool Tesseract::trainModel(std::string lan, std::string font, int iteration, boo
         return true;
     }
 }
+std::vector<BoundingBox> Tesseract::getBoundingBoxes(std::string imageUrl)
+{
+    std::vector<BoundingBox> boxes;
+    Pix* image = pixRead(imageUrl.c_str());
+    if (!image) {
+        std::cout << "fallo img" << std::endl;
+        return boxes;
+    }
+    _ocr->SetImage(image);
+    int result = _ocr->Recognize(0);
+    if (result != 0) {
+    	std::cout << "Recognition failed with error code: " << result << std::endl;
+        return boxes;
+    }
+    tesseract::ResultIterator* ri = _ocr->GetIterator();
+    tesseract::PageIteratorLevel level = tesseract::RIL_TEXTLINE;
+    if (ri != nullptr) {
+    	const char* word = ri->GetUTF8Text(level);
+    	while (word != nullptr) {
+    		float conf = ri->Confidence(level);
+    		int x1, y1, x2, y2;
+    		ri->BoundingBox(level, &x1, &y1, &x2, &y2);
+    		/*std::cout << "Word: '" << word << "' at (" << x1 << ", " << y1 << ") -> ("
+    			<< x2 << ", " << y2 << "), Confidence: " << conf << "\n";*/
+            boxes.push_back({ x1, y1, x2, y2 });
+    		delete[] word;
+
+    		// Avanza al siguiente nivel de iteración
+    		if (!ri->Next(level)) {
+    			break;
+    		}
+    		word = ri->GetUTF8Text(level);
+    	}
+    }
+    pixDestroy(&image);
+}
 bool Tesseract::train(std::string lan, std::string font, int iteration ,bool clear)
 {
     if (!generateGT(lan, font)) {
