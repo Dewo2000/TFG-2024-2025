@@ -14,7 +14,12 @@ TEST_CASE("Placeholders", "[Placeholders]") {
 	};
 	Placeholders h = Placeholders(delimitadores);
 	h.test(texto);
-	REQUIRE(true);
+	std::vector<PlaceholderResult> expect({ { 10,"*placeholder1*" },{75,"*placeholder1*"},
+									{ 35,"[otroPlaceholder]" },
+									 {100,"[otroPlaceholder]"},{ 55,"{unoMas}" },
+									 {120,"{unoMas}"} });
+
+	REQUIRE(h.getResult() == expect);
 }
 TEST_CASE("Overlap", "[Overlap]") {
 

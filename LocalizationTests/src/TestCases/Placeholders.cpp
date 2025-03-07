@@ -39,7 +39,7 @@ void Placeholders::test(const std::string& testString)
             std::wstring encontrado(match.str());  // Capturar solo el contenido entre los delimitadores
             size_t posicion = match.position() + (searchStart - wstr.begin());
 
-            result.push_back({ static_cast<int>(posicion), encontrado });
+            result.push_back({ static_cast<int>(posicion), wstring_to_utf8(encontrado) });
 
             searchStart += match.position() + match.length(); // Mover iterador
         }
@@ -47,7 +47,7 @@ void Placeholders::test(const std::string& testString)
     _result = result;
     for (const auto& p : result) {
         
-        std::string s = "Posicion: " + std::to_string(p.posicion) + ", Placeholder: " + wstring_to_utf8(p.contenido) + "\n";
+        std::string s = "Posicion: " + std::to_string(p.posicion) + ", Placeholder: " + p.contenido + "\n";
         spdlog::warn(s);
     }
 }
