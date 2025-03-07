@@ -24,8 +24,6 @@ void Truncation::test(const std::string& testString)
     for (int i = 0; i < palabrasEntrada.size(); i++) {
         for (int j = 0; j < palabrasEsperado.size(); j++) {
             if (palabrasEsperado[j] == palabrasEntrada[i]) {
-                string s = "El texto de entrada NO esta truncado. " + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
-                spdlog::info(s);
                 palabrasEsperado.erase(palabrasEsperado.begin());
                 testPass = true;
                 break;

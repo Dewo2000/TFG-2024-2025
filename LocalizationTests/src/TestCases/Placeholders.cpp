@@ -1,5 +1,6 @@
 #include "Placeholders.h"
 #include <iostream>
+#include <regex>
 using namespace std;
 
 Placeholders::Placeholders(Delimitadores delimitador)
@@ -16,17 +17,15 @@ void Placeholders::test(const std::string& testString)
     std::vector<PlaceholderResult> result;
 
     for (int i = 0; i < _delimitador.size();i++) {
-        int pos = 0;
-        while ((pos = testString.find(_delimitador[i].first,pos)) != std::string::npos) {
-            size_t endPos = testString.find(_delimitador[i].second, pos + 1);
-            if (endPos != std::string::npos) {
-                std::string contenido = testString.substr(pos, endPos - pos + 1);
-                result.push_back({ pos, contenido });
-                pos = endPos + 1;
-            }
-            else { //Ha llegado al final y no se encuentra
-                break; 
-            }
+        char inicio = _delimitador[i].first;
+        char fin = _delimitador[i].second;
+        std::string pattern = "\\" + std::string(1, inicio) + "(.*?)" + "\\" + std::string(1, fin);
+        std::regex regexPlaceholder(pattern);
+        std::sregex_iterator iter(testString.begin(), testString.end(), regexPlaceholder);
+        std::sregex_iterator end;
+        while (iter != end) {
+            result.push_back({ static_cast<int>(iter->position()), iter->str() });
+            ++iter;
         }
     }
     _result = result;
