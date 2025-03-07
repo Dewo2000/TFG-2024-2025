@@ -12,16 +12,9 @@ TEST_CASE("Placeholders", "[Placeholders]") {
 		{'[', ']'},   // Placeholder entre []
 		{'{', '}'},   // Placeholder entre {}
 	};
-
-	try {
-		Placeholders h = Placeholders(delimitadores);
-		h.test(texto);
-		REQUIRE(true);
-	}
-	catch (const std::exception& e) {
-		FAIL("Excepción atrapada: " << e.what());
-	}
-	
+	Placeholders h = Placeholders(delimitadores);
+	h.test(texto);
+	REQUIRE(true);
 }
 TEST_CASE("Overlap", "[Overlap]") {
 

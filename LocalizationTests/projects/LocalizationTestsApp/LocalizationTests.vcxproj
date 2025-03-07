@@ -150,7 +150,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-licuuc;-lspdlog;-lfmt</AdditionalDependencies>
+      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-licuuc;-lspdlog;-lfmt;-licudata;-licui18n</AdditionalDependencies>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -163,7 +163,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-licuuc;-lspdlog;-lfmt</AdditionalDependencies>
+      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-licuuc;-lspdlog;-lfmt;-licudata;-licui18n</AdditionalDependencies>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
