@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de OCR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .imagen {
+            margin-bottom: 30px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .tests {
+            margin-top: 15px;
+        }
+        .tests p {
+            margin: 5px 0;
+        }
+        .error {
+            color: red;
+        }
+        .highlight {
+            color: green;
+        }
+        .code {
+            font-family: monospace;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Reporte de Resultados OCR</h1>
+
+{{#each this}}
+    <div class="imagen">
+        <h2>Imagen: {{@key}}</h2>
+
+        <p><strong>Texto esperado:</strong> <span class="code">{{texto_esperado}}</span></p>
+        <p><strong>Texto reconocido:</strong> <span class="code">{{texto_reconocido}}</span></p>
+
+        <div class="tests">
+            <h3>Pruebas:</h3>
+            <p><strong>Overlap:</strong> {{tests.overlap.test_pass}}</p>
+            <p><strong>Truncamiento:</strong> {{tests.truncamiento.test_pass}}</p>
+            
+            <div class="placeholders">
+                <h4>Placeholders:</h4>
+                <p><strong>Test Pass:</strong> {{tests.placeholders.test_pass}}</p>
+
+                {{#if tests.placeholders.errors}}
+                    <ul>
+                        {{#each tests.placeholders.errors}}
+                            <li class="error">Posición: {{pos}}, Contenido: "{{contenido}}"</li>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <p>No hay errores en los placeholders.</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+{{/each}}
+
+</body>
+</html>

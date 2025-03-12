@@ -51,7 +51,7 @@ void Placeholders::test(const std::string& testString)
     for (const auto& p : result) {
         
         std::string s = "Posicion: " + std::to_string(p.posicion) + ", Placeholder: " + p.contenido + "\n";
-        spdlog::warn(s);
+        //spdlog::warn(s);
     }
 }
 

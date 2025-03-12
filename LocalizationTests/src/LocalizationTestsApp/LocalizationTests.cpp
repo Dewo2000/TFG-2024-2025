@@ -237,7 +237,7 @@ bool LocalizationTests::initTesting()
 				imageResult["texto_reconocido"] = recog;
 
 				testAll(rutaImagen, gt, recog,imageResult);
-				jsonResult[rutaImagen] = imageResult;
+				jsonResult[entry.path().filename()] = imageResult;
 				
 
 			}
@@ -266,7 +266,8 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 
 	Overlap lap = Overlap();
 	json overlap;
-	lap.Init(_configInfo.imgPath + "/" + img, _ocr);
+	lap.Init(img, _ocr);
+	lap.test();
 	if (lap.getPass()) overlap["test_pass"] = true;
 	else overlap["test_pass"] = false;
 

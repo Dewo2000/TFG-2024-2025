@@ -32,7 +32,7 @@ void Truncation::test(const std::string& testString)
             }
             else if (palabrasEsperado[j].substr(0, palabrasEntrada[i].size()) == palabrasEntrada[i]) {
                 string s = "Palabra " + to_string(i) +" truncado " + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
-                spdlog::warn(s);
+                //spdlog::warn(s);
                 palabrasEsperado.erase(palabrasEsperado.begin());
                 _testPass = false;
                 break;
@@ -41,7 +41,7 @@ void Truncation::test(const std::string& testString)
 
     }
     if (palabrasEsperado.size() > 0) {
-        spdlog::warn("Falta palabras");
+        //spdlog::warn("Falta palabras");
         _testPass = false;
     }
 }

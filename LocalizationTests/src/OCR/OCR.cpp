@@ -113,8 +113,6 @@ std::vector<ButtonLimits> OCR::getButtonsFromImage(std::string imgPath,int butMi
 			rectangle(imagen, rect, cv::Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
 			//Solo tenemos en cuenta los botones de un tamaño mínimo
 			if (rect.width >= butMinW && rect.height >= butMinH) {
-				cout << "Coordenadas del boton: " << rect.x << ", " << rect.y
-					<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
 				result.push_back({ rect.x,rect.y,rect.width,rect.height });
 			}
 			
