@@ -10,6 +10,7 @@ using namespace std;
 Placeholders::Placeholders(Delimitadores delimitador)
 {
 	_delimitador = delimitador;
+    _testPass = true;
 }
 
 Placeholders::~Placeholders()
@@ -18,6 +19,7 @@ Placeholders::~Placeholders()
 
 void Placeholders::test(const std::string& testString)
 {
+    _testPass = true;
     std::vector<PlaceholderResult> result;
     std::wstring wstr =utf8_to_wstring(testString);
     std::string a = wstring_to_utf8(wstr);
@@ -45,6 +47,7 @@ void Placeholders::test(const std::string& testString)
         }
     }
     _result = result;
+    if (_result.size() > 0)_testPass = false;
     for (const auto& p : result) {
         
         std::string s = "Posicion: " + std::to_string(p.posicion) + ", Placeholder: " + p.contenido + "\n";

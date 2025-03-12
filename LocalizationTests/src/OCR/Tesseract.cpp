@@ -111,9 +111,9 @@ bool Tesseract::trainModel(std::string lan, std::string font, int iteration, boo
         return true;
     }
 }
-std::vector<BoundingBox> Tesseract::getBoundingBoxes(std::string imageUrl)
+std::vector<LBox> Tesseract::getBoundingBoxes(std::string imageUrl)
 {
-    std::vector<BoundingBox> boxes;
+    std::vector<LBox> boxes;
     Pix* image = pixRead(imageUrl.c_str());
     if (!image) {
         std::cout << "fallo img" << std::endl;
@@ -146,6 +146,7 @@ std::vector<BoundingBox> Tesseract::getBoundingBoxes(std::string imageUrl)
     	}
     }
     pixDestroy(&image);
+    delete image;
 }
 bool Tesseract::train(std::string lan, std::string font, int iteration ,bool clear)
 {

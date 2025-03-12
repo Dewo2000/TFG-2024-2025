@@ -21,10 +21,11 @@ public:
 	~Placeholders();
 	void test(const std::string& testString) override;
 	std::vector<PlaceholderResult> getResult() { return _result; };
+	bool getPass() override { return _testPass; };
 private:
     Delimitadores _delimitador;
 	std::vector<PlaceholderResult> _result;
-
+	bool _testPass;
     std::wstring utf8_to_wstring(const std::string& input);
 
 	std::string wstring_to_utf8(const std::wstring& wstr);

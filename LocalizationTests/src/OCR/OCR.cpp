@@ -64,17 +64,10 @@ bool OCR::preprocessing(std::string iName , imageInfo& imageOutput)
 	
 	float factor = 1.5;
 	cv::resize(image, image, cv::Size(int(image.cols * factor), int(image.rows * factor)), factor, factor, cv::INTER_LINEAR);
-	
 	cv::threshold(image, image, 127, 255, cv::THRESH_BINARY);
-	
-	
-	
 	cv::fastNlMeansDenoising(image, image, 10, 7, 21);
-		
-	
 	cv::medianBlur(image, image, 5);
 	cv::GaussianBlur(image, image, cv::Size(5, 5), 0);
-		
 	cv::Mat kernel = cv::Mat::ones(5, 5, CV_8UC1);  // Kernel de 5x5 de unos
 		//Dilatar la imagen
 	cv::dilate(image, image, kernel);
@@ -88,4 +81,43 @@ bool OCR::preprocessing(std::string iName , imageInfo& imageOutput)
 	imageOutput.data = new unsigned char[imageOutput.step * imageOutput.rows];
     memcpy(imageOutput.data, image.data, imageOutput.step * imageOutput.rows);
 	return true;
+}
+std::vector<ButtonLimits> OCR::getButtonsFromImage(std::string imgPath,int butMinW,int butMinH)
+{
+	std::vector<ButtonLimits> result;
+	cv::Mat imagen = cv::imread(imgPath);
+
+	if (imagen.empty()) {
+		cout << "No se pudo cargar la imagen." << endl;
+		return result;
+	}
+
+	cv::Mat gray;
+	cv::cvtColor(imagen, gray, cv::COLOR_BGR2GRAY);
+
+	// Aplicar un umbral para binarizar la imagen
+	cv::Mat thresh;
+	cv::threshold(gray, thresh, 200, 255, cv::THRESH_BINARY_INV); // Ajusta el valor 200 según sea necesario
+
+	// Encontrar contornos
+	std::vector<std::vector<cv::Point>> contornos;
+	cv::findContours(thresh, contornos, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+
+	// Dibujar los contornos que podrían ser botones
+	for (size_t i = 0; i < contornos.size(); i++) {
+		vector<cv::Point> aprox;
+		approxPolyDP(contornos[i], aprox, arcLength(contornos[i], true) * 0.02, true);
+
+		if (aprox.size() == 4) { // Consideramos que un botón podría ser rectangular
+			cv::Rect rect = boundingRect(aprox);
+			rectangle(imagen, rect, cv::Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
+			//Solo tenemos en cuenta los botones de un tamaño mínimo
+			if (rect.width >= butMinW && rect.height >= butMinH) {
+				cout << "Coordenadas del boton: " << rect.x << ", " << rect.y
+					<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
+				result.push_back({ rect.x,rect.y,rect.width,rect.height });
+			}
+			
+		}
+	}
 }

@@ -1,5 +1,8 @@
 #include "Truncation.h"
 #include "Placeholders.h"
+#include "OCR.h"
+#include "Tesseract.h"
+#include "Overlap.h"
 #define CATCH_CONFIG_MAIN  // Esto define la función main() para las pruebas
 #include "catch2/catch.hpp"      // Incluir Catch2
 
@@ -18,11 +21,31 @@ TEST_CASE("Placeholders", "[Placeholders]") {
 									{ 35,"[otroPlaceholder]" },
 									 {100,"[otroPlaceholder]"},{ 55,"{unoMas}" },
 									 {120,"{unoMas}"} });
-
+	REQUIRE(h.getPass() == false);
 	REQUIRE(h.getResult() == expect);
+	h.test("No");
+	REQUIRE(h.getPass() == true);
 }
 TEST_CASE("Overlap", "[Overlap]") {
 
+	OCR* ocr = new Tesseract();
+	ocr->init("/home/trainingFont/trainedModel", "eng");
+	Overlap lap = Overlap();
+	lap.Init("/home/localizationtests/volumen/overlap/C.png", ocr);
+	lap.test();
+	REQUIRE(lap.getPass()==true);
+	lap.Init("/home/localizationtests/volumen/overlap/F.png", ocr);
+	lap.test();
+	REQUIRE(lap.getPass() == false);
+	lap.Init("/home/localizationtests/volumen/overlap/Multi_Correct.png", ocr);
+	lap.test();
+	REQUIRE(lap.getPass() == true);
+	lap.Init("/home/localizationtests/volumen/overlap/Multi_Fail.png", ocr);
+	lap.test();
+	REQUIRE(lap.getPass() == false);
+
+	ocr->release();
+	delete ocr;
 
 
 }
@@ -38,11 +61,12 @@ TEST_CASE("Truncation", "[Truncation]") {
 	Truncation t = Truncation(esperado);
 	t.test(entrada1);
 	REQUIRE(t.getPass() == false);
-	//t.test(entrada3);
-	//REQUIRE(t.getPass() == false);
-	//t.test(entrada4);
-	//REQUIRE(t.getPass() == false);
-	//t.test(entrada2);
-	//REQUIRE(t.getPass() == true);
+	t.test(entrada2);
+	REQUIRE(t.getPass() == true);
+	t.test(entrada3);
+	REQUIRE(t.getPass() == false);
+	t.test(entrada4);
+	REQUIRE(t.getPass() == false);
+	
 
 }

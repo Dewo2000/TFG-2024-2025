@@ -4,16 +4,9 @@
 
 #include "TestCase.h"
 #include <vector>
-struct ButtonLimits
-{
-	int x;
-	int y;
-	int w;
-	int h;
-};
 class OCR;
-struct BoundingBox;
-
+struct LBox;
+struct ButtonLimits;
 class Overlap : TestCase {
 public:
 	Overlap();
@@ -21,14 +14,14 @@ public:
 	void test(const std::string& testString="") override;
 	bool checkOverlap();
 	bool Init(std::string imageUrl, OCR* ocr);
-	bool getButtons();
 	void setMinButtonSize(int w, int h);
+	bool getPass() override { return _testPass; };
 private:
 	std::vector<ButtonLimits> _buttons;
-	std::vector<BoundingBox> _boxes;
+	std::vector<LBox> _boxes;
 	OCR* _ocr = nullptr;
 	std::string _imageUrl;
 	int _butMinW, _butMinH;
-	bool _result;
+	bool _testPass;
 };
 #endif

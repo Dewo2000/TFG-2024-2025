@@ -10,6 +10,7 @@ Overlap::Overlap()
 {
 	_butMinW = 65;
 	_butMinH = 30;
+	_testPass = true;
 }
 
 Overlap::~Overlap()
@@ -19,7 +20,10 @@ Overlap::~Overlap()
 
 void Overlap::test(const std::string& testString)
 {
-	_result = checkOverlap();
+	_testPass = true;
+	_boxes = _ocr->getBoundingBoxes(_imageUrl);
+	_buttons = _ocr->getButtonsFromImage(_imageUrl, _butMinW, _butMinH);
+	_testPass= !checkOverlap();
 }
 
 bool Overlap::checkOverlap()
@@ -54,47 +58,7 @@ bool Overlap::Init(std::string imageUrl, OCR* ocr)
 {
 	_imageUrl = imageUrl;
 	_ocr = ocr;
-	_boxes = _ocr->getBoundingBoxes(imageUrl);
-	return true;
-}
 
-bool Overlap::getButtons()
-{
-	//Mat imagen = imread(_imageUrl);
-
-	//if (imagen.empty()) {
-	//	cout << "No se pudo cargar la imagen." << endl;
-	//	return -1;
-	//}
-
-	//cv::Mat gray;
-	//cv::cvtColor(imagen, gray, cv::COLOR_BGR2GRAY);
-
-	//// Aplicar un umbral para binarizar la imagen
-	//cv::Mat thresh;
-	//cv::threshold(gray, thresh, 200, 255, cv::THRESH_BINARY_INV); // Ajusta el valor 200 según sea necesario
-
-	//// Encontrar contornos
-	//std::vector<std::vector<cv::Point>> contornos;
-	//cv::findContours(thresh, contornos, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-
-	//// Dibujar los contornos que podrían ser botones
-	//for (size_t i = 0; i < contornos.size(); i++) {
-	//	vector<Point> aprox;
-	//	approxPolyDP(contornos[i], aprox, arcLength(contornos[i], true) * 0.02, true);
-
-	//	if (aprox.size() == 4) { // Consideramos que un botón podría ser rectangular
-	//		Rect rect = boundingRect(aprox);
-	//		rectangle(imagen, rect, Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
-	//		//Solo tenemos en cuenta los botones de un tamaño mínimo
-	//		if (rect.width >= _butMinW && rect.height >= _butMinH) {
-	//			cout << "Coordenadas del boton: " << rect.x << ", " << rect.y
-	//				<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
-	//			_buttons.push_back({ rect.x,rect.y,rect.width,rect.height });
-	//		}
-	//		
-	//	}
-	//}
 	return true;
 }
 

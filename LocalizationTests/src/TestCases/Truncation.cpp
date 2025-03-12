@@ -6,7 +6,7 @@ using namespace std;
 Truncation::Truncation(std::string exp)
 {
 	_expected = exp;
-    testPass = true;
+    _testPass = true;
 }
 
 Truncation::~Truncation()
@@ -15,7 +15,9 @@ Truncation::~Truncation()
 
 void Truncation::test(const std::string& testString)
 {
-    testPass = true;
+    _testPass = true;
+    if (testString.length() == _expected.length())return;
+   
 
     std::vector<std::string> palabrasEsperado = split(_expected);
     std::vector<std::string> palabrasEntrada = split(testString);
@@ -25,14 +27,14 @@ void Truncation::test(const std::string& testString)
         for (int j = 0; j < palabrasEsperado.size(); j++) {
             if (palabrasEsperado[j] == palabrasEntrada[i]) {
                 palabrasEsperado.erase(palabrasEsperado.begin());
-                testPass = true;
+                _testPass = true;
                 break;
             }
             else if (palabrasEsperado[j].substr(0, palabrasEntrada[i].size()) == palabrasEntrada[i]) {
                 string s = "Palabra " + to_string(i) +" truncado " + palabrasEsperado[j] + " -> " + palabrasEntrada[i] + "\n";
                 spdlog::warn(s);
                 palabrasEsperado.erase(palabrasEsperado.begin());
-                testPass = false;
+                _testPass = false;
                 break;
             }
         }
@@ -40,15 +42,8 @@ void Truncation::test(const std::string& testString)
     }
     if (palabrasEsperado.size() > 0) {
         spdlog::warn("Falta palabras");
-        testPass = false;
+        _testPass = false;
     }
-
-    //if (testString == _expected) {
-    //    std::cout << "El texto de entrada NO está truncado.\n";
-    //}
-    //if (testString.size() < _expected.size() && _expected.substr(0, testString.size()) == testString) {
-    //    std::cout << "El texto de entrada está truncado.\n";
-    //}
 }
 
 std::vector<std::string> Truncation::split(const std::string& texto)

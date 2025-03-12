@@ -7,5 +7,6 @@
 class TestCase {
 public:
 	virtual void test(const std::string& testString) = 0;
+	virtual bool getPass() {};
 };
 #endif

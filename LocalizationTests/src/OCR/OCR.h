@@ -13,11 +13,18 @@ struct imageInfo {
 	int rows;
 	int step;
 };
-struct BoundingBox {
+struct LBox {
 	int x;
 	int y;
 	int x2;
 	int y2;
+};
+struct ButtonLimits
+{
+	int x;
+	int y;
+	int w;
+	int h;
 };
 class OCR
 {
@@ -27,7 +34,8 @@ public:
 	virtual void release() = 0;
 	virtual bool getDirImgText(std::string imgPath, std::string outputPath)=0;
 	virtual bool trainModel(std::string lan, std::string font, int iteration, bool clear = false)=0;
-	virtual std::vector<BoundingBox> getBoundingBoxes(std::string imageUrl) {};
+	virtual std::vector<LBox> getBoundingBoxes(std::string imageUrl) {};
+	std::vector<ButtonLimits> getButtonsFromImage(std::string imgPath,int butMinW, int butMinH);
 protected:
 	std::string readGT(const std::string& rutaArchivo);
 	std::string findMostSimilarLine(const std::string& target, const std::vector<std::string>& recognizedLines, double threshold);

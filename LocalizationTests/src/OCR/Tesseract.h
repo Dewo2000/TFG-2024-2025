@@ -14,7 +14,7 @@ public:
 	void release() override;
 	bool getDirImgText(std::string imgPath, std::string outputPath) override;
 	bool trainModel(std::string lan, std::string font, int iteration,bool clear=false) override;
-	std::vector<BoundingBox> getBoundingBoxes(std::string imageUrl)override;
+	std::vector<LBox> getBoundingBoxes(std::string imageUrl)override;
 private:
 	const std::string trainFolder = "/home/trainingFont";
 	const std::string groundTruth = "python3 " + trainFolder + "/ground_truth_exec.py";

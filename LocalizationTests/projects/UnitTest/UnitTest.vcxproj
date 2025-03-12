@@ -80,14 +80,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)bin</OutDir>
-    <IntDir>$(ProjectDir)obj\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(ProjectName)/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin</RemoteOutRelDir>
     <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)bin</OutDir>
-    <IntDir>$(ProjectDir)obj\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(ProjectName)/$(Platform)/$(Configuration)</RemoteIntRelDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin</RemoteOutRelDir>
     <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
@@ -96,26 +96,33 @@
     <ClCompile Include="..\..\src\UnitTest\unittest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OCR\OCR.vcxproj">
+      <Project>{ae18f8be-bbb1-4050-a8fa-d0a86a7bc9be}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TestCases\TestCases.vcxproj">
       <Project>{567f12f8-6449-40e8-8d50-ce3834121d51}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>/home/catch2/single_include;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/home/catch2/single_include;/usr/include;/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-licuuc;-lspdlog;-lfmt;-licudata;-licui18n</AdditionalDependencies>
+      <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>/home/catch2/single_include;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/home/catch2/single_include;/usr/include;/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-licuuc;-lspdlog;-lfmt;-licudata;-licui18n</AdditionalDependencies>
+      <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
