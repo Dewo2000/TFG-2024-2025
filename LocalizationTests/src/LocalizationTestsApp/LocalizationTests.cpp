@@ -2,9 +2,16 @@
 #include "Tesseract.h"
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
+
+#include "Overlap.h"
+#include "Truncation.h"
+#include "Placeholders.h"
+
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 LocalizationTests::LocalizationTests() : state_(State::UNINITIALIZED), initTime_()
 {
 
@@ -37,16 +44,8 @@ void LocalizationTests::run()
 		}
 		case State::TESTING:
 		{
-			//PlaceholderVector placeholders = PlaceholderVector();
-			//placeholders.push_back({ '{','}' });
-			//BadlyImplemented tests = BadlyImplemented(placeholders);
-			//initTime_ = std::chrono::system_clock::now();
-			//tests.test("Hola de buenas");
-			//printTime();
-			//tests.test("Hola {name}, que tal estas {laugh}");
-			//printTime();
-			//tests.test("Hola {name{player1}}");
-			//printTime();
+			if (initTesting()) {
+			}
 			break;
 		}
 		default:
@@ -56,6 +55,9 @@ void LocalizationTests::run()
 
 void LocalizationTests::release()
 {
+	//Liberación de ocr
+	_ocr->release();
+	delete _ocr;
 }
 
 bool LocalizationTests::parseArguments(const std::vector<std::string>& args)
@@ -144,18 +146,19 @@ bool LocalizationTests::getConfig()
 		archivo.close();
 
 		// Acceder a los valores
-		_configinfo.imgPath = config["imagePath"];
-		_configinfo.gtPath = config["gtPath"];
-		_configinfo.model = config["model"];
-		_configinfo.modelPath = config["modelPath"];
-		_configinfo.outputPath = config["outputPath"];
-		_configinfo.ocr = config["OCR"];
+		_configInfo.imgPath = config["imagePath"];
+		_configInfo.gtPath = config["gtPath"];
+		_configInfo.model = config["model"];
+		_configInfo.modelPath = config["modelPath"];
+		_configInfo.outputPath = config["outputPath"];
+		_configInfo.ocr = config["OCR"];
 
 		for (const auto& s : config["placeholders"]) {
 			if (!s.is_string() || s.get<std::string>().size() != 1) {
 				throw std::runtime_error("Error en simbolos_placeholders: Deben ser caracteres individuales.");
 			}
-			_configinfo.placeholders.push_back(s.get<std::string>()[0]);
+			_configInfo.placeholders.push_back({s.get<std::string>()[0], s.get<std::string>()[0]
+		});
 		}
 
 		return true;
@@ -165,4 +168,91 @@ bool LocalizationTests::getConfig()
 		spdlog::error(e.what());
 		return false;
 	}
+}
+
+bool LocalizationTests::initTesting()
+{
+	//Seleccion de ocr;
+	if (_configInfo.ocr == "Tesseract") {
+		_ocr = new Tesseract();
+	}
+
+	//Inicialización de OCR
+	if (!_ocr->init(_configInfo.modelPath, _configInfo.model))return false;
+	
+
+	//Si el directorio imagen existe
+	if (!fs::exists(_configInfo.imgPath) || !fs::is_directory(_configInfo.imgPath)) {
+		std::cerr << "El directorio no existe o no es válido.\n";
+		return false;
+	}
+	//Reconocimiento de los textos de las imagenes
+	_ocr->getDirImgText(_configInfo.imgPath, _configInfo.outputPath + "/recognition");
+
+	//Correr por el directorio y buscar imagenes
+	for (const auto& entry : fs::directory_iterator(_configInfo.imgPath)) {
+		if (entry.is_regular_file()) {
+			std::string extension = entry.path().extension().string();
+			std::string nombre_imagen = entry.path().stem().string();  // Nombre sin extensión
+			std::string archivo_gt = _configInfo.gtPath + nombre_imagen + ".txt";
+			std::string archivo_recog = _configInfo.outputPath+"/recognition/" + nombre_imagen + ".txt";
+
+			// Convertir extensión a minúsculas (por si acaso)
+			std::transform(extension.begin(), extension.end(), extension.begin(), ::tolower);
+			if (extension == ".jpg" || extension == ".png" || extension == ".jpeg") {
+
+				std::string rutaImagen = entry.path().string();
+				std::cout << "Procesando: " << rutaImagen << std::endl;
+				std::string gt = "";
+				std::string recog = "";
+
+				//Busqueda del ground-truth de la imagen
+				if (fs::exists(archivo_gt)) {
+					std::ifstream archivo(archivo_gt);
+					if (!archivo) {
+						std::cerr << "No se pudo abrir el archivo TXT: " << archivo_gt << std::endl;
+						continue;
+					}
+					else {
+						gt.assign((std::istreambuf_iterator<char>(archivo)), std::istreambuf_iterator<char>());
+					}
+				}
+
+				//Busqueda de la salida de la imagen
+				if (fs::exists(archivo_recog)) {
+					std::ifstream archivo(archivo_recog);
+					if (!archivo) {
+						std::cerr << "No se pudo abrir el archivo TXT: " << archivo_recog << std::endl;
+						continue;
+					}
+					else {
+						recog.assign((std::istreambuf_iterator<char>(archivo)), std::istreambuf_iterator<char>());
+					}
+				}
+				testAll(rutaImagen, gt, recog);
+			}
+		}
+	}
+
+	
+	return true;
+}
+
+void LocalizationTests::testAll(std::string img, std::string gt,std::string recog)
+{
+	Overlap lap = Overlap();
+	lap.Init(_configInfo.imgPath+"/"+img, _ocr);
+	if (lap.getPass())std::cout << "Lap OK" << std::endl;
+	else std::cout << "Lap NO" << std::endl;
+
+	Truncation trun = Truncation(gt);
+	trun.test(recog);
+	if (trun.getPass())std::cout << "Trun OK" << std::endl;
+	else std::cout << "trun NO" << std::endl;
+
+	Placeholders holder = Placeholders(_configInfo.placeholders);
+	holder.test(recog);
+	if (holder.getPass())std::cout << "hol OK" << std::endl;
+	else std::cout << "hol NO" << std::endl;
+
 }

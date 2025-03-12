@@ -12,7 +12,7 @@ struct ConfigInfo {
 	std::string modelPath;
 	std::string outputPath;
 	std::string ocr;
-	std::vector<char> placeholders;
+	std::vector<std::pair<char, char>> placeholders;
 };
 struct TrainInfo {
 	std::string font;
@@ -20,6 +20,7 @@ struct TrainInfo {
 	int iter;
 	bool clear;
 };
+class OCR;
 class LocalizationTests {
 public:
 	LocalizationTests();
@@ -41,6 +42,9 @@ private:
 	bool getConfig();
 	TrainInfo _trainInfo;
 	std::string _configFile;
-	ConfigInfo _configinfo;
+	ConfigInfo _configInfo;
+	bool initTesting();
+	void testAll(std::string img,std::string gt,std::string recog);
+	OCR* _ocr;
 };
 #endif
