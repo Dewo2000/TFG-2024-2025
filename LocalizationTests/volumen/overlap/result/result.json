@@ -1,0 +1,83 @@
+{
+    "/home/localizationtests/volumen/overlap/C.png": {
+        "tests": {
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\n",
+        "texto_reconocido": "E.\n1\nr.l-\"\npoal\nI [\ngan\n"
+    },
+    "/home/localizationtests/volumen/overlap/CP.png": {
+        "tests": {
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "errors": [
+                    {
+                        "contenido": "%hola%",
+                        "pos": 0
+                    }
+                ],
+                "test_pass": false
+            },
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "",
+        "texto_reconocido": "%hola%\n"
+    },
+    "/home/localizationtests/volumen/overlap/F.png": {
+        "tests": {
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "Empezar jugar no se que",
+        "texto_reconocido": "Empezar jugar a no se que\n"
+    },
+    "/home/localizationtests/volumen/overlap/Multi_Correct.png": {
+        "tests": {
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\nSalir\r\nSoy un texto",
+        "texto_reconocido": "Empezar jugar Salr\nSy un texta\n"
+    },
+    "/home/localizationtests/volumen/overlap/Multi_Fail.png": {
+        "tests": {
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar a no se que\r\nEmpezar jugar\r\nSoy un texto",
+        "texto_reconocido": "Empezar jugar a no se que\nEmpezar jugar\nSay oo lexto\n"
+    }
+}

@@ -5,6 +5,7 @@
 #include <chrono>
 #include <vector>
 #include <string>
+#include <nlohmann/json.hpp>
 struct ConfigInfo {
 	std::string imgPath;
 	std::string gtPath;
@@ -44,7 +45,7 @@ private:
 	std::string _configFile;
 	ConfigInfo _configInfo;
 	bool initTesting();
-	void testAll(std::string img,std::string gt,std::string recog);
+	void testAll(std::string img,std::string gt,std::string recog, nlohmann::json &imageResult);
 	OCR* _ocr;
 };
 #endif

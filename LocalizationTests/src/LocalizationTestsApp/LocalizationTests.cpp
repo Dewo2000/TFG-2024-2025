@@ -3,7 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <nlohmann/json.hpp>
+#include <cstdlib>
+
 #include <spdlog/spdlog.h>
 
 #include "Overlap.h"
@@ -189,13 +190,14 @@ bool LocalizationTests::initTesting()
 	//Reconocimiento de los textos de las imagenes
 	_ocr->getDirImgText(_configInfo.imgPath, _configInfo.outputPath + "/recognition");
 
+	json jsonResult;
 	//Correr por el directorio y buscar imagenes
 	for (const auto& entry : fs::directory_iterator(_configInfo.imgPath)) {
 		if (entry.is_regular_file()) {
 			std::string extension = entry.path().extension().string();
 			std::string nombre_imagen = entry.path().stem().string();  // Nombre sin extensión
 			std::string archivo_gt = _configInfo.gtPath + nombre_imagen + ".txt";
-			std::string archivo_recog = _configInfo.outputPath+"/recognition/" + nombre_imagen + ".txt";
+			std::string archivo_recog = _configInfo.outputPath+"recognition/" + nombre_imagen + ".txt";
 
 			// Convertir extensión a minúsculas (por si acaso)
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::tolower);
@@ -229,30 +231,71 @@ bool LocalizationTests::initTesting()
 						recog.assign((std::istreambuf_iterator<char>(archivo)), std::istreambuf_iterator<char>());
 					}
 				}
-				testAll(rutaImagen, gt, recog);
+
+				json imageResult;
+				imageResult["texto_esperado"] = gt;
+				imageResult["texto_reconocido"] = recog;
+
+				testAll(rutaImagen, gt, recog,imageResult);
+				jsonResult[rutaImagen] = imageResult;
+				
+
 			}
+			
 		}
 	}
-
+	std::string command = "sudo chmod 777 " + _configInfo.outputPath;
+	std::system(command.c_str());
+	// Escribir el objeto JSON en un archivo
+	std::ofstream archivo(_configInfo.outputPath + "result.json");
+	if (archivo.is_open()) {
+		archivo << jsonResult.dump(4);  // 'dump(4)' para escribir el JSON con formato bonito (indentación de 4 espacios)
+		archivo.close();
+		std::cout << "JSON guardado exitosamente en 'result.json'" << std::endl;
+	}
+	else {
+		std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
+	}
 	
 	return true;
 }
 
-void LocalizationTests::testAll(std::string img, std::string gt,std::string recog)
+void LocalizationTests::testAll(std::string img, std::string gt,std::string recog,json& imageResult)
 {
+	json tests;
+
 	Overlap lap = Overlap();
-	lap.Init(_configInfo.imgPath+"/"+img, _ocr);
-	if (lap.getPass())std::cout << "Lap OK" << std::endl;
-	else std::cout << "Lap NO" << std::endl;
+	json overlap;
+	lap.Init(_configInfo.imgPath + "/" + img, _ocr);
+	if (lap.getPass()) overlap["test_pass"] = true;
+	else overlap["test_pass"] = false;
 
 	Truncation trun = Truncation(gt);
+	json truncation;
 	trun.test(recog);
-	if (trun.getPass())std::cout << "Trun OK" << std::endl;
-	else std::cout << "trun NO" << std::endl;
+	if (trun.getPass())truncation["test_pass"] = true;
+	else truncation["test_pass"] = false;
 
 	Placeholders holder = Placeholders(_configInfo.placeholders);
+	json holders;
 	holder.test(recog);
-	if (holder.getPass())std::cout << "hol OK" << std::endl;
-	else std::cout << "hol NO" << std::endl;
+	if (holder.getPass())holders["test_pass"] = true;
+	else {
+		holders["test_pass"] = false;
+		std::vector<PlaceholderResult> result = holder.getResult();
+		json error;
+		for (int i = 0;i < result.size();i++) {
+			json presult;
+			presult["pos"] = result[i].posicion;
+			presult["contenido"] = result[i].contenido;
+			error.push_back(presult);
+		}
+		holders["errors"] = error;
+	}
+	tests["overlap"] = overlap;
+	tests["truncamiento"] = truncation;
+	tests["placeholders"] = holders;
+	imageResult["tests"] = tests;
 
+	
 }

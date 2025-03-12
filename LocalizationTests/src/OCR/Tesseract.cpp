@@ -47,6 +47,7 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
             // Verifica si la entrada es un archivo regular y tiene la extensión .png
             if (ent->d_type == DT_REG && filename.size() > 4 && filename.substr(filename.size() - 4) == ".png") {
                 pngFiles.push_back(filename);
+               
             }
         }
         // Cierra el directorio
@@ -63,6 +64,11 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
         _ocr->SetImage(image.data, image.cols, image.rows, 1, image.step);
         char* outText = _ocr->GetUTF8Text();
         std::string gtName;
+        std::string imageName;
+        size_t pos = pngFiles[i].find_last_of(".");
+        if (pos != std::string::npos) {
+            imageName = pngFiles[i].substr(0, pos);  // Obtener solo la parte antes del punto
+        }
         if (gtName != "") {
             std::string expected = readGT(gtName);
             std::vector<std::string> expectedLines = splitIntoLines(expected);
@@ -74,7 +80,7 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
                     cleanOutPut += bestMatch + "\n";
                 }
             }
-            std::ofstream outFile(outputPath + "/" + std::to_string(i) + ".txt");
+            std::ofstream outFile(outputPath + "/" + imageName + ".txt");
             if (outFile.is_open()) {
                 outFile << cleanOutPut;
                 outFile.close();
@@ -85,7 +91,7 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
             }
         }
         else {
-            std::ofstream outFile(outputPath + "/" + std::to_string(i) + ".txt");
+            std::ofstream outFile(outputPath + "/" + imageName + ".txt");
             if (outFile.is_open()) {
                 outFile << outText;
                 outFile.close();
@@ -251,6 +257,3 @@ bool Tesseract::generateGT(std::string lan, std::string font)
     }
    
 }
-
-
-
