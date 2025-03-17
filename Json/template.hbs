@@ -6,34 +6,106 @@
     <title>Reporte de OCR</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.4;
         }
         h1 {
+            font-size: 2rem;
+            text-align: center;
             color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .contenedor-imagenes {
+            display: grid;
+            grid-template-columns: 1fr; /* Por defecto, dos columnas */
+            gap: 20px; /* Espacio entre las imágenes */
+            margin-bottom: 20px;
         }
         .imagen {
-            margin-bottom: 30px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .imagen:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        }
+        .imagen img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border-radius: 8px;
         }
         .tests {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-top: 15px;
+        }
+        .tests h3 {
+            margin-top: 0;
+            color: #34495e;
+            font-size: 1.4rem;
         }
         .tests p {
             margin: 5px 0;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
         }
-        .error {
-            color: red;
-        }
-        .highlight {
-            color: green;
+        .tests p strong {
+            font-weight: bold;
         }
         .code {
             font-family: monospace;
-            color: #333;
+            background: #e8e8e8;
+            padding: 3px 5px;
+            border-radius: 5px;
+            word-wrap: break-word;
+            max-width: 80%;
+            font-size: 0.9rem;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+            font-weight: bold;
+        }
+        .icon {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .success {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .placeholder-list {
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+        .placeholder-list li {
+            font-size: 0.9rem;
+            color: #e74c3c;
+        }
+        .placeholder-list li span {
+            font-weight: bold;
+        }
+
+        /* Responsividad para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .contenedor-imagenes {
+                grid-template-columns: 1fr; /* En pantallas más pequeñas, las imágenes se muestran en una sola columna */
+            }
         }
     </style>
 </head>
@@ -41,35 +113,58 @@
 
 <h1>Reporte de Resultados OCR</h1>
 
-{{#each this}}
-    <div class="imagen">
-        <h2>Imagen: {{@key}}</h2>
+<!-- Botones para elegir cuántas columnas mostrar -->
+<div style="text-align: center; margin-bottom: 20px;">
+    <button onclick="cambiarColumnas(1)">1</button>
+    <button onclick="cambiarColumnas(2)">2</button>
+    <button onclick="cambiarColumnas(3)">3</button>
+    <button onclick="cambiarColumnas(4)">4</button>
+</div>
 
-        <p><strong>Texto esperado:</strong> <span class="code">{{texto_esperado}}</span></p>
-        <p><strong>Texto reconocido:</strong> <span class="code">{{texto_reconocido}}</span></p>
+<!-- Contenedor de las imágenes -->
+<div class="contenedor-imagenes">
+    {{#each this}}
+        <div class="imagen">
+            <h2 style="color: #16a085; font-size: 1.4rem;">Imagen: {{@key}}</h2>
 
-        <div class="tests">
-            <h3>Pruebas:</h3>
-            <p><strong>Overlap:</strong> {{tests.overlap.test_pass}}</p>
-            <p><strong>Truncamiento:</strong> {{tests.truncamiento.test_pass}}</p>
-            
-            <div class="placeholders">
-                <h4>Placeholders:</h4>
-                <p><strong>Test Pass:</strong> {{tests.placeholders.test_pass}}</p>
+            {{#if imagen_url}}
+                <img src="{{imagen_url}}" alt="Imagen procesada">
+            {{/if}}
 
-                {{#if tests.placeholders.errors}}
-                    <ul>
-                        {{#each tests.placeholders.errors}}
-                            <li class="error">Posición: {{pos}}, Contenido: "{{contenido}}"</li>
-                        {{/each}}
-                    </ul>
-                {{else}}
-                    <p>No hay errores en los placeholders.</p>
-                {{/if}}
+            <p><strong>Texto esperado:</strong> <span class="code">{{texto_esperado}}</span></p>
+            <p><strong>Texto reconocido:</strong> <span class="code">{{texto_reconocido}}</span></p>
+
+            <div class="tests">
+                <h3>Pruebas:</h3>
+                <p><strong>Overlap:</strong> <span class="icon">{{#if tests.overlap.test_pass}}✅{{else}}❌{{/if}}</span></p>
+                <p><strong>Truncamiento:</strong> <span class="icon">{{#if tests.truncamiento.test_pass}}✅{{else}}❌{{/if}}</span></p>
+                
+                <div class="placeholders">
+                    <h4>Placeholders:</h4>
+                    <p><strong>Test Pass:</strong> <span class="icon">{{#if tests.placeholders.test_pass}}✅{{else}}❌{{/if}}</span></p>
+
+                    {{#if tests.placeholders.errors}}
+                        <ul class="placeholder-list">
+                            {{#each tests.placeholders.errors}}
+                                <li class="error">Posición: <span>{{pos}}</span>, Contenido: "{{contenido}}"</li>
+                            {{/each}}
+                        </ul>
+                    {{else}}
+                        <p class="success">No hay errores en los placeholders.</p>
+                    {{/if}}
+                </div>
             </div>
         </div>
-    </div>
-{{/each}}
+    {{/each}}
+</div>
+
+<!-- Script de JavaScript para cambiar la cantidad de columnas -->
+<script>
+    function cambiarColumnas(numColumnas) {
+        const contenedor = document.querySelector('.contenedor-imagenes');
+        contenedor.style.gridTemplateColumns = `repeat(${numColumnas}, 1fr)`;
+    }
+</script>
 
 </body>
 </html>

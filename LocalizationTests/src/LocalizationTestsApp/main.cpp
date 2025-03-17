@@ -22,14 +22,14 @@ int main(int argc, char* argv[]) {
 		{"program", "--test"},
 		{"program", "--test", "-c", "/home/localizationtests/volumen/config.json"},
 		{"program", "--train", "-f", "Arial", "-l", "eng"},
-		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "50"},
+		{"program", "--train", "-f", "Dogica", "-l", "eng", "-i", "1000"},
 		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "100", "--clear"},
 		{"program", "--train", "-f", "Arial", "-l", "eng", "--clear"},
 		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "abc"} // Caso con error
 	};
 
 	LocalizationTests* test = new LocalizationTests();
-	test->init(testCases[1]);
+	test->init(testCases[3]);
 	test->run();
 	test->release();
 	delete test;

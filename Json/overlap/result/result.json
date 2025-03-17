@@ -12,8 +12,7 @@
             }
         },
         "texto_esperado": "Empezar jugar\r\n",
-        "texto_reconocido": "E.\n1\nr.l-\"\npoal\nI [\ngan\n",
-        "imagen_url":"./overlap/C.png"
+        "texto_reconocido": "E.\n1\nr.l-\"\npoal\nI [\ngan\n"
     },
     "CP.png": {
         "tests": {
@@ -34,9 +33,7 @@
             }
         },
         "texto_esperado": "",
-        "texto_reconocido": "%hola%\n",
-        "imagen_url":"./overlap/CP.png"
-        
+        "texto_reconocido": "%hola%\n"
     },
     "F.png": {
         "tests": {
@@ -51,8 +48,7 @@
             }
         },
         "texto_esperado": "Empezar jugar no se que",
-        "texto_reconocido": "Empezar jugar a no se que\n",
-        "imagen_url":"./overlap/F.png"
+        "texto_reconocido": "Empezar jugar a no se que\n"
     },
     "Multi_Correct.png": {
         "tests": {

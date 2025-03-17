@@ -37,7 +37,7 @@ void LocalizationTests::run()
 		case State::TRAINING:
 		{
 			Tesseract tess = Tesseract();
-			if (tess.trainModel("spa", "courier prime", 1000)) {
+			if (tess.trainModel(_trainInfo.lan, _trainInfo.font, _trainInfo.iter,_trainInfo.clear)) {
 				std::cout << "yes\n";
 			}
 			else std::cout << "no\n";
@@ -57,6 +57,7 @@ void LocalizationTests::run()
 void LocalizationTests::release()
 {
 	//Liberación de ocr
+	if(_ocr!=nullptr)
 	_ocr->release();
 	delete _ocr;
 }
