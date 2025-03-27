@@ -25,19 +25,19 @@
 % En caso de trabajos no unipersonales, cada participante indicará en la memoria su contribución al proyecto con una extensión de al menos dos páginas por cada uno de los participantes.
 
 % Todo el material no original, ya sea texto o figuras, deberá ser convenientemente citado y referenciado. En el caso de material complementario se deben respetar las licencias y \emph{copyrights} asociados al software y hardware que se emplee. En caso contrario no se autorizará la defensa, sin menoscabo de otras acciones que correspondan.
-
+\bibliographystyle{plain}
+\section{Motivación}
 Con el paso de los años, los videojuegos se han convertido en una de las industrias de entretenimiento más grandes del mundo, y con este crecimiento viene la necesidad de adaptarse a diferentes lenguajes y culturas.
-En este punto es donde entran en acción los procesos de \textbf{internacionalización} (\textbf{\textit{I18N}}) y \textbf{localización} (\textbf{\textit{L10N}}).
-La \textbf{internacionalización} es el proceso por el cual un videojuego se prepara desde sus etapas iniciales de desarrollo para soportar diferentes \textbf{culturas} e \textbf{idiomas}, de tal manera que no haya que realizar grandes modificaciones en el \textbf{código} para introducirlos.
-Por otra parte, la \textbf{localización} es el proceso por el cual se \textbf{traducen} y adaptan los textos, gráficos y recursos de un videojuego para las diferentes culturas en las que éste se va a comercializar.
+En este punto es donde entran en acción los procesos de internacionalización ({\textit{I18N}}) y localización ({\textit{L10N}}).\cite{LQAPSM2017}
+La internacionalización es el proceso por el cual un videojuego se prepara desde sus etapas iniciales de desarrollo para soportar diferentes culturas e idiomas, de tal manera que no haya que realizar grandes modificaciones en el código para introducirlos.
+Por otra parte, la localización es el proceso por el cual se traducen y adaptan los textos, gráficos y recursos de un videojuego para las diferentes culturas en las que éste se va a comercializar.
 
-Durante ambos de estos procesos se pueden producir distintos tipos de errores (como errores de traducción o errores de visualización), aquí es donde entra el \textbf{\textit{Localization Quality Assurance}} (o \textbf{LQA}). Este proceso se encarga de revisar y probar las distintas partes del videojuego para asegurarse de que no se produzca ninguno de estos errores y el producto final sea adecuado para las culturas y el público objetivo.
+Durante ambos de estos procesos se pueden producir distintos tipos de errores (como errores de traducción o errores de visualización). Aquí es donde entra el \textit{Localization Quality Assurance} (o LQA). Este proceso se encarga de revisar y probar las distintas partes del videojuego para asegurarse de que no se produzca ninguno de estos errores y el producto final sea adecuado para las culturas y el público objetivo.
 
 Hasta ahora este proceso ha sido un trabajo manual en el que los probadores comprueban meticulosamente cada texto y como éstos se visualizan dentro del videojuego, lo cual requiere de una gran cantidad de tiempo y recursos. Aunque existen herramientas para comprobar la corrección de las traducciones y los textos automáticamente, sin embargo, no se puede decir lo mismo en lo referente a comprobar que los textos se visualicen correctamente en el contexto del videojuego.
 
-\section{Motivación}
 Teniendo en cuenta lo expuesto en la sección anterior, nuestra motivación para este trabajo es poder automatizar las pruebas sobre los procesos de internacionalización y localización, de forma que se puedan
-ahorrar tiempo y recursos en estos campos y dedicarlos a otros más importantes. Para conseguir esto, vamos a utilizar técnicas de visión por computador y Reconocimiento óptico de caracteres (OCR, por sus siglas en inglés)
+ahorrar tiempo y recursos en estos campos y dedicarlos a otros más importantes. Para conseguir esto, vamos a utilizar técnicas de visión por computador y Reconocimiento óptico de caracteres \textit{(OCR,Optical Character Recognition)}
 de forma que a partir de una captura de pantalla del videojuego, se pueda extraer el texto y realizar distintas comprobaciones y pruebas sobre él.
 
 

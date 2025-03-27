@@ -1,5 +1,6 @@
 #include "Tesseract.h"
-#include <fstream> 
+#include <fstream>
+#include <sstream>
 #include <string>
 #include <algorithm>
 #include <vector>
@@ -26,7 +27,7 @@ void Tesseract::release()
         _ocr->End();
 }
 
-bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
+bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::string gtPath)
 {
     	//Creación de carpetas de resultados
 	std::string command = "sudo mkdir -p "+outputPath;
@@ -63,12 +64,12 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
         preprocessing(imgPath+"/" + pngFiles[i], image);
         _ocr->SetImage(image.data, image.cols, image.rows, 1, image.step);
         char* outText = _ocr->GetUTF8Text();
-        std::string gtName;
-        std::string imageName;
+        std::string imageName="";
         size_t pos = pngFiles[i].find_last_of(".");
         if (pos != std::string::npos) {
             imageName = pngFiles[i].substr(0, pos);  // Obtener solo la parte antes del punto
         }
+        std::string gtName = gtPath + imageName + "-gt.txt";        
         if (gtName != "") {
             std::string expected = readGT(gtName);
             std::vector<std::string> expectedLines = splitIntoLines(expected);

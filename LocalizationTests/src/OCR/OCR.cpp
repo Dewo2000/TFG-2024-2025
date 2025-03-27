@@ -9,7 +9,7 @@ std::string OCR::readGT(const std::string& rutaArchivo)
 {
 	std::ifstream archivo(rutaArchivo, std::ios::in | std::ios::binary);
 	if (!archivo) {
-		throw std::runtime_error("No se pudo abrir el archivo: " + rutaArchivo);
+		return "";
 	}
 
 	// Mover el puntero al final para determinar el tamaño

@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 	};
 
 	LocalizationTests* test = new LocalizationTests();
-	test->init(testCases[3]);
+	test->init(testCases[1]);
 	test->run();
 	test->release();
 	delete test;

@@ -12,7 +12,7 @@
             }
         },
         "texto_esperado": "Empezar jugar\r\n",
-        "texto_reconocido": "E.\n1\nr.l-\"\npoal\nI [\ngan\n"
+        "texto_reconocido": ""
     },
     "CP.png": {
         "tests": {
@@ -20,20 +20,14 @@
                 "test_pass": true
             },
             "placeholders": {
-                "errors": [
-                    {
-                        "contenido": "%hola%",
-                        "pos": 0
-                    }
-                ],
-                "test_pass": false
+                "test_pass": true
             },
             "truncamiento": {
                 "test_pass": true
             }
         },
         "texto_esperado": "",
-        "texto_reconocido": "%hola%\n"
+        "texto_reconocido": ""
     },
     "F.png": {
         "tests": {
@@ -44,11 +38,11 @@
                 "test_pass": true
             },
             "truncamiento": {
-                "test_pass": true
+                "test_pass": false
             }
         },
         "texto_esperado": "Empezar jugar no se que",
-        "texto_reconocido": "Empezar jugar a no se que\n"
+        "texto_reconocido": "Empezarn ugar a no se que\n"
     },
     "Multi_Correct.png": {
         "tests": {
@@ -63,7 +57,7 @@
             }
         },
         "texto_esperado": "Empezar jugar\r\nSalir\r\nSoy un texto",
-        "texto_reconocido": "Empezar jugar Salr\nSy un texta\n"
+        "texto_reconocido": ""
     },
     "Multi_Fail.png": {
         "tests": {
@@ -78,6 +72,6 @@
             }
         },
         "texto_esperado": "Empezar jugar a no se que\r\nEmpezar jugar\r\nSoy un texto",
-        "texto_reconocido": "Empezar jugar a no se que\nEmpezar jugar\nSay oo lexto\n"
+        "texto_reconocido": "Empezar jugar a no se que\nEmpezar jugar\n"
     }
 }

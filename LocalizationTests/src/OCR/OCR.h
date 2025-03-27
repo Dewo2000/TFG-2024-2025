@@ -32,7 +32,7 @@ public:
 	virtual ~OCR() {};
 	virtual bool init(std::string modelPath,std::string font) = 0;
 	virtual void release() = 0;
-	virtual bool getDirImgText(std::string imgPath, std::string outputPath)=0;
+	virtual bool getDirImgText(std::string imgPath, std::string outputPath,std::string gtPath)=0;
 	virtual bool trainModel(std::string lan, std::string font, int iteration, bool clear = false)=0;
 	virtual std::vector<LBox> getBoundingBoxes(std::string imageUrl) {};
 	std::vector<ButtonLimits> getButtonsFromImage(std::string imgPath,int butMinW, int butMinH);

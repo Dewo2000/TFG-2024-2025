@@ -189,7 +189,7 @@ bool LocalizationTests::initTesting()
 		return false;
 	}
 	//Reconocimiento de los textos de las imagenes
-	_ocr->getDirImgText(_configInfo.imgPath, _configInfo.outputPath + "/recognition");
+	_ocr->getDirImgText(_configInfo.imgPath, _configInfo.outputPath + "/recognition",_configInfo.gtPath);
 
 	json jsonResult;
 	//Correr por el directorio y buscar imagenes
@@ -197,7 +197,7 @@ bool LocalizationTests::initTesting()
 		if (entry.is_regular_file()) {
 			std::string extension = entry.path().extension().string();
 			std::string nombre_imagen = entry.path().stem().string();  // Nombre sin extensión
-			std::string archivo_gt = _configInfo.gtPath + nombre_imagen + ".txt";
+			std::string archivo_gt = _configInfo.gtPath + nombre_imagen + "-gt.txt";
 			std::string archivo_recog = _configInfo.outputPath+"recognition/" + nombre_imagen + ".txt";
 
 			// Convertir extensión a minúsculas (por si acaso)

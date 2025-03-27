@@ -12,7 +12,7 @@ public:
 	~Tesseract() {};
 	bool init(std::string modelPath, std::string font)override;
 	void release() override;
-	bool getDirImgText(std::string imgPath, std::string outputPath) override;
+	bool getDirImgText(std::string imgPath, std::string outputPath, std::string gtPath) override;
 	bool trainModel(std::string lan, std::string font, int iteration,bool clear=false) override;
 	std::vector<LBox> getBoundingBoxes(std::string imageUrl)override;
 private:

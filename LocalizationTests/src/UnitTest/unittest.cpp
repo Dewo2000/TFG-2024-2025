@@ -9,7 +9,7 @@
 TEST_CASE("Placeholders", "[Placeholders]") {
 
 	
-	std::string texto = "Texto con *placeholder1* y también [otroPlaceholder] y {unoMas}. Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}.";
+	std::string texto = "Texto con $*placeholder1* y también [otroPlaceholder] y {unoMas}. Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}.";
 	std::vector<std::pair<char, char>> delimitadores = {
 		{'*', '*'},   // Placeholder entre *
 		{'[', ']'},   // Placeholder entre []
@@ -26,6 +26,28 @@ TEST_CASE("Placeholders", "[Placeholders]") {
 	h.test("No");
 	REQUIRE(h.getPass() == true);
 }
+
+TEST_CASE("PlaceholdersNegativo", "[Placeholders]") {
+
+
+	std::string texto = "Texto con $*placeholder1* y también [otroPlaceholder] y {unoMas}. Texto con *placeholder1* y tambien [otroPlaceholder] y {unoMas}.";
+	std::vector<std::pair<char, char>> delimitadores = {
+		{'*', '*'},   // Placeholder entre *
+		{'[', ']'},   // Placeholder entre []
+		{'{', '}'},   // Placeholder entre {}
+	};
+	Placeholders h = Placeholders(delimitadores);
+	h.test(texto);
+	std::vector<PlaceholderResult> expect({ { 10,"*placeholder1*" },{75,"*placeholder1*"},
+									{ 35,"[otroPlaceholder]" },
+									 {100,"[otroPlaceholder]"},{ 55,"{unoMas}" },
+									 {120,"{unoMas}"} });
+	REQUIRE(h.getPass() == false);
+	REQUIRE(h.getResult() == expect);
+	h.test("No");
+	REQUIRE(h.getPass() == true);
+}
+
 TEST_CASE("Overlap", "[Overlap]") {
 
 	OCR* ocr = new Tesseract();
