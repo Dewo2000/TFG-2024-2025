@@ -24,17 +24,16 @@
       </h2>
       <div id="collapse-{{@index}}" class="accordion-collapse collapse {{#if @first}}show{{/if}}" aria-labelledby="heading-{{@index}}" data-bs-parent="#accordionResultados">
         <div class="accordion-body">
-          <div class="imagen">
-              <img src="../{{@key}}" alt="Imagen procesada" class="imagen-thumbnail">
-
-            <p><strong>Texto esperado:</strong> <span class="code">{{texto_esperado}}</span></p>
+          <div class="row">
+            <div class="col-4">
+               <p><strong>Texto esperado:</strong> <span class="code">{{texto_esperado}}</span></p>
             <p><strong>Texto reconocido:</strong> <span class="code">{{texto_reconocido}}</span></p>
 
             <div class="tests">
               <h3>Pruebas:</h3>
               <p><strong>Overlap:</strong> <span class="icon">{{#if tests.overlap.test_pass}}✅{{else}}❌{{/if}}</span></p>
               <p><strong>Truncamiento:</strong> <span class="icon">{{#if tests.truncamiento.test_pass}}✅{{else}}❌{{/if}}</span></p>
-
+            </div>
               <div class="placeholders">
                 <h4>Placeholders:</h4>
                 <p><strong>Test Pass:</strong> <span class="icon">{{#if tests.placeholders.test_pass}}✅{{else}}❌{{/if}}</span></p>
@@ -49,11 +48,15 @@
                   <p class="success">No hay errores en los placeholders.</p>
                 {{/if}}
               </div>
+             </div>
+            <div class="col-8">
+              <div class="img">
+                <img src="../{{@key}}" alt="Imagen procesada" class="img-fluid">
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   {{/each}}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

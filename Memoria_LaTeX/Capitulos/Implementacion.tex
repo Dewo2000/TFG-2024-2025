@@ -6,6 +6,14 @@ Para la implementación de la herramienta se ha decidido utilizar \emph{C++} com
 La imagen de docker son construidos mediante un fichero 
 DockerFile. En este documento viene las especificaciones técnicas que debe tener el entorno como las librerías que debe tener y las configuraciones de la imagen.A partir de esa imagen se construye contenedores donde podemos ejecutar el programa.
 
+El programa tiene una estructura de clases como se muestra en la figura \ref{fig:UML}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{Imagenes/TFGUml.pdf}
+	\caption{Diagrama de clases de la herramienta.}
+	\label{fig:UML}
+\end{figure}
+
 En el programa principal recibirá como parámetro:
 \begin{itemize}
 	\item --train. Para entrenar un modelo y se necesitará otros parametros para el entreno:
@@ -32,9 +40,13 @@ Tesseract también se encarga de devolver las coordenadas del texto en la imagen
 Para el preprocesado, se usan métodos proporcionado por OpenCV de las cuales son:
 
  \texttt{resize,threshold,fastNlMeansDenoising,medianBlur,GaussianBlur,dilate y erode}.
-También usamos OpenCV para el reconocimiento del contorno de la caja delimitadora para el error de solapamiento de texto. Utilizando \texttt{findContours} para encontrar el contorno y \texttt{approxPolyDP} para el filtrado de contornos ya que solo nos quedamos con los rectángulos. 
+También usamos OpenCV para el reconocimiento del contorno de la caja delimitadora para el error de solapamiento de texto. Utilizando \texttt{findContours} para encontrar el contorno y \texttt{approxPolyDP} para el filtrado de contornos ya que solo nos quedamos con los rectángulos.
+
+En este modulo es posible cambiar de libreria de OCR (p.ej EasyOCR) heredando de la clase OCR y completando las funciones necesarias con métodos de esa librería sin afectar al funcionamiento completo de la herramienta. 
 \section{Implementación del modulo test}
 \label{sec:Implementación de los tests}
+
+En este modulo, los tests heredan de la clase TestCases por lo que es posible implementar más tests de los que hay implementado sin afectar el funcionamiento general de la herramienta.
 \subsection{Test sobre solapamiento de texto}
 Para la implementación de este test se ha hecho el uso de Tesseract para obtener las coordenadas del texto en la imagen, además se hace el uso de OpenCV para la detección de la caja delimitadora del texto y la obtención de las coordenadas en la imagen.
 
@@ -52,4 +64,17 @@ Con este patrón se empezará la busqueda en el texto reconocido por el OCR y se
 Para la implementación de este test se tiene en cuenta la comparación inicial del número de caracteres de la cadena esperada y la cadena reconocida por el OCR usando .length del string de la std, en el caso de que sean iguales, no hay forma de que exista un truncamiento por lo que pasa el test.
 Si la longitud de las dos cadenas son diferentes, se compara palabra a palabra si una es subcadena de otra, es decir que una contiene a otra utilizando el método substr del string.
 Si al final del bucle aun queda cadenas sin comparar, eso significa que falta palabras, por lo que es un truncamiento a nivel de frase.
+
+\section{Despliege}
+Como se comenta al principio de este capítulo, esta aplicación se despliega en un contenedor de docker. El proceso será:
+\begin{enumerate}
+	\item Construir la imagen usando el DockerFile proporcionado.
+	\item Arrancar el contenedor con la imagen construida.
+	\item Abril visual studio 2022 y conectarse al contenedor.
+	\item Ejecutar el programa y conseguir los resultados.
+\end{enumerate}
+Las instrucciones concretas se encuentran en el README.md .
+Para el entreno del modelo con fuentes propias es necesario que esté la fuente en la carpeta fonts antes de la construcción de la imagen. Si se desea añadir más fuente posteriormente, existe un archivo con los pasos a seguir en el README.md .
+\section{Conclusión}
+La herramienta se despliega en un contenedor Docker y está implementado en \emph{C++} usando Visual Studio 2022. El modulo de OCR usa Tesseract como librería de reconocimiento de texto y OpenCV para preprocesado y detección de contornos, el modulo acepta otras librerías de OCR con heredar de la clase OCR y implementando las funciones necesarias.Los tests también son extensibles añadiendo más tests heredando de la clase TestCases.
 

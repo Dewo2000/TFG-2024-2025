@@ -11,7 +11,7 @@ TEST_CASE("Placeholders", "[Placeholders]") {
 	
 	std::string texto = "Placeholders";
 	std::vector<std::pair<std::string, std::string>> delimitadores = {
-		{"%_", "_%"} 
+		{"%_", "_%"} ,{"_&","%_"}
 	};
 	Placeholders h = Placeholders(delimitadores);
 	h.test(texto);
@@ -24,11 +24,11 @@ TEST_CASE("Placeholders", "[Placeholders]") {
 	REQUIRE(h.getPass() == true);
 	h.test("%_casi&");
 	REQUIRE(h.getPass() == true);
-	h.test("_casi_&");
+	h.test("_casi_%");
 	REQUIRE(h.getPass() == true);
-	h.test("&_casi_");
+	h.test("%_casi_");
 	REQUIRE(h.getPass() == true);
-	h.test("&_casi&_");
+	h.test("%_casi%_");
 	REQUIRE(h.getPass() == true);
 }
 
