@@ -1,6 +1,7 @@
 {
     "C.png": {
         "tests": {
+            "overall_pass": false,
             "overlap": {
                 "test_pass": true
             },
@@ -16,21 +17,29 @@
     },
     "CP.png": {
         "tests": {
+            "overall_pass": false,
             "overlap": {
                 "test_pass": true
             },
             "placeholders": {
-                "test_pass": true
+                "errors": [
+                    {
+                        "contenido": "%hola%",
+                        "pos": 0
+                    }
+                ],
+                "test_pass": false
             },
             "truncamiento": {
                 "test_pass": true
             }
         },
         "texto_esperado": "",
-        "texto_reconocido": ""
+        "texto_reconocido": "%hola%\n"
     },
     "F.png": {
         "tests": {
+            "overall_pass": false,
             "overlap": {
                 "test_pass": false
             },
@@ -38,14 +47,15 @@
                 "test_pass": true
             },
             "truncamiento": {
-                "test_pass": false
+                "test_pass": true
             }
         },
         "texto_esperado": "Empezar jugar no se que",
-        "texto_reconocido": "Empezarn ugar a no se que\n"
+        "texto_reconocido": "Empezar jugar a no se que\n"
     },
     "Multi_Correct.png": {
         "tests": {
+            "overall_pass": false,
             "overlap": {
                 "test_pass": true
             },
@@ -57,10 +67,11 @@
             }
         },
         "texto_esperado": "Empezar jugar\r\nSalir\r\nSoy un texto",
-        "texto_reconocido": ""
+        "texto_reconocido": "Sy un texta\n"
     },
     "Multi_Fail.png": {
         "tests": {
+            "overall_pass": false,
             "overlap": {
                 "test_pass": false
             },

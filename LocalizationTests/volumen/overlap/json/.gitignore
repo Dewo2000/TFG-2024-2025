@@ -1,0 +1,32 @@
+# Node modules folder (instalado por npm)
+node_modules/
+
+# Archivos de configuración locales (como IDEs o editores)
+.idea/
+.vscode/
+
+# Archivos de logs
+*.log
+
+# Archivos de dependencias locales (pueden ser generados en el entorno local)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno (entornos de desarrollo o producción)
+.env
+
+# Archivos de compilación
+/dist/
+/build/
+
+# Archivos temporales
+*.tmp
+*.swp
+
+# Sistema operativo (archivos específicos de MacOS o Windows)
+.DS_Store
+Thumbs.db
+
+# Archivos generados como el HTML final
+output.html

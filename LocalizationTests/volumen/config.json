@@ -1,9 +1,9 @@
 {
     "imagePath": "/home/localizationtests/volumen/overlap",
     "gtPath": "/home/localizationtests/volumen/overlap/gt/",
-    "model": "Courier Prime",
+    "model": "eng",
     "modelPath": "/home/trainingFont/trainedModel",
     "outputPath":"/home/localizationtests/volumen/overlap/result/",
     "OCR":"Tesseract",
-    "placeholders": ["#", "@", "%"]
+    "placeholders":  { "begin": "%", "end": "%" }
 }

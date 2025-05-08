@@ -1,0 +1,82 @@
+{
+    "C.png": {
+        "tests": {
+            "overall_pass ": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\n",
+        "texto_reconocido": ""
+    },
+    "CP.png": {
+        "tests": {
+            "overall_pass ": true,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "",
+        "texto_reconocido": ""
+    },
+    "F.png": {
+        "tests": {
+            "overall_pass ": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar no se que",
+        "texto_reconocido": "Empezarn ugar a no se que\n"
+    },
+    "Multi_Correct.png": {
+        "tests": {
+            "overall_pass ": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\nSalir\r\nSoy un texto",
+        "texto_reconocido": ""
+    },
+    "Multi_Fail.png": {
+        "tests": {
+            "overall_pass ": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar a no se que\r\nEmpezar jugar\r\nSoy un texto",
+        "texto_reconocido": "Empezar jugar a no se que\nEmpezar jugar\n"
+    }
+}

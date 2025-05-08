@@ -24,11 +24,11 @@ void Placeholders::test(const std::string& testString)
     std::wstring wstr =utf8_to_wstring(testString);
     std::string a = wstring_to_utf8(wstr);
     for (int i = 0; i < _delimitador.size();i++) {
-        wchar_t inicio = _delimitador[i].first;
-        wchar_t fin = _delimitador[i].second;
+        std::wstring inicio = utf8_to_wstring(_delimitador[i].first);
+        std::wstring fin = utf8_to_wstring(_delimitador[i].second);
         // Expresión regular en `std::u32string`
        // Construir el patrón de expresión regular para este par de delimitadores
-        std::wstring pattern = L"\\" + std::wstring(1, inicio) + L"(.*?)" +L"\\" + std::wstring(1, fin);
+        std::wstring pattern = L"\\" + inicio + L"(.*?)" +L"\\" +  fin;
 
         // Construir la expresión regular
 

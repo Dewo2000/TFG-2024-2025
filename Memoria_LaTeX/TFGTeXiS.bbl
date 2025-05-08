@@ -1,8 +1,93 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{14}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
-\bibitem{LQAPSM2017}
-Pablo Muñóz~Sánchez.
-\newblock {\em Localización de Videojuegos}.
+\bibitem[{Cod(2025)}]{Codificacion}
+Codificacion.
+\newblock \url{https://conceptos.es/codificacion}, 2025.
+
+\bibitem[{Arasa(2022)}]{Regex}
+{\sc Arasa, C.~G.}
+\newblock ¿que son las expresiones regulares?(regex).
+\newblock
+  \url{https://www.viewnext.com/que-son-las-expresiones-regulares-regex/},
+  2022.
+
+\bibitem[{AWS(2024)}]{WhatIsOCR}
+{\sc AWS}.
+\newblock ¿qué es el reconocimiento óptico de caracteres (ocr)?
+\newblock \url{https://aws.amazon.com/es/what-is/ocr/}, 2024.
+
+\bibitem[{Belcic(2022)}]{LQA}
+{\sc Belcic, I.}
+\newblock What is localization quality assurance (lqa)??
+\newblock
+  \url{https://www.gridly.com/blog/what-is-localization-quality-assurance-lqa/},
+  2022.
+
+\bibitem[{Chatterjee(2023)}]{Localization}
+{\sc Chatterjee, A.}
+\newblock Diferencias entre internacionalización y localización (i18n y
+  l10n).
+\newblock
+  \url{https://www.multilocale.com/blog/es/diferencias-entre-internacionalizacion-y-localizacion-i18n-y-l10n},
+  2023.
+
+\bibitem[{geeksforgeeks(2024)}]{LevDistance}
+{\sc geeksforgeeks}.
+\newblock Introduction to levenshtein distance.
+\newblock
+  \url{https://www.geeksforgeeks.org/introduction-to-levenshtein-distance/},
+  2024.
+
+\bibitem[{Hashemi-Pour y Alexander-S-Gillis(2024)}]{QA}
+{\sc Hashemi-Pour, C.} y {\sc Alexander-S-Gillis}.
+\newblock What is quality assurance (qa)?
+\newblock
+  \url{https://www.techtarget.com/searchsoftwarequality/definition/quality-assurance},
+  2024.
+
+\bibitem[{LightningAi()}]{CER}
+{\sc LightningAi}.
+\newblock Char error rate.
+\newblock
+  \url{https://lightning.ai/docs/torchmetrics/stable/text/char_error_rate.html},
+  ????
+
+\bibitem[{Muñóz~Sánchez(2017)}]{LQAPSM2017}
+{\sc Muñóz~Sánchez, P.}
+\newblock {\em Localización de Videojuegos\/}.
 \newblock Editorial Síntesis, 2017.
+
+\bibitem[{Newzoo(2024)}]{NZIngreso2024}
+{\sc Newzoo}.
+\newblock Newzoo's global games market report 2024.
+\newblock 2024.
+
+\bibitem[{OcropusDoc(2015)}]{OcropusOCR}
+{\sc OcropusDoc}.
+\newblock Extracting text from an image using ocropus.
+\newblock
+  \url{https://www.danvk.org/2015/01/09/extracting-text-from-an-image-using-ocropus.html},
+  2015.
+
+\bibitem[{OpenCV(2025)}]{OpenCVProcessing}
+{\sc OpenCV}.
+\newblock Image processing in opencv.
+\newblock
+  \url{https://docs.opencv.org/4.x/d2/d96/tutorial_py_table_of_contents_imgproc.html},
+  2025.
+
+\bibitem[{Robayo(2023)}]{Joseda}
+{\sc Robayo, J. D.~R.}
+\newblock {\em Testing Automatizado para la localización en videojuegos\/}.
+\newblock Proyecto de investigación, Universidad Complutense, 2023.
+\newblock Disponible en
+  \url{https://github.com/JosedaMachine/LocalizationTesting-CollabProject}.
+
+\bibitem[{TesseractDoc(2023)}]{TesseractOCR}
+{\sc TesseractDoc}.
+\newblock Improving the quality of the output.
+\newblock \url{https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html},
+  2023.
 
 \end{thebibliography}

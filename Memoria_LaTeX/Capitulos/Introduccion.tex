@@ -1,34 +1,30 @@
 \chapter{Introducción}
 \label{cap:introduccion}
-
-%\chapterquote{Frase célebre dicha por alguien inteligente}{Autor}
-
-% Según la normativa  para Trabajos de Fin de Grado\footnote{\url{https://informatica.ucm.es/file/normativatfg-2021-2022?ver} (ver versión actualizada para cada curso académico)}, la memoria incluirá una portada normalizada con la siguiente información: título en castellano, título en inglés, autores, profesor director, codirector si es el caso, curso
-% académico e identificación de la asignatura (Trabajo de fin de grado del Grado en -
-% nombre del grado correspondiente-, Facultad de Informática, Universidad Complutense de Madrid). Los datos referentes al título y director (y codirector en su caso) deben corresponder a los publicados en la página web de TFG.
-
-% La memoria debe incluir la descripción detallada de la propuesta hardware/software realizada y ha de contener:
-% \begin{enumerate}
-% \renewcommand{\theenumi}{\alph{enumi}}
-% 	\item un índice,
-% 	\item un resumen y una lista de no más de 10 palabras clave para su búsqueda bibliográfica, ambos en castellano e inglés,
-% 	\item una introducción con los antecedentes, objetivos y plan de trabajo,
-% 	\item resultados y discusión crítica y razonada de los mismos, con sus conclusiones,
-% 	\item bibliografía.
-% \end{enumerate}
-% Para facilitar la escritura de la memoria siguiendo esta estructura, el estudiante podrá usar las plantillas en LaTeX o Word preparadas al efecto y publicadas en la página web de TFG.
-
-% La memoria constará de un mínimo de 25 páginas para los proyectos realizados por un único estudiante, y de al menos 5 páginas más por cada integrante adicional del grupo. En este número de páginas solo se tiene en cuenta el contenido correspondiente a los apartados c y d del punto anterior.
-
-% La memoria puede estar escrita en castellano o inglés, pero en el primer caso la introducción y las conclusiones deben aparecer también en inglés. Las memorias de los TFG matriculados en el grupo I deberán estar escritas íntegramente en inglés, excepto por lo especificado en los puntos 1 y 2 anteriores (título, resumen y lista de palabras clave).
-
-% En caso de trabajos no unipersonales, cada participante indicará en la memoria su contribución al proyecto con una extensión de al menos dos páginas por cada uno de los participantes.
-
-% Todo el material no original, ya sea texto o figuras, deberá ser convenientemente citado y referenciado. En el caso de material complementario se deben respetar las licencias y \emph{copyrights} asociados al software y hardware que se emplee. En caso contrario no se autorizará la defensa, sin menoscabo de otras acciones que correspondan.
-\bibliographystyle{plain}
+Hoy en día debido a la gran cantidad de usuarios en los videojuegos en diferentes regiones, surge la necesidad de adaptar el videojuego a otras regiones o países diferentes al origen, para ello existe una serie de pasos o estrategias que se puede seguir, en mi caso diseñare una herramienta que ayude a este proceso.
 \section{Motivación}
-Con el paso de los años, los videojuegos se han convertido en una de las industrias de entretenimiento más grandes del mundo, y con este crecimiento viene la necesidad de adaptarse a diferentes lenguajes y culturas.
-En este punto es donde entran en acción los procesos de internacionalización ({\textit{I18N}}) y localización ({\textit{L10N}}).\cite{LQAPSM2017}
+Con el paso de los años, los videojuegos se han convertido en una de las industrias de entretenimiento más grandes del mundo.Según un informe de \cite{NZIngreso2024}, en 2024, el mercado global de los videojuegos ha alcanzado un valor estimado de 187.7 billones de ingreso como se muestra en la figura \ref{fig:NewZooRevenues}. En el mismo informe aparece el crecimiento jugadores en la figura \ref{fig:NewzooPlayers}, desde 3.14 billones en 2022 a 3.422 billones 2024 y su predicción en 2027 es de 3.759 billones.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Newzoo_2024_Revenues.png}
+	\caption{Ingreso estimado en la industria de videojuegos 2024.Newzoo}
+	\label{fig:NewZooRevenues}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Newzoo_Players.png}
+	\caption{Jugadores globales 2022-2024 y predicción en 2027.Newzoo}
+	\label{fig:NewzooPlayers}
+\end{figure}
+
+Además en el mismo informe se comenta el porcentaje de jugadores de cada región ocupando más de la mitad, un 53\% los jugadores pacifico asiáticos como se muestra en la figura \ref{fig:NewzooPlayersReg}.
+Con esos crecimientos y estos datos viene la necesidad de adaptar los videojuegos a diferentes lenguajes y culturas a través de los procesos de internacionalización ({\textit{I18N}}) y localización ({\textit{L10N}}) para poder ser publicados en otras regiones y países.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Newzoo_Players_Region.png}
+	\caption{Porcentaje de jugadores de cada región. Newzoo}
+	\label{fig:NewzooPlayersReg}
+\end{figure}
 La internacionalización es el proceso por el cual un videojuego se prepara desde sus etapas iniciales de desarrollo para soportar diferentes culturas e idiomas, de tal manera que no haya que realizar grandes modificaciones en el código para introducirlos.
 Por otra parte, la localización es el proceso por el cual se traducen y adaptan los textos, gráficos y recursos de un videojuego para las diferentes culturas en las que éste se va a comercializar.
 
@@ -36,37 +32,32 @@ Durante ambos de estos procesos se pueden producir distintos tipos de errores (c
 
 Hasta ahora este proceso ha sido un trabajo manual en el que los probadores comprueban meticulosamente cada texto y como éstos se visualizan dentro del videojuego, lo cual requiere de una gran cantidad de tiempo y recursos. Aunque existen herramientas para comprobar la corrección de las traducciones y los textos automáticamente, sin embargo, no se puede decir lo mismo en lo referente a comprobar que los textos se visualicen correctamente en el contexto del videojuego.
 
-Teniendo en cuenta lo expuesto en la sección anterior, nuestra motivación para este trabajo es poder automatizar las pruebas sobre los procesos de internacionalización y localización, de forma que se puedan
+Teniendo en cuenta lo expuesto en los párrafos anteriores anterior, nuestra motivación para este trabajo es poder automatizar las pruebas sobre los procesos de internacionalización y localización, de forma que se puedan
 ahorrar tiempo y recursos en estos campos y dedicarlos a otros más importantes. Para conseguir esto, vamos a utilizar técnicas de visión por computador y Reconocimiento óptico de caracteres \textit{(OCR,Optical Character Recognition)}
 de forma que a partir de una captura de pantalla del videojuego, se pueda extraer el texto y realizar distintas comprobaciones y pruebas sobre él.
 
 
 \section{Objetivos}
-Nuestros objetivos en este trabajo son los siguientes:
+Mi objetivo principal en este trabajo es el diseño y la elaboración de una herramienta que ayude en la automatización del QA en la localización.
+Para lograr el objetivo principal, se plantea los siguientes objetivos secundarios: 
 \begin{enumerate}
-	\item Utilizar tecnología de OCR para reconocer el texto en capturas de pantalla de un videojuego.
-	\item Crear una \textit{suite} de \textit{testing} que sea capaz de realizar pruebas para errores de internacionalización y localización.
-	\item Combinar estas dos partes para utilizar el texto reconocido en las imágenes como entrada de estas pruebas.
-\end{enumerate}
 
-
-\section{Plan de trabajo}
-Para conseguir nuestros objetimos, seguiremos los siguientes pasos:
-\begin{itemize}
-	\item Ivestigar sobre el proceso y las herramientas utilizadas en LQA, además de los errores más comunes en internacionalización y localización.
+	\item Investigar sobre el proceso y las herramientas utilizadas en LQA, además de los errores más comunes en internacionalización y localización.
 	\item Investigar sobre OCRs y cómo utilizarlas, para elegir una adecuada a nuestras especificaciones, realizando pruebas y comparaciones entre ellas.
-	\item Crear una \textit{suite} de \textit{testing}, que distribuimos en una imagen de Docker para que pueda desplegarse en cualquier equipo.
-	\item Evaluar nuestras pruebas para asegurarnos de que tienen un procentaje de acierto adecuado.
-\end{itemize}
-
-
-% \section{Explicaciones adicionales sobre el uso de esta plantilla}
-% Si quieres cambiar el \textbf{estilo del título} de los capítulos del documento, edita el fichero \verb|TeXiS\TeXiS_pream.tex| y comenta la línea \verb|\usepackage[Lenny]{fncychap}| para dejar el estilo básico de \LaTeX.
-
-% Si no te gusta que no haya \textbf{espacios entre párrafos} y quieres dejar un pequeño espacio en blanco, no metas saltos de línea (\verb|\\|) al final de los párrafos. En su lugar, busca el comando  \verb|\setlength{\parskip}{0.2ex}| en \verb|TeXiS\TeXiS_pream.tex| y aumenta el valor de $0.2ex$ a, por ejemplo, $1ex$.
-
-% TFGTeXiS se ha elaborado a partir de la plantilla de TeXiS\footnote{\url{http://gaia.fdi.ucm.es/research/texis/}}, creada por Marco Antonio y Pedro Pablo Gómez Martín para escribir su tesis doctoral. Para explicaciones más extensas y detalladas sobre cómo usar esta plantilla, recomendamos la lectura del documento \texttt{TeXiS-Manual-1.0.pdf} que acompaña a esta plantilla.
-
-% El siguiente texto se genera con el comando \verb|\lipsum[2-20]| que viene a continuación en el fichero .tex. El único propósito es mostrar el aspecto de las páginas usando esta plantilla. Quita este comando y, si quieres, comenta o elimina el paquete \textit{lipsum} al final de \verb|TeXiS\TeXiS_pream.tex|
-
-% \subsection{Texto de prueba}
+	\item Crear una serie de tests para los posibles errores lingüísticos, que distribuimos en una imagen de Docker para que pueda desplegarse en cualquier equipo.
+	\item Integrar el OCR para usarlo como entrada de datos a los tests. Hacer mejoras para que el OCR de el máximo acierto posible.
+	\item Realizar una evaluación  de nuestra herramienta para asegurar de que produce un porcentaje de acierto adecuado.
+\end{enumerate}
+\section{Plan de trabajo}
+Para conseguir nuestros objetivos, seguiremos los siguientes pasos:
+\begin{enumerate}
+	\item Investigar y entender como funciona el proceso de internacionalización(\ref{sec:Internacionalización}), localización(\ref{sec:Localization}), el proceso de LQA(\ref{sec:LQA}) y los errores de lingüísticos más comunes(\ref{sec:Errores linguisticos}) que se producen a la hora de elaborar un videojuego. 
+	\item Elegir de los errores más comunes de localización aquellas que estén relacionados con errores de caracteres o posiciones que sea posible ser detectado utilizando una OCR.(\ref{sec:Descripción de los tests})
+	\item Elaborar una serie de tests que sean capaz de detectar si existe algún error de localización específico teniendo información de entrada de la OCR.(\ref{sec:Implementación de los tests})
+	\item Investigar sobre distintos OCRs, ver como funcionan, como usarlos para detectar texto en imágenes, como entrenar un modelo sabiendo el idioma y la fuente usada.(\ref{sec:Seleccion de libreria de OCR})
+	\item Hacer una evaluación con los OCRs seleccionados teniendo en cuenta el tiempo y el porcentaje de acierto.Buscar formas que aumente ese porcentaje de acierto.(\ref{sec:Mejoras en el reconocimiento})
+	\item Hacer una evaluación por separado del funcionamiento de cada módulo (OCR, test).
+	\item Unificar ambos módulos y hacer una evaluación completa de la herramienta.
+	\item Generar una salida que sea fácilmente interpretado por un ser humano. 
+	
+\end{enumerate}

@@ -13,7 +13,7 @@ struct ConfigInfo {
 	std::string modelPath;
 	std::string outputPath;
 	std::string ocr;
-	std::vector<std::pair<char, char>> placeholders;
+	std::vector<std::pair<std::string, std::string>> placeholders;
 };
 struct TrainInfo {
 	std::string font;

@@ -15,8 +15,6 @@ Reallocating 'name_of_file' (item size: 1) to 20 items.
 A level-1 auxiliary file: TeXiS/TeXiS_toc.aux
 Reallocating 'name_of_file' (item size: 1) to 27 items.
 A level-1 auxiliary file: Capitulos/Introduccion.aux
-Reallocating 'name_of_file' (item size: 1) to 6 items.
-The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 33 items.
 A level-1 auxiliary file: Capitulos/EstadoDeLaCuestion.aux
 Reallocating 'name_of_file' (item size: 1) to 33 items.
@@ -35,10 +33,8 @@ Reallocating 'name_of_file' (item size: 1) to 39 items.
 A level-1 auxiliary file: Capitulos/ContribucionesPersonales.aux
 Reallocating 'name_of_file' (item size: 1) to 26 items.
 A level-1 auxiliary file: Cascaras/bibliografia.aux
-Illegal, another \bibstyle command---line 3 of file Cascaras/bibliografia.aux
- : \bibstyle
- :          {TeXiS/TeXiS}
-I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 12 items.
+The style file: TeXiS/TeXiS.bst
 Reallocating 'name_of_file' (item size: 1) to 7 items.
 Reallocating 'name_of_file' (item size: 1) to 24 items.
 A level-1 auxiliary file: Apendices/appendixA.aux
@@ -47,45 +43,49 @@ A level-1 auxiliary file: Apendices/appendixB.aux
 Reallocating 'name_of_file' (item size: 1) to 17 items.
 A level-1 auxiliary file: Cascaras/fin.aux
 Database file #1: biblio.bib
-You've used 1 entry,
-            2118 wiz_defined-function locations,
-            522 strings with 4586 characters,
-and the built_in function-call counts, 235 in all, are:
-= -- 19
-> -- 7
-< -- 0
-+ -- 3
-- -- 2
-* -- 10
-:= -- 47
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 3
-chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 12
-empty$ -- 23
-format.name$ -- 2
-if$ -- 47
-int.to.chr$ -- 0
+Warning--entry type for "NZIngreso2024" isn't style-file defined
+--line 13 of file biblio.bib
+Warning--to sort, need author or key in Codificacion
+Warning--empty year in CER; set to ????
+You've used 14 entries,
+            2962 wiz_defined-function locations,
+            1168 strings with 14707 characters,
+and the built_in function-call counts, 5216 in all, are:
+= -- 454
+> -- 138
+< -- 13
++ -- 56
+- -- 42
+* -- 262
+:= -- 904
+add.period$ -- 42
+call.type$ -- 14
+change.case$ -- 84
+chr.to.int$ -- 14
+cite$ -- 18
+duplicate$ -- 419
+empty$ -- 398
+format.name$ -- 59
+if$ -- 1011
+int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 8
-num.names$ -- 2
-pop$ -- 8
+missing$ -- 75
+newline$ -- 74
+num.names$ -- 52
+pop$ -- 175
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 70
 quote$ -- 0
-skip$ -- 6
+skip$ -- 183
 stack$ -- 0
-substring$ -- 5
-swap$ -- 1
+substring$ -- 158
+swap$ -- 149
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 2
-warning$ -- 0
-while$ -- 2
-width$ -- 2
-write$ -- 12
-(There was 1 error message)
+type$ -- 137
+warning$ -- 2
+while$ -- 39
+width$ -- 0
+write$ -- 171
+(There were 3 warnings)

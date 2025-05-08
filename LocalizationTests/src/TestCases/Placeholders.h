@@ -14,7 +14,7 @@ struct PlaceholderResult {
 		return posicion == other.posicion && contenido == other.contenido;
 	}
 };
-typedef std::vector<std::pair<char, char>> Delimitadores;
+typedef std::vector<std::pair<std::string, std::string>> Delimitadores;
 class Placeholders : TestCase {
 public:
 	Placeholders(Delimitadores delimitador);

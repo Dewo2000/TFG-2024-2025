@@ -154,14 +154,8 @@ bool LocalizationTests::getConfig()
 		_configInfo.modelPath = config["modelPath"];
 		_configInfo.outputPath = config["outputPath"];
 		_configInfo.ocr = config["OCR"];
-
-		for (const auto& s : config["placeholders"]) {
-			if (!s.is_string() || s.get<std::string>().size() != 1) {
-				throw std::runtime_error("Error en simbolos_placeholders: Deben ser caracteres individuales.");
-			}
-			_configInfo.placeholders.push_back({s.get<std::string>()[0], s.get<std::string>()[0]
-		});
-		}
+		_configInfo.placeholders.push_back({ config["placeholders"]["begin"], config["placeholders"]["end"] });
+		
 
 		return true;
 	}
@@ -264,19 +258,24 @@ bool LocalizationTests::initTesting()
 void LocalizationTests::testAll(std::string img, std::string gt,std::string recog,json& imageResult)
 {
 	json tests;
-
+	bool overallpass = true;
 	Overlap lap = Overlap();
 	json overlap;
 	lap.Init(img, _ocr);
 	lap.test();
 	if (lap.getPass()) overlap["test_pass"] = true;
-	else overlap["test_pass"] = false;
+	else { overlap["test_pass"] = false; 
+	overallpass = false;
+	}
+
 
 	Truncation trun = Truncation(gt);
 	json truncation;
 	trun.test(recog);
 	if (trun.getPass())truncation["test_pass"] = true;
-	else truncation["test_pass"] = false;
+	else { truncation["test_pass"] = false; 
+	overallpass = false;
+	}
 
 	Placeholders holder = Placeholders(_configInfo.placeholders);
 	json holders;
@@ -284,6 +283,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 	if (holder.getPass())holders["test_pass"] = true;
 	else {
 		holders["test_pass"] = false;
+		overallpass = false;
 		std::vector<PlaceholderResult> result = holder.getResult();
 		json error;
 		for (int i = 0;i < result.size();i++) {
@@ -297,6 +297,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 	tests["overlap"] = overlap;
 	tests["truncamiento"] = truncation;
 	tests["placeholders"] = holders;
+	tests["overall_pass"] = overallpass;
 	imageResult["tests"] = tests;
 
 	

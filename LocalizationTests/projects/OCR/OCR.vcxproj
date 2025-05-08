@@ -93,15 +93,11 @@
     <ClCompile Include="..\..\src\OCR\Levenshtein.cpp" />
     <ClCompile Include="..\..\src\OCR\OCR.cpp" />
     <ClCompile Include="..\..\src\OCR\Tesseract.cpp" />
-    <ClCompile Include="..\..\src\OCR\TesseractApi.cpp" />
-    <ClCompile Include="..\..\src\OCR\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\OCR\Levenshtein.h" />
     <ClInclude Include="..\..\src\OCR\OCR.h" />
     <ClInclude Include="..\..\src\OCR\Tesseract.h" />
-    <ClInclude Include="..\..\src\OCR\TesseractApi.h" />
-    <ClInclude Include="..\..\src\OCR\Utils.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

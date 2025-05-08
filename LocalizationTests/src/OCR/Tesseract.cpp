@@ -8,7 +8,7 @@
 #include <cstring>
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
-
+#include <filesystem>
 
 bool Tesseract::init(std::string modelPath, std::string font)
 {
@@ -70,7 +70,7 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
             imageName = pngFiles[i].substr(0, pos);  // Obtener solo la parte antes del punto
         }
         std::string gtName = gtPath + imageName + "-gt.txt";        
-        if (gtName != "") {
+        if (std::filesystem::exists(gtName)) {
             std::string expected = readGT(gtName);
             std::vector<std::string> expectedLines = splitIntoLines(expected);
             std::vector<std::string> outputLines = splitIntoLines(outText);

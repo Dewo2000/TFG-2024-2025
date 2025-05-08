@@ -27,7 +27,6 @@ void Truncation::test(const std::string& testString)
         for (int j = 0; j < palabrasEsperado.size(); j++) {
             if (palabrasEsperado[j] == palabrasEntrada[i]) {
                 palabrasEsperado.erase(palabrasEsperado.begin());
-                _testPass = true;
                 break;
             }
             else if (palabrasEsperado[j].substr(0, palabrasEntrada[i].size()) == palabrasEntrada[i]) {
@@ -55,6 +54,5 @@ std::vector<std::string> Truncation::split(const std::string& texto)
     while (stream >> palabra) {
         palabras.push_back(palabra);
     }
-
     return palabras;
 }
