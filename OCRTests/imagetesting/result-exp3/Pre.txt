@@ -1,0 +1,7 @@
+Grises
+Escalado
+Simple Threshold
+Denoising
+Blurring
+Filtro de nitidez
+Dilate Erode

@@ -16,10 +16,11 @@
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading-{{@index}}">
         <button class="accordion-button {{#unless @first}}collapsed{{/unless}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{@index}}" aria-expanded="{{#if @first}}true{{else}}false{{/if}}" aria-controls="collapse-{{@index}}">
-          Imagen: {{@key}}
+          Imagen: {{@key}} 
           <span class="icon">
             {{#if tests.overall_pass}}✅{{else}}❌{{/if}}
           </span>
+                       Porcentaje de similitud: {{tests.similarity}}
         </button>
       </h2>
       <div id="collapse-{{@index}}" class="accordion-collapse collapse {{#if @first}}show{{/if}}" aria-labelledby="heading-{{@index}}" data-bs-parent="#accordionResultados">

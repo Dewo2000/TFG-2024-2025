@@ -10,6 +10,7 @@
 #include "Overlap.h"
 #include "Truncation.h"
 #include "Placeholders.h"
+#include "Similarity.h"
 
 using json = nlohmann::json;
 namespace fs = std::filesystem;
@@ -226,7 +227,9 @@ bool LocalizationTests::initTesting()
 						recog.assign((std::istreambuf_iterator<char>(archivo)), std::istreambuf_iterator<char>());
 					}
 				}
-
+				if (!recog.empty() && recog.back() == '\n') {
+					recog.pop_back();  // elimina el último carácter
+				}
 				json imageResult;
 				imageResult["texto_esperado"] = gt;
 				imageResult["texto_reconocido"] = recog;
@@ -259,30 +262,50 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 {
 	json tests;
 	bool overallpass = true;
+	Similarity sim = Similarity(gt);
+	sim.test(recog);
+	double simi=sim.getSimilarity();
+
+	json overlapJson;
+	overlapJson["test_pass"] = true;
+	json truncationJson;
+	truncationJson["test_pass"] = true;
+	json holdersJson;
+	holdersJson["test_pass"] = true;
+	
 	Overlap lap = Overlap();
-	json overlap;
 	lap.Init(img, _ocr);
 	lap.test();
-	if (lap.getPass()) overlap["test_pass"] = true;
-	else { overlap["test_pass"] = false; 
+	if (lap.getPass()) overlapJson["test_pass"] = true;
+	else {
+		overlapJson["test_pass"] = false;
 	overallpass = false;
 	}
 
+	if (simi == 100.0) {
+		tests["overlap"] = overlapJson;
+		tests["truncamiento"] = truncationJson;
+		tests["placeholders"] = holdersJson;
+		tests["overall_pass"] = overallpass;
+		tests["similarity"] = simi;
+		imageResult["tests"] = tests;
+		return;
+	}
 
 	Truncation trun = Truncation(gt);
-	json truncation;
+	
 	trun.test(recog);
-	if (trun.getPass())truncation["test_pass"] = true;
-	else { truncation["test_pass"] = false; 
+	if (trun.getPass())truncationJson["test_pass"] = true;
+	else { truncationJson["test_pass"] = false; 
 	overallpass = false;
 	}
 
 	Placeholders holder = Placeholders(_configInfo.placeholders);
-	json holders;
+
 	holder.test(recog);
-	if (holder.getPass())holders["test_pass"] = true;
+	if (holder.getPass())holdersJson["test_pass"] = true;
 	else {
-		holders["test_pass"] = false;
+		holdersJson["test_pass"] = false;
 		overallpass = false;
 		std::vector<PlaceholderResult> result = holder.getResult();
 		json error;
@@ -292,12 +315,13 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 			presult["contenido"] = result[i].contenido;
 			error.push_back(presult);
 		}
-		holders["errors"] = error;
+		holdersJson["errors"] = error;
 	}
-	tests["overlap"] = overlap;
-	tests["truncamiento"] = truncation;
-	tests["placeholders"] = holders;
+	tests["overlap"] = overlapJson;
+	tests["truncamiento"] = truncationJson;
+	tests["placeholders"] = holdersJson;
 	tests["overall_pass"] = overallpass;
+	tests["similarity"] = simi;
 	imageResult["tests"] = tests;
 
 	

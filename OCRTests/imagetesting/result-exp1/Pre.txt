@@ -1,0 +1,6 @@
+Grises
+Escalado
+Adaptive Threshold
+Denoising
+Blurring
+Dilate_Erode

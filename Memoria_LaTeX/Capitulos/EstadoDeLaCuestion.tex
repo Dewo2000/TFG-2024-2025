@@ -11,12 +11,6 @@ Según \cite{LQAPSM2017}, la internacionalización de un videojuego implica una 
 	\item Separación del texto traducible de código fuente. Esto ayuda a que el traductor se centre únicamente en el trabajo de traducción y no tenga que acceder al código fuente.
 	\item Uso de fuentes adecuadas para distintos idiomas. Las fuentes deben mostrar todos los posibles caracteres del idioma seleccionado, el fallo de esto puede conllevar a que en el videojuego no se vea el texto completo.
 	\item Uso de la codificación adecuada para distintos idiomas.Según \cite{Codificacion} la codificación es la forma en que se traduce la información para que pueda ser interpretada y utilizada por una máquina.La mala elección o uso de la codificación puede provocar que se genere caracteres no legibles como se muestra en la figura \ref{fig:EFontC}, al igual que el uso incorrecto de la fuente donde la fuente no incluye algún carácter que se esta utilizando ,por tanto es necesario que la codificación pueda interpretar un carácter o símbolo introducido por teclado. Se usa el estándar de Unicode.
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Font_C.png}
-		\caption{Glifos con lo que se representa comúnmente cuando hay error de fuente.}
-		\label{fig:EFontC}
-	\end{figure}
 	\item Diseño de interfaces adaptables al texto que se debe mostrar. La misma cadena de texto en distintos idiomas traducidos pueden necesitar distintos espacios para mostrarlo en pantalla, esto puede conllevar a un problema a la hora de diseñar la interfaz y el espacio que tiene en el videojuego para mostrar una cadena.
 	\cite{LQAPSM2017} plantea las siguientes posibilidades de solucionar el problema:
 	
@@ -31,7 +25,12 @@ Según \cite{LQAPSM2017}, la internacionalización de un videojuego implica una 
 	
 	\item Comprobación cultural de imágenes e iconos. Algunos gestos, imágenes o iconos pueden resultar inapropiados para algunas culturas o religiones hay que tener especial cuidado con la zona de localización.
 \end{itemize}
-
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Font_C.png}
+	\caption{Glifos con lo que se representa comúnmente cuando hay error de fuente.}
+	\label{fig:EFontC}
+\end{figure}
 
 \section{Localización}
 \label{sec:Localization}
@@ -79,7 +78,7 @@ Un ejemplo podría ser como se muestra en la figura \ref{fig:EFont} donde alguno
 \end{figure}
 
 \subsection{Implementación de texto incorrecta}\label{ErrorImpIncorrecta}
-Este error se ilustra cuando el texto que debería aparecer en un idioma, aparece en otro diferente. Este error se produce debido a que hay un error en el documento de localización o porque el programa en si tiene algún error.Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el
+Este error se ilustra cuando el texto que debería aparecer en un idioma, aparece en otro diferente o aparece en forma de ``placeholder''. Este error se produce debido a que hay un error en el documento de localización o porque el programa en si tiene algún error. Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el
 texto adecuado.
 \subsection{Cadena no localizada}\label{ErrorNoLocalizada}
 Este error se produce cuando un texto no está traducido como se muestra en la figura \ref{fig:EImplementacion_Incorrecta}. Esto puede ocurrir cuando el traductor no haya traducido el texto o que el desarrollador no haya proporcionado el texto. 
@@ -211,9 +210,35 @@ Según \cite{TesseractOCR} y \cite{OcropusOCR} para llegar al objetivo de recono
 		\item Métodos basados en plantillas: Se compara cada carácter con un conjunto de plantillas predefinidas. Si la forma del carácter coincide con una plantilla, se clasifica como ese carácter.
 		\item Métodos basados en aprendizaje automático o redes neuronales: Las técnicas modernas de OCR suelen usar redes neuronales entrenadas con miles de ejemplos de texto. El sistema ``aprende'' a identificar caracteres y a hacer distinciones más sutiles en base a sus experiencias pasadas.
 	\end{itemize}
-
+\end{enumerate}
+\section{Librerías de OCR (Optical Character Recognition)}
+\label{sec:Seleccion de libreria de OCR}
+Durante el desarrollo de este trabajo, se evaluaron varias herramientas de OCR para seleccionar la más adecuada para nuestras necesidades. Las herramientas probadas fueron Ocropus	\footnote{(repositorio github de Ocropus) \url{https://github.com/ocropus-archive/DUP-ocropy} }, EasyOCR	\footnote{(repositorio github de EasyOCR) \url{https://github.com/JaidedAI/EasyOCR} } y Tesseract	\footnote{(repositorio github de Tesseract) \url{https://github.com/tesseract-ocr/tesseract} }. A continuación, se describe brevemente cada una de ellas.
+\begin{enumerate}
+	\item \textbf{OCRopus}
+	Es un sistema de OCR basado en redes neuronales con un enfoque modular.
+	Principalmente esta disponible para Linux. Proporciona diferentes módulos para la binarización, segmentación, generación del ground-truth y el entreno del modelo.
+	Una de las razones por la que esta herramienta fue descartado es que el lenguaje de programación principal con la que trabaja es \emph{python} y en nuestro proyecto trabajamos principalmente con \emph{C++}. Además la última actualización de esta librería fue en 16 de Diciembre de 2017
 	
+	\item \textbf{EasyOCR}
+	EasyOCR es una biblioteca de reconocimiento óptico de caracteres (OCR) desarrollada en Python que facilita la extracción de texto de imágenes y documentos. Diseñada con el objetivo de ser fácil de usar y accesible, una de las características de EasyOCR es que es capaz de reconocer texto en más de 80 idiomas y soporta múltiples scripts, lo que la convierte en una herramienta versátil para diversas aplicaciones.
+	Proporciona gran variedad de modelos entrenados y también ofrece la opción de entrenar tu propio modelo.
 	
+	La herramienta en resumen se adapta muy bien a nuestras necesidades. El único problema esta en el idioma de programación con la que trabaja , al igual que OCRopus , EasyOCR está implementada con \emph{python} y nosotros con \emph{C++}.
+	
+	\item \textbf{Tesseract}
+	
+	Tesseract es una biblioteca de (OCR) de código abierto que se utiliza para convertir imágenes de texto en texto editable. Originalmente desarrollado por Hewlett-Packard en la década de 1980, Tesseract fue liberado como software de código abierto en 2005 y ha sido mantenido y mejorado por la comunidad, particularmente por Google, que ha contribuido significativamente a su desarrollo.
+	
+	Al igual que EasyOCR una de las características más destacadas de Tesseract es su capacidad para reconocer texto en múltiples idiomas y alfabetos, soportando más de 100 idiomas de forma nativa. Esto lo convierte en una herramienta versátil para aplicaciones globales que requieren la extracción de texto de documentos escritos en diferentes lenguas.
+	
+	Tesseract utiliza técnicas avanzadas de aprendizaje profundo y redes neuronales, lo que le permite alcanzar altos niveles de precisión en el reconocimiento de texto. Su arquitectura se basa en el uso de modelos de aprendizaje profundo entrenados con grandes conjuntos de datos, lo que mejora continuamente su rendimiento en diversas condiciones.
+	
+	El motor puede integrarse fácilmente en aplicaciones de procesamiento de imágenes y visión por computadora. Tesseract se utiliza comúnmente en combinación con bibliotecas como OpenCV para preprocesar imágenes antes de la etapa de reconocimiento, lo que mejora la precisión de los resultados.
+	
+	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo y una de ellas es C++, por lo que esta herramienta cumple con todos los requisitos para nuestro proyecto y es la razón por la que hemos optado por Tesseract.
 \end{enumerate}
 \section{Conclusión}
-En conclusión, la internacionalización se trata de preparar el producto para que sea fácilmente admitir diferentes idiomas y para ello es necesario seguir algunas pautas como la separación del texto traducible de código fuente. La localización es el proceso de la cual un producto se adapta a un cierto idioma o cultura, esto es esencial en videojuegos para que los jugadores de otras regiones tengan una experiencia inmersiva y auténtica. QA\textit{Quality Assurance} se trata un de proceso sistemático para garantizar que un producto cumpla los requisitos y LQA\textit{Localization Quality Assurance} es el mismo proceso centrándose en aspectos de la localización como los aspectos lingüísticos, visuales, funcionales y culturares. El OCR es una tecnología que consigue convertir imágenes con texto en datos de texto que la computadora pueda entender.
+En conclusión, la internacionalización se trata de preparar el producto para que sea fácilmente admitir diferentes idiomas y para ello es necesario seguir algunas pautas como la separación del texto traducible de código fuente. La localización es el proceso de la cual un producto se adapta a un cierto idioma o cultura, esto es esencial en videojuegos para que los jugadores de otras regiones tengan una experiencia inmersiva y auténtica. QA(\textit{Quality Assurance}) se trata de un proceso sistemático para garantizar que un producto cumpla los requisitos y LQA(\textit{Localization Quality Assurance}) es el mismo proceso centrándose en aspectos de la localización como los aspectos lingüísticos, visuales, funcionales y culturares. El OCR es una tecnología que consigue convertir imágenes con texto en datos de texto que la computadora pueda entender.
+
+Con todo este estudio en esta sección, ayuda a entender el funcionamiento de una OCR, la existencia de errores de localización que se necesitan resolver y como se muestra los errores en pantalla, ayudando a diseñar las distintas partes de la herramienta(tests y OCR) que se detallan en el siguiente capitulo.

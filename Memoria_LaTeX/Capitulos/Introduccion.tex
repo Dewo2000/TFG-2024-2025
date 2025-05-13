@@ -2,7 +2,7 @@
 \label{cap:introduccion}
 Hoy en día debido a la gran cantidad de usuarios en los videojuegos en diferentes regiones, surge la necesidad de adaptar el videojuego a otras regiones o países diferentes al origen, para ello existe una serie de pasos o estrategias que se puede seguir, en mi caso diseñare una herramienta que ayude a este proceso.
 \section{Motivación}
-Con el paso de los años, los videojuegos se han convertido en una de las industrias de entretenimiento más grandes del mundo. Según un informe de \cite{NZIngreso2024}, en 2024, el mercado global de los videojuegos ha alcanzado un valor estimado de 187.7 billones de ingreso como se muestra en la figura \ref{fig:NewZooRevenues}. En el mismo informe aparece el crecimiento jugadores en la figura \ref{fig:NewzooPlayers}, desde 3.14 billones en 2022 a 3.422 billones 2024 y su predicción en 2027 es de 3.759 billones.
+Con el paso de los años, los videojuegos se han convertido en una de las industrias de entretenimiento más grandes del mundo. Según un informe de \cite{NZIngreso2024}, en 2024, el mercado global de los videojuegos ha alcanzado un valor estimado de 187.7 miles de millones de ingreso como se muestra en la figura \ref{fig:NewZooRevenues}. En el mismo informe aparece el crecimiento jugadores (Figura \ref{fig:NewzooPlayers}), desde 3.14 billones en 2022 a 3.422 billones 2024 y su predicción en 2027 es de 3.759 billones.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Imagenes/Newzoo_2024_Revenues.png}
@@ -38,20 +38,21 @@ de forma que a partir de una captura de pantalla del videojuego, se pueda extrae
 
 
 \section{Objetivos}
-Mi objetivo principal en este trabajo es el diseño y la elaboración de una herramienta que ayude en la automatización del QA en la localización.
+El objetivo principal en este trabajo es el diseño y la implementación de una herramienta que ayude en la automatización del QA en la localización.
 Para lograr el objetivo principal, se plantea los siguientes objetivos secundarios: 
 \begin{enumerate}
 
 	\item Investigar sobre el proceso y las herramientas utilizadas en LQA, además de los errores más comunes en internacionalización y localización.
 	\item Investigar sobre OCRs y cómo utilizarlas, para elegir una adecuada a nuestras especificaciones, realizando pruebas y comparaciones entre ellas.
-	\item Crear una serie de tests para los posibles errores lingüísticos, que distribuimos en una imagen de Docker para que pueda desplegarse en cualquier equipo.
+	\item Diseñar una serie de tests automáticos basado en OCR para los posibles errores lingüísticos.
+	\item Despliegue de la herramienta en una imagen de Docker para que pueda desplegarse en cualquier equipo.
 	\item Integrar el OCR para usarlo como entrada de datos a los tests. Hacer mejoras para que el OCR de el máximo acierto posible.
-	\item Realizar una evaluación  de nuestra herramienta para asegurar de que produce un porcentaje de acierto adecuado.
+	\item Evaluar nuestra herramienta para asegurar de que produce un porcentaje de acierto adecuado.
 \end{enumerate}
 \section{Plan de trabajo}
 Para conseguir nuestros objetivos, seguiremos los siguientes pasos:
 \begin{enumerate}
-	\item Investigar y entender como funciona el proceso de internacionalización(\ref{sec:Internacionalización}), localización(\ref{sec:Localization}), el proceso de LQA(\ref{sec:LQA}) y los errores de lingüísticos más comunes(\ref{sec:Errores linguisticos}) que se producen a la hora de elaborar un videojuego. 
+	\item Investigar y entender como funciona el proceso de internacionalización(\ref{sec:Internacionalización}), localización(\ref{sec:Localization}), el proceso de LQA(\ref{sec:LQA}) y los errores de lingüísticos más comunes(\ref{sec:Errores de localizacion}) que se producen a la hora de elaborar un videojuego. 
 	\item Elegir de los errores más comunes de localización aquellas que estén relacionados con errores de caracteres o posiciones que sea posible ser detectado utilizando una OCR.(\ref{sec:Descripción de los tests})
 	\item Elaborar una serie de tests que sean capaz de detectar si existe algún error de localización específico teniendo información de entrada de la OCR.(\ref{sec:Implementación de los tests})
 	\item Investigar sobre distintos OCRs, ver como funcionan, como usarlos para detectar texto en imágenes, como entrenar un modelo sabiendo el idioma y la fuente usada.(\ref{sec:Seleccion de libreria de OCR})

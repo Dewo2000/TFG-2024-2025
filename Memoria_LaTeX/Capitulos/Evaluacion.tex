@@ -1,35 +1,13 @@
 \chapter{Evaluación de la herramienta}
 \label{cap:evaluacion}
 
-En este capítulo se escribirá la evaluación sobre nuestra herramienta. Como la herramienta consta de dos módulos, evaluaremos las librerías de OCR, los resultados obtenidos después de aplicar preprocesamiento y distancia levenshtein para limpieza de basura.También se evaluará los tests implementados y una evaluación de la herramienta en conjunto.
-\section{Librerías de OCR (Optical Character Recognition)}
-\label{sec:Seleccion de libreria de OCR}
-Durante el desarrollo de este trabajo, se evaluaron varias herramientas de OCR para seleccionar la más adecuada para nuestras necesidades. Las herramientas probadas fueron Ocropus	\footnote{(repositorio github de Ocropus) \url{https://github.com/ocropus-archive/DUP-ocropy} }, EasyOCR	\footnote{(repositorio github de EasyOCR) \url{https://github.com/JaidedAI/EasyOCR} } y Tesseract	\footnote{(repositorio github de Tesseract) \url{https://github.com/tesseract-ocr/tesseract} }. A continuación, se describe brevemente cada una de ellas.
-\begin{enumerate}
-	\item \textbf{OCRopus}
-	Es un sistema de OCR basado en redes neuronales con un enfoque modular.
-	Principalmente esta disponible para Linux. Proporciona diferentes módulos para la binarización, segmentación, generación del ground-truth y el entreno del modelo.
-	Una de las razones por la que esta herramienta fue descartado es que el lenguaje de programación principal con la que trabaja es \emph{python} y en nuestro proyecto trabajamos principalmente con \emph{C++}. Además la última actualización de esta librería fue en 16 de Diciembre de 2017
-	
-	\item \textbf{EasyOCR}
-	EasyOCR es una biblioteca de reconocimiento óptico de caracteres (OCR) desarrollada en Python que facilita la extracción de texto de imágenes y documentos. Diseñada con el objetivo de ser fácil de usar y accesible, una de las características de EasyOCR es que es capaz de reconocer texto en más de 80 idiomas y soporta múltiples scripts, lo que la convierte en una herramienta versátil para diversas aplicaciones.
-	Proporciona gran variedad de modelos entrenados y también ofrece la opción de entrenar tu propio modelo.
-	
-	La herramienta en resumen se adapta muy bien a nuestras necesidades. El único problema esta en el idioma de programación con la que trabaja , al igual que OCRopus , EasyOCR está implementada con \emph{python} y nosotros con \emph{C++}.
-	
-	\item \textbf{Tesseract}
-	
-	Tesseract es una biblioteca de (OCR) de código abierto que se utiliza para convertir imágenes de texto en texto editable. Originalmente desarrollado por Hewlett-Packard en la década de 1980, Tesseract fue liberado como software de código abierto en 2005 y ha sido mantenido y mejorado por la comunidad, particularmente por Google, que ha contribuido significativamente a su desarrollo.
-	
-	Al igual que EasyOCR una de las características más destacadas de Tesseract es su capacidad para reconocer texto en múltiples idiomas y alfabetos, soportando más de 100 idiomas de forma nativa. Esto lo convierte en una herramienta versátil para aplicaciones globales que requieren la extracción de texto de documentos escritos en diferentes lenguas.
-	
-	Tesseract utiliza técnicas avanzadas de aprendizaje profundo y redes neuronales, lo que le permite alcanzar altos niveles de precisión en el reconocimiento de texto. Su arquitectura se basa en el uso de modelos de aprendizaje profundo entrenados con grandes conjuntos de datos, lo que mejora continuamente su rendimiento en diversas condiciones.
-	
-	El motor puede integrarse fácilmente en aplicaciones de procesamiento de imágenes y visión por computadora. Tesseract se utiliza comúnmente en combinación con bibliotecas como OpenCV para preprocesar imágenes antes de la etapa de reconocimiento, lo que mejora la precisión de los resultados.
-	
-	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo y una de ellas es C++, por lo que esta herramienta cumple con todos los requisitos para nuestro proyecto y es la razón por la que hemos optado por Tesseract.
-\end{enumerate}
-\subsection{Pruebas y resultados de los OCR}
+En este capítulo se escribirá la evaluación sobre nuestra herramienta separando en una evaluación para el módulo de OCR, otra para el módulo de tests y una evaluación de la herramienta de forma genérica.
+En la parte de OCR se evaluará la librería utilizada, la mejora que proporciona la parte de preprocesamiento y la limpieza de caractéres basura utilizando distancia Levenshtein.
+En la parte de tests se evaluará la precisión de los tests asegurándonos de que no exista casos que de un falso error en el test, la evaluación sera con test de unidad.
+De forma genérica se evaluará la herramienta con los resultados obtenidos ejecutando la herramienta midiendo la precisión y la matriz de confusión.
+
+\section{Pruebas y resultados de los OCR}
+\label{sec:Evaluación_OCR}
 En esta sección se hará una evaluación de los distintos OCRs para elegir la más conveniente para nuestra herramienta.
 La evaluación se hará sobre las librerías de Tesseract, EasyOCR y Ocropus, son estas elegidas por su disponibilidad gratuita.
 
@@ -300,23 +278,38 @@ Se marca en rojo aquel tipo de preprocesamiento que da peor resultado en la cate
 
 Como podemos observar, en la mayoría de los preprocesamientos, los resultados mejoran en comparación con la de sin aplicar nada. Sin embargo, hay otros que empeoran, esto es debido a que el preprocesamiento ha marcado más las líneas y las geometrías por lo que el OCR reconozca más caracteres ``basura'' por lo que el CER supera a 1(reconoce más caracteres de los que hay en el ground-truth). Esto no significa que el OCR vaya ir a peor, puede que reconozca mejor el texto esperado pero añadiendo más basura que antes, algo que intentaremos resolver en el siguiente apartado. 
 
-Obteniendo esta tabla y viendo los resultados de imágenes se ha ido probando distintas combinaciones de preprocesados de imágenes y se ha obtenido la siguiente combinación:
-\begin{itemize}
-	\item Grises
-	\item Escalado
-	\item Simple Threshold
-	\item Denoising
-	\item Blurring
-	\item Dilate\_Erode	
-\end{itemize}
-\textbf{NO SE HA ACABADO AÚN TENGO QUE REHACER LAS PRUEBAS}
+Obteniendo esta tabla y viendo los resultados de imágenes se ha ido probando distintas combinaciones de preprocesados de imágenes:
+\begin{enumerate}
+	\item Experimento 1: 
+	\begin{itemize}
+		\item Grises \item Escalado\item Adaptive Threshold \item Denoising \item Blurring \item Dilate\_Erode    
+	\end{itemize}
+		\item Experimento 2: 
+	\begin{itemize}
+		\item Grises\item Escalado\item Denoising Blurring  \item Dilate\_Erode\item Ec. Histograma \item Gamma \item F.Nitidez           
+	\end{itemize}
+		\item Experimento 3: 
+	\begin{itemize}
+		\item Grises \item Escalado\item Simple Threshold \item Denoising \item Blurring \item F.Nitidez \item Dilate\_Erode    
+	\end{itemize}
+		\item Experimento 4: 
+	\begin{itemize}
+		\item Grises \item Escalado\item Simple Threshold \item Denoising \item Blurring \item Dilate\_Erode    
+	\end{itemize}
+\end{enumerate}
 Obteniendo estos resultados:
 \begin{table}[H]
-	\begin{tabular}{lllll}
-		Complejo & Simple & PixelArt & TxTBoc & TxtBoc2                      \\
-		2.57     & 0.29   & 2.01     & 1.01   & 1.49
+	\begin{tabular}{llllll}
+		Experimento & Complejo & Simple & PixelArt & TxTBoc & TxtBoc2                      \\
+		 1 & 18.79     & 3.96   & 13.93     & 5.26   & 22.01 \\
+		 2 & 7.23     & 4.58   & 14.96     & 4.94   & 11.94 \\
+		 3 & 3.68     & 0.34   & 2.30     & 1.16   & 1.62 \\
+		 4 & 2.57     & 0.29   & 2.01     & 1.01   & 1.49
 	\end{tabular}
+	\caption{Tabla con los resultados CER de cada categoría en cada experimento.}
+	\label{table:Prepro}
 \end{table}
+Donde podemos ver en la tabla \ref{table:Prepro} que el experimento más destacado es el experimento 4, por lo que en adelante seguiremos el preprocesamiento con las técnicas del experimento 4.
 \subsection{Eliminación de caracteres basura}
 Obteniendo el resultado de CER medio de los preprocesamientos(tabla \ref{table:preproCERtable}), podemos ver que se produce muchos números que superan al 1, esto significa que el OCR ha reconocido más caracteres de lo que hay en el ground-truth, todos esos caracteres que sobran son caracteres basura y el texto que necesitaremos estará en algunas de esas líneas. En esta sección intentaremos eliminar esos caracteres basura dejando solo lo necesario.
 \begin{figure}[H]
@@ -419,9 +412,13 @@ Donde:
 \textit{max(s1,s2)}	 es el máximo entre la longitud de la cadena \textit{s1} y cadena \textit{s2}
 
 Empezamos comparando la primera línea de OCR con la primera línea del esperado y así todo el rato hasta que comparemos todas.
-
-
-\textbf{NO SE HA ACABADO,TENGO PENSADO HACER UNA TABLA CON LAS COMPARACIONES,DISTANCIA Y SI SON DESCARTADOS O NO}
+\begin{enumerate}
+	\item Se compara ``Agumon'' con la primera línea  obteniendo una distacia levenshtein de 6(1 sustitución para sustituir el único carácter a ``A'' y 5 inserciones ``gumon''  ), aplicando la fórmula obtenemos una similitud de 0.
+	\item Se compara con las siguientes 3 líneas obteniendo resultado de todos distancia 6 y similitud 0.
+	\item Se compara con la siguiente obteniendo una distancia de 1, aplicando la formula obtenemos una similitud de 0.86, por lo que se marca como encontrado y no se vuelve a comparar las líneas encontradas.
+	\item Se coge la siguiente línea a comparar y se repite el proceso hasta acabar con todas.
+\end{enumerate}
+Después de todo ese proceso obtenemos la cadena limpiada utilizando distancia levenshtein.
 \item Texto aplicando distancia levenshtein:
 \begin{verbatim}
 Agumon /
@@ -440,8 +437,22 @@ Levenshtein & 0.63     & 0.16   & 0.63     & 0.55   & 0.42
 \end{table}
 El resultado de OCR es el resultado que obtenemos con solamente aplicando el preprocesamiento del apartado anterior. Sobre esa salida, se aplica la distancia levenshtein para la eliminación de basura obteniendo los nuevos resultados. Podemos ver en los números que mejoran casi un 50\% en todas la categorías por lo que es una técnica viable para nuestra herramienta.
 \section{Evaluación de los tests}
+En esta sección se hará una evaluación de los tests implementados.
+El objetivo de esta evaluación es asegurar de que los tests implementados sean correctos sin producir ningún falso positivo y falso negativo.
+La metodología de la evaluación es utilizando test de unidad donde existirá una suite de test para casos positivos de cada test y casos negativos de cada test. El test de unidad se puede encontrar en \texttt{unittest.cpp}.
 
-Aqui se pondrá la evaluación de los tests indicando que se usa test de unidad situado en el repo.
+Ejecutando el test de unidad obtenemos que se ha pasado todos los tests, tanto positivos como negativos por lo que podemos llegar a la conclusión de que la implementación de los tests son correctas.
+
 \section{Evaluación de la herramienta}
-
-Aqui se pondrá la evaluación de la herramienta indicando la matriz de confusión con los resultados y valores relevantes a nuestra herramienta.
+En esta sección se hará una evaluación de la herramienta de forma genérica incluyendo los dos modulos de OCR y tests.
+El objetivo de esta evaluación es asegurar de que nuestra herramienta es eficiente y preciso como ayuda de la parte de LQA.
+La metodología de la evaluación es la siguiente:
+\begin{enumerate}
+	\item 30 imágenes en total. Donde hay 10 imágenes con errores de localización, y los 25 restantes sin error.
+	\item Se ejecutara la herramienta propocionando información de estas imagenes y configuración.
+	\item Se obtendrá los resultados de las imágenes.
+	\item Generar una matriz de confusión con los resultados obtenidos y esperados.
+	\item Obtener información de la matriz de confusión como precisión, falsos positivos y falsos negativos.
+\end{enumerate}
+El resultado de la evaluación es la siguiente:
+TABLA

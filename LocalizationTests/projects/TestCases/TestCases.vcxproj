@@ -125,12 +125,14 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\TestCases\Overlap.h" />
     <ClInclude Include="..\..\src\TestCases\Placeholders.h" />
+    <ClInclude Include="..\..\src\TestCases\Similarity.h" />
     <ClInclude Include="..\..\src\TestCases\TestCase.h" />
     <ClInclude Include="..\..\src\TestCases\Truncation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\TestCases\Overlap.cpp" />
     <ClCompile Include="..\..\src\TestCases\Placeholders.cpp" />
+    <ClCompile Include="..\..\src\TestCases\Similarity.cpp" />
     <ClCompile Include="..\..\src\TestCases\Truncation.cpp" />
   </ItemGroup>
   <ItemGroup>

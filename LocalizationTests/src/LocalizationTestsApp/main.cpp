@@ -29,9 +29,9 @@ int main(int argc, char* argv[]) {
 	};
 
 	LocalizationTests* test = new LocalizationTests();
-	//test->init(testCases[1]);
-	std::vector<std::string> args(argv, argv + argc);
-	test->init(args);
+	test->init(testCases[1]);
+	//std::vector<std::string> args(argv, argv + argc);
+	//test->init(args);
 	test->run();
 	test->release();
 	delete test;

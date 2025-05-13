@@ -76,15 +76,24 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
             std::vector<std::string> outputLines = splitIntoLines(outText);
             std::string cleanOutPut;
             for (const auto& expectedLine : expectedLines) {
-                std::string bestMatch = findMostSimilarLine(expectedLine, outputLines, 0.8);
+                std::string bestMatch = findMostSimilarLine(expectedLine, outputLines, 0.7);
                 if (!bestMatch.empty()) {
                     cleanOutPut += bestMatch + "\n";
                 }
             }
             std::ofstream outFile(outputPath + "/" + imageName + ".txt");
+            std::ofstream outFile2(outputPath + "/" + imageName + "-nl.txt");
             if (outFile.is_open()) {
                 outFile << cleanOutPut;
                 outFile.close();
+                std::cout << "Texto guardado" << std::endl;
+            }
+            else {
+                std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
+            }
+            if (outFile2.is_open()) {
+                outFile2 << outText;
+                outFile2.close();
                 std::cout << "Texto guardado" << std::endl;
             }
             else {

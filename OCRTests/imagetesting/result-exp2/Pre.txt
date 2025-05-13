@@ -1,0 +1,8 @@
+Grises
+Escalado
+Denoising
+Blurring
+Dilate_Erode
+Ecualización de histograma
+Corrección de gamma
+Filtro de nitidez
