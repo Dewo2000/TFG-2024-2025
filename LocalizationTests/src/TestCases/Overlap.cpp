@@ -8,8 +8,8 @@
 using namespace std;
 Overlap::Overlap()
 {
-	_butMinW = 65;
-	_butMinH = 30;
+	_butMinW = 0;
+	_butMinH = 0;
 	_testPass = true;
 }
 

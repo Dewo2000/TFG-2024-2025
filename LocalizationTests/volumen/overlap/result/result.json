@@ -3,7 +3,7 @@
         "tests": {
             "overall_pass": false,
             "overlap": {
-                "test_pass": true
+                "test_pass": false
             },
             "placeholders": {
                 "test_pass": true
@@ -71,7 +71,7 @@
         "tests": {
             "overall_pass": false,
             "overlap": {
-                "test_pass": true
+                "test_pass": false
             },
             "placeholders": {
                 "test_pass": true
@@ -117,6 +117,23 @@
         },
         "texto_esperado": "Agumon\r\nStill,a \"smahrt fown\" is cool! It really can\r\ndo anything!",
         "texto_reconocido": "Agumon /\nStill, a “smahrt fown” is cool! It really can\ndo anything! <"
+    },
+    "C.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 0.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\n",
+        "texto_reconocido": ""
     },
     "C1.png": {
         "tests": {
@@ -173,7 +190,7 @@
         "tests": {
             "overall_pass": false,
             "overlap": {
-                "test_pass": true
+                "test_pass": false
             },
             "placeholders": {
                 "test_pass": true
@@ -275,7 +292,7 @@
         "tests": {
             "overall_pass": false,
             "overlap": {
-                "test_pass": true
+                "test_pass": false
             },
             "placeholders": {
                 "test_pass": true
@@ -292,7 +309,7 @@
         "tests": {
             "overall_pass": false,
             "overlap": {
-                "test_pass": true
+                "test_pass": false
             },
             "placeholders": {
                 "test_pass": true
@@ -309,7 +326,7 @@
         "tests": {
             "overall_pass": false,
             "overlap": {
-                "test_pass": true
+                "test_pass": false
             },
             "placeholders": {
                 "test_pass": true
@@ -321,5 +338,56 @@
         },
         "texto_esperado": "My Figure\r\nThis is your figure. Select it to see\r\nyour play records !\r\n",
         "texto_reconocido": ""
+    },
+    "F.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 96.0,
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "Empezar jugar a no se que",
+        "texto_reconocido": "Empezar jugar a no sg que"
+    },
+    "Multi_Correct.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 82.35294117647058,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\nSalir\r\nSoy un texto",
+        "texto_reconocido": "Empezar jugar Salr\nSy un texta"
+    },
+    "Multi_Fail.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 72.22222222222221,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar a no se que\r\nEmpezar jugar\r\nSoy un texto",
+        "texto_reconocido": "Empezar jugar a no se que\nEmpezar jugar"
     }
 }

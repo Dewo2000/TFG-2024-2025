@@ -97,11 +97,14 @@ std::vector<ButtonLimits> OCR::getButtonsFromImage(std::string imgPath,int butMi
 
 	// Aplicar un umbral para binarizar la imagen
 	cv::Mat thresh;
-	cv::threshold(gray, thresh, 200, 255, cv::THRESH_BINARY_INV); // Ajusta el valor 200 según sea necesario
+	cv::threshold(gray, thresh, 200, 255, cv::THRESH_BINARY);
+
+	cv::Mat edges;
+	cv::Canny(gray, edges, 30, 150);  // Puedes ajustar estos valores
 
 	// Encontrar contornos
 	std::vector<std::vector<cv::Point>> contornos;
-	cv::findContours(thresh, contornos, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+	cv::findContours(edges, contornos, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
 	// Dibujar los contornos que podrían ser botones
 	for (size_t i = 0; i < contornos.size(); i++) {
