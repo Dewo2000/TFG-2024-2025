@@ -78,8 +78,14 @@ Un ejemplo podría ser como se muestra en la figura \ref{fig:EFont} donde alguno
 \end{figure}
 
 \subsection{Implementación de texto incorrecta}\label{ErrorImpIncorrecta}
-Este error se ilustra cuando el texto que debería aparecer en un idioma, aparece en otro diferente o aparece en forma de ``placeholder''. Este error se produce debido a que hay un error en el documento de localización o porque el programa en si tiene algún error. Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el
+Este error se ilustra cuando el texto que debería aparecer en un idioma, aparece en otro diferente o aparece en forma de ``placeholder''(Figura \ref{fig:E_Implementacion}). Este error se produce debido a que hay un error en el documento de localización o porque el programa en si tiene algún error. Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el
 texto adecuado.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Implementacion.png}
+	\caption{Aparece un placeholder en vez del nivel alcanzado}
+	\label{fig:E_Implementacion}
+\end{figure}
 \subsection{Cadena no localizada}\label{ErrorNoLocalizada}
 Este error se produce cuando un texto no está traducido como se muestra en la figura \ref{fig:EImplementacion_Incorrecta}. Esto puede ocurrir cuando el traductor no haya traducido el texto o que el desarrollador no haya proporcionado el texto. 
 \begin{figure}[H]
@@ -112,10 +118,23 @@ Suele ocurrir cuando es mal traducido, por falta de información u omisión de p
 \end{figure}
 
 \subsection{Solapamiento de texto}\label{ErrorSolapamiento}
-Este error sucede cuando el texto se sale de los limites fijados para él, puede ser un botón o un cuadro de texto. Puede deberse por una mala implementación por parte del desarrollador o que el traductor no haya respetado los límites de espacios proporcionado.
+Este error sucede cuando el texto se sale de los limites fijados para él, puede ser un botón o un cuadro de texto. Puede deberse por una mala implementación por parte del desarrollador o que el traductor no haya respetado los límites de espacios proporcionado.(Figura \ref{fig:E_Solapa})
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Solapamiento.png}
+	\caption{El texto se sobresale de la caja delimitadora.}
+	\label{fig:E_Solapa}
+\end{figure}
 
 \subsection{Truncamiento de texto}\label{ErrorTruncamiento}
 Este error se produce cuando un texto aparece cortado y no se muestra por completo. Puede deberse a que no haya suficiente espacio dentro de los limites fijados.
+(Figura \ref{fig:E_Trunc})
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Trunca.png}
+	\caption{El texto confirm no aparece completo.}
+	\label{fig:E_Trunc}
+\end{figure}
 
 \subsection{Error terminológico o incoherencia}\label{ErrorTermino}
 Este error se produce cuando se usa una palabra incorrecta para referirse a una
@@ -213,7 +232,7 @@ Según \cite{TesseractOCR} y \cite{OcropusOCR} para llegar al objetivo de recono
 \end{enumerate}
 \section{Librerías de OCR (Optical Character Recognition)}
 \label{sec:Seleccion de libreria de OCR}
-Durante el desarrollo de este trabajo, se evaluaron varias herramientas de OCR para seleccionar la más adecuada para nuestras necesidades. Las herramientas probadas fueron Ocropus	\footnote{(repositorio github de Ocropus) \url{https://github.com/ocropus-archive/DUP-ocropy} }, EasyOCR	\footnote{(repositorio github de EasyOCR) \url{https://github.com/JaidedAI/EasyOCR} } y Tesseract	\footnote{(repositorio github de Tesseract) \url{https://github.com/tesseract-ocr/tesseract} }. A continuación, se describe brevemente cada una de ellas.
+Durante el desarrollo de este trabajo, se evaluarán varias herramientas de OCR para seleccionar la más adecuada para nuestras necesidades. Las herramientas que probaremos serán Ocropus	\footnote{(repositorio github de Ocropus) \url{https://github.com/ocropus-archive/DUP-ocropy} }, EasyOCR	\footnote{(repositorio github de EasyOCR) \url{https://github.com/JaidedAI/EasyOCR} } y Tesseract	\footnote{(repositorio github de Tesseract) \url{https://github.com/tesseract-ocr/tesseract} }. A continuación, se describe brevemente cada una de ellas.
 \begin{enumerate}
 	\item \textbf{OCRopus}
 	Es un sistema de OCR basado en redes neuronales con un enfoque modular.
