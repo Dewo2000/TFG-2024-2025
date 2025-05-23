@@ -41,7 +41,7 @@ protected:
 	std::string findMostSimilarLine(const std::string& target, const std::vector<std::string>& recognizedLines, double threshold);
 	std::vector<std::string> splitIntoLines(const std::string& text);
 	std::string _volumen = "/home/localizationtests/volumen/";
-	bool preprocessing(std::string iName, imageInfo& image);
+	bool preprocessing(imageInfo& image,std::string imgPath,std::string iName);
 	
 };
 

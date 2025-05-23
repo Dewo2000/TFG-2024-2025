@@ -29,19 +29,11 @@ Reallocating 'name_of_file' (item size: 1) to 27 items.
 A level-1 auxiliary file: Capitulos/Introduction.aux
 Reallocating 'name_of_file' (item size: 1) to 36 items.
 A level-1 auxiliary file: Capitulos/ConclusionsFutureWork.aux
-Reallocating 'name_of_file' (item size: 1) to 39 items.
-A level-1 auxiliary file: Capitulos/ContribucionesPersonales.aux
 Reallocating 'name_of_file' (item size: 1) to 26 items.
 A level-1 auxiliary file: Cascaras/bibliografia.aux
 Reallocating 'name_of_file' (item size: 1) to 12 items.
 The style file: TeXiS/TeXiS.bst
 Reallocating 'name_of_file' (item size: 1) to 7 items.
-Reallocating 'name_of_file' (item size: 1) to 24 items.
-A level-1 auxiliary file: Apendices/appendixA.aux
-Reallocating 'name_of_file' (item size: 1) to 24 items.
-A level-1 auxiliary file: Apendices/appendixB.aux
-Reallocating 'name_of_file' (item size: 1) to 17 items.
-A level-1 auxiliary file: Cascaras/fin.aux
 Database file #1: biblio.bib
 Warning--entry type for "NZIngreso2024" isn't style-file defined
 --line 13 of file biblio.bib
@@ -49,7 +41,7 @@ Warning--to sort, need author or key in Codificacion
 Warning--empty year in CER; set to ????
 You've used 14 entries,
             2962 wiz_defined-function locations,
-            1168 strings with 14707 characters,
+            1164 strings with 14607 characters,
 and the built_in function-call counts, 5216 in all, are:
 = -- 454
 > -- 138

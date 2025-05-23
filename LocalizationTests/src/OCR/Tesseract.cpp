@@ -61,7 +61,7 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
     //Procesamiento de cada imagen
     for (int i = 0; i < pngFiles.size(); i++) {
         imageInfo image;
-        preprocessing(imgPath+"/" + pngFiles[i], image);
+        preprocessing(image, imgPath, pngFiles[i]);
         _ocr->SetImage(image.data, image.cols, image.rows, 1, image.step);
         char* outText = _ocr->GetUTF8Text();
         std::string imageName="";
@@ -82,7 +82,7 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
                 }
             }
             std::ofstream outFile(outputPath + "/" + imageName + ".txt");
-            std::ofstream outFile2(outputPath + "/" + imageName + "-nl.txt");
+            //std::ofstream outFile2(outputPath + "/" + imageName + "-nl.txt");
             if (outFile.is_open()) {
                 outFile << cleanOutPut;
                 outFile.close();
@@ -91,14 +91,14 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
             else {
                 std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
             }
-            if (outFile2.is_open()) {
+            /*if (outFile2.is_open()) {
                 outFile2 << outText;
                 outFile2.close();
                 std::cout << "Texto guardado" << std::endl;
-            }
-            else {
-                std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
-            }
+            }*/
+            //else {
+            //    std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
+            //}
         }
         else {
             std::ofstream outFile(outputPath + "/" + imageName + ".txt");

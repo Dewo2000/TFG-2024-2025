@@ -43,10 +43,3 @@ h1 {
     font-size: 1.2rem;
     margin-left: 0.5rem;
 }
-.imagen-thumbnail {
-    max-width: 60%;   /* Asegura que la imagen no se desborde fuera del contenedor */
-    height: auto;      /* Mantiene la proporción de la imagen */
-    max-height: 300px; /* Establece una altura máxima para la imagen */
-    display: block;    /* Asegura que la imagen se comporte como un bloque */
-    margin: 0 auto;    /* Centra la imagen horizontalmente */
-}

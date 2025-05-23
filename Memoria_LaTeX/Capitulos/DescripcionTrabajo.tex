@@ -1,11 +1,14 @@
 \chapter{Descripción del Trabajo}
 \label{cap:descripcionTrabajo}
+
+En este capítulo se describirá el diseño de la herramienta detallando las funcionalidades de los dos módulos que va a tener, el de OCR y el de test. Se contará el formato de la salida de la herramienta y la forma en la que va a ser interpretada.
+
 \section{Diseño de la herramienta}
 \label{sec:Descripción de la herramienta}
 Se desea diseñar una herramienta donde dado el usuario unas imágenes, unas configuraciones y el texto esperado, el programa pueda reconocer el texto de la imagen y detectar si existe algún error de localización de las que hemos seleccionado.
 La idea es que esta herramienta sea utilizado como ayuda al personal de LQA como parte del desarrollo del videojuego.
 El usuario proporciona los datos necesarios para la ejecución de la herramienta, seguido la herramienta recoge los datos, estos datos son enviados al OCR para el reconocimiento de texto y otras informaciones relevantes (p.ej posición del texto), después, se envia toda la información a los tests para detectar la existencia de algún error y esto será enviado de nuevo al programa principal generando así un informe de los resultados.(Figura \ref{fig:Descripcion_Herramienta})
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width = 1\textwidth]{Imagenes/Descripcion_Herramienta.png}
 	\caption{Dibujo con los módulos y la información que se pasa.}

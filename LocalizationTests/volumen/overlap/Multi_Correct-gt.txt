@@ -1,3 +1,3 @@
 Empezar jugar
 Salir
-Soy un texto
+Soy untexto

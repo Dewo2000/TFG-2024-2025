@@ -63,13 +63,20 @@ Para la recogida de parámetros, es necesario un archivo de configuración con e
 
 El preprocesado se ejecuta en el método protegido \texttt{preprocessing} de la clase \texttt{OCR}, la cual se usan métodos proporcionado por OpenCV de las cuales son:
 \begin{itemize}
+	\item \texttt{cvtColor} Cambia la imagen a escala de grises.
 	\item \texttt{Resize}. Cambia las dimensiones la imagen, lo cual ajusta el tamaño de la imagen para un mejor reconocimiento.
 	\item \texttt{Threshold} Aplica simple thresholding la cual asigna un valor binario a cada píxel dependiendo el umbral. Resalta mejor los caracteres del fondo.
 	\item \texttt{fastNlMeansDenoising} Aplica reducción de ruido para mejorar la calidad visual y el reconocimiento.
 	\item \texttt{medianBlur} y \texttt{GaussianBlur} Otra técnica para aplicar reducción de ruido suavizando la imagen.
 	\item \texttt{dilate} y \texttt{erode} Técnica de dilatar y erosionar que ayuda a reducir ruidos y el cierre de contornos, mejora la detección de los caracteres.
 \end{itemize}
-La combinación anterior se ha obtenido haciendo estudio y experimento sobre las técnicas de preprocesamiento en la sección \ref{sec:Mejoras en el reconocimiento}
+La combinación anterior se ha obtenido haciendo estudio y experimento sobre las técnicas de preprocesamiento en la sección \ref{sec:Mejoras en el reconocimiento} que luego serán revocadas en la sección \ref{sec:Evaluación_herramienta} después de la evaluación y simplificando el preprocesamiento a:
+\begin{itemize}
+	\item \texttt{cvtColor} Cambia la imagen a escala de grises.
+	\item \texttt{Resize}. Cambia las dimensiones la imagen, lo cual ajusta el tamaño de la imagen para un mejor reconocimiento.
+	\item \texttt{createCLAHE} Ecualización adaptativa del histograma que mejora el contraste de la imagen.
+	\item \texttt{Threshold} Aplica simple thresholding la cual asigna un valor binario a cada píxel dependiendo el umbral. Resalta mejor los caracteres del fondo.
+\end{itemize}
 
 El siguiente paso es el reconocimiento de texto utilizando la librería de Tesseract. El método \texttt{getDirImgText} para reconocer texto de una carpeta de imágenes se sitúa en la clase \texttt{OCR}, la cual es un método virtual puro que en la clase de \texttt{Tesseract} debe implementar. En el método se hace lo siguiente: 
 \begin{enumerate}
@@ -174,13 +181,14 @@ Como se comenta al principio de este capítulo, esta aplicación se despliega en
 Existirá dos formas de ejecutar la herramienta dependiendo de la necesidad.
 
 Si se hace uso de la herramienta directamente:
-\texttt{(Se explica aqui los detalles para usar la herramienta.)}
+
+Existe un archivo LocalizationTest.tar en el repositorio, este archivo es la imagen donde contiene todo lo necesario para la herramienta, la herramienta, archivos ejemplo y resultados ejemplo. Para ello hay importar la imagen al docker y crear un contenedor nuevo con la imagen importada.
 
 Si se desea hacer una extensión de la herramienta como añadir más tests o usar una librería de OCR diferente,el proceso será:
 \begin{enumerate}
 	\item Construir la imagen usando el DockerFile proporcionado.
 	\item Arrancar el contenedor con la imagen construida.
-	\item Abril visual studio 2022 u otro editor y conectarse al contenedor.
+	\item Abril un editor y conectarse al contenedor de docker.
 	\item Ejecutar el programa y conseguir los resultados.
 \end{enumerate}
 Las instrucciones concretas se encuentran en el README.md .

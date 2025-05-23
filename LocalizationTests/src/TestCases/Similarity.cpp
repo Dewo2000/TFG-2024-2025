@@ -1,6 +1,7 @@
 #include "Similarity.h"
 #include <iostream>
 #include "Levenshtein.h"
+#include <cmath>
 using namespace std;
 
 Similarity::Similarity(std::string expected)
@@ -20,6 +21,6 @@ void Similarity::test(const std::string& testString)
 	if (maxLen == 0)_similarity = 100.0;
 	else
 	{
-		_similarity = (1.0 - static_cast<double>(distance) / maxLen) * 100.0;
+		_similarity = std::round((1.0 - static_cast<double>(distance) / maxLen) * 100.0);
 	}
 }

@@ -247,34 +247,34 @@ Las técnicas probadas son las siguientes:
 		\caption{Imagen aplicando reducción de ruido}
 		\label{fig:Denoising}
 	\end{figure}
-	
+	\begin{table}[H]
+		\begin{tabular}{llllll}
+			Tipo                                                                 & F.Complejo                      & F.Simple                      & PixelArt                      & TxTBoc                       & TxtBoc2                       \\
+			Nada                                                               & 9.39                          & 1.05                         & 2.51                          & 2.02                         & 5.61                          \\
+			Grises                                                               & 3.72                          & 0.59                         & 2.69                          & 1.17                         & 2.16                          \\
+			Contraste                                                            & 5.06                          & 0.81                         & 2.39                          & 1.13                         & 10.07                         \\
+			\begin{tabular}[c]{@{}l@{}}Ecualización\\ de histograma\end{tabular} & 5.59                          & 3.60                         & 6.56                          & 2.41                         & 8.67                          \\
+			Gamma                                                                & 3.72                          & 0.59                         & 2.69                          & 1.17                         & 2.16                          \\
+			Filtro de nitidez                                                    & 11.06                         & 2.17                         & 8.84                          & 3.29                         & 12.05                         \\
+			Thresholding C                                                       & \cellcolor[HTML]{FF0000}16.80 & \cellcolor[HTML]{FF0000}9.44 & 10.36                         & 4.08                         & \cellcolor[HTML]{FF0000}23.44 \\
+			\begin{tabular}[c]{@{}l@{}}Thresholding\\ Gaussian\end{tabular}      & 12.85                         & 9.35                         & \cellcolor[HTML]{FF0000}16.16 & \cellcolor[HTML]{FF0000}4.71 & 22.83                         \\
+			Thresold Binary                                                      & 4.05                          & \cellcolor[HTML]{00FF00}0.49 & 2.14                          & 1.79                         & 2.04                          \\
+			\begin{tabular}[c]{@{}l@{}}Redimension\\ x1.5\end{tabular}           & 4.77                          & 0.80                         & 2.86                          & 1.27                         & 3.07                          \\
+			Gaussian Blur                                                        & 3.02                          & 0.68                         & 2.34                          & 1.14                         & 1.86                          \\
+			Median Blur                                                          & 2.75                          & 0.51                         & 2.75                          & 1.25                         & 1.37                          \\
+			2 Blur                                                               & 2.26                          & 0.59                         & 2.15                          & 1.22                         & \cellcolor[HTML]{00FF00}1.09  \\
+			Dilatación y erosión                                                 & 2.19                          & 0.51                         & 2.48                          & \cellcolor[HTML]{00FF00}0.69 & 1.83                          \\
+			Dilatación                                                           & \cellcolor[HTML]{00FF00}1.80  & 0.62                         & \cellcolor[HTML]{00FF00}1.23  & 0.80                         & 5.53                          \\
+			Erosión                                                              & 2.02                          & 1.00                         & 2.57                          & 0.82                         & 1.21                          \\
+			Denoising                                                            & 3.23                          & 0.57                         & 2.64                          & 1.07                         & 1.70                         
+		\end{tabular}
+		\caption{Tabla con los resultados de CER medio de cada categoría de imágenes después de aplicar un tipo de preprocesamiento.}
+		\label{table:preproCERtable}
+	\end{table}
 \end{enumerate}
 A continuación se ha hecho el experimento de aplicar un solo tipo de preprocesamiento a todas las imágenes de cada categoría, ejecutando el OCR sobre las imágenes preprocesadas y obteniendo el CER de cada imágen y el CER medio de cada categoría. Este proceso se ha aplicado para cada uno de las posibles técnicas de preprocesamiento obteniendo el resultado en la tabla \ref{table:preproCERtable}. Cada columna representa la categoría de la imagen y cada fila representa el preprocesamiento aplicado a las imágenes. En este caso no se hace distinción de OCR ya que preprocesamiento se aplica directamente en las imágenes antes de ser pasados a la OCR por lo que no importa la librería de OCR que se este usando.
 Se marca en rojo aquel tipo de preprocesamiento que da peor resultado en la categoría y en verde, aquel que da mejor resultado.
-\begin{table}[H]
-	\begin{tabular}{llllll}
-		Tipo                                                                 & F.Complejo                      & F.Simple                      & PixelArt                      & TxTBoc                       & TxtBoc2                       \\
-		Nada                                                               & 9.39                          & 1.05                         & 2.51                          & 2.02                         & 5.61                          \\
-		Grises                                                               & 3.72                          & 0.59                         & 2.69                          & 1.17                         & 2.16                          \\
-		Contraste                                                            & 5.06                          & 0.81                         & 2.39                          & 1.13                         & 10.07                         \\
-		\begin{tabular}[c]{@{}l@{}}Ecualización\\ de histograma\end{tabular} & 5.59                          & 3.60                         & 6.56                          & 2.41                         & 8.67                          \\
-		Gamma                                                                & 3.72                          & 0.59                         & 2.69                          & 1.17                         & 2.16                          \\
-		Filtro de nitidez                                                    & 11.06                         & 2.17                         & 8.84                          & 3.29                         & 12.05                         \\
-		Thresholding C                                                       & \cellcolor[HTML]{FF0000}16.80 & \cellcolor[HTML]{FF0000}9.44 & 10.36                         & 4.08                         & \cellcolor[HTML]{FF0000}23.44 \\
-		\begin{tabular}[c]{@{}l@{}}Thresholding\\ Gaussian\end{tabular}      & 12.85                         & 9.35                         & \cellcolor[HTML]{FF0000}16.16 & \cellcolor[HTML]{FF0000}4.71 & 22.83                         \\
-		Thresold Binary                                                      & 4.05                          & \cellcolor[HTML]{00FF00}0.49 & 2.14                          & 1.79                         & 2.04                          \\
-		\begin{tabular}[c]{@{}l@{}}Redimension\\ x1.5\end{tabular}           & 4.77                          & 0.80                         & 2.86                          & 1.27                         & 3.07                          \\
-		Gaussian Blur                                                        & 3.02                          & 0.68                         & 2.34                          & 1.14                         & 1.86                          \\
-		Median Blur                                                          & 2.75                          & 0.51                         & 2.75                          & 1.25                         & 1.37                          \\
-		2 Blur                                                               & 2.26                          & 0.59                         & 2.15                          & 1.22                         & \cellcolor[HTML]{00FF00}1.09  \\
-		Dilatación y erosión                                                 & 2.19                          & 0.51                         & 2.48                          & \cellcolor[HTML]{00FF00}0.69 & 1.83                          \\
-		Dilatación                                                           & \cellcolor[HTML]{00FF00}1.80  & 0.62                         & \cellcolor[HTML]{00FF00}1.23  & 0.80                         & 5.53                          \\
-		Erosión                                                              & 2.02                          & 1.00                         & 2.57                          & 0.82                         & 1.21                          \\
-		Denoising                                                            & 3.23                          & 0.57                         & 2.64                          & 1.07                         & 1.70                         
-	\end{tabular}
-	\caption{Tabla con los resultados de CER medio de cada categoría de imágenes después de aplicar un tipo de preprocesamiento.}
-	\label{table:preproCERtable}
-\end{table}
+
 
 Como podemos observar, en la mayoría de los preprocesamientos, los resultados mejoran en comparación con la de sin aplicar nada. Sin embargo, hay otros que empeoran, esto es debido a que el preprocesamiento ha marcado más las líneas y las geometrías por lo que el OCR reconozca más caracteres ``basura'' por lo que el CER supera a 1(reconoce más caracteres de los que hay en el ground-truth). Esto no significa que el OCR vaya ir a peor, puede que reconozca mejor el texto esperado pero añadiendo más basura que antes, algo que intentaremos resolver en el siguiente apartado. 
 
@@ -438,22 +438,201 @@ Levenshtein & 0.63     & 0.16   & 0.63     & 0.55   & 0.42
 \end{table}
 El resultado de OCR es el resultado que obtenemos con solamente aplicando el preprocesamiento del apartado anterior. Sobre esa salida, se aplica la distancia levenshtein para la eliminación de basura obteniendo los nuevos resultados. Podemos ver en los números que mejoran casi un 50\% en todas la categorías por lo que es una técnica viable para nuestra herramienta.
 \section{Evaluación de los tests}
-En esta sección se hará una evaluación de los tests implementados.
 El objetivo de esta evaluación es asegurar de que los tests implementados sean correctos sin producir ningún falso positivo y falso negativo.
 La metodología de la evaluación es utilizando test de unidad donde existirá una suite de test para casos positivos de cada test y casos negativos de cada test. El test de unidad se puede encontrar en \texttt{unittest.cpp}.
 
 Ejecutando el test de unidad obtenemos que se ha pasado todos los tests, tanto positivos como negativos por lo que podemos llegar a la conclusión de que la implementación de los tests son correctas.
 
 \section{Evaluación de la herramienta}
+\label{sec:Evaluación_herramienta}
 En esta sección se hará una evaluación de la herramienta de forma genérica incluyendo los dos modulos de OCR y tests.
 El objetivo de esta evaluación es asegurar de que nuestra herramienta es eficiente y preciso como ayuda de la parte de LQA.
 La metodología de la evaluación es la siguiente:
 \begin{enumerate}
-	\item 30 imágenes en total. Donde hay 10 imágenes con errores de localización, y los 25 restantes sin error.
+	\item 30 imágenes en total. Entre las 30 imágenes, existen \begin{itemize}
+		\item 7 errores de solapamiento
+		\item 5 errores de truncamiento
+		\item 5 errores de placeholders
+	\end{itemize}
+	Las imágenes de prueba con errores de localización se ha hecho editando sobre imágenes de los juegos revolcando el contenido original.
 	\item Se ejecutara la herramienta propocionando información de estas imagenes y configuración.
 	\item Se obtendrá los resultados de las imágenes.
 	\item Generar una matriz de confusión con los resultados obtenidos y esperados.
 	\item Obtener información de la matriz de confusión como precisión, falsos positivos y falsos negativos.
 \end{enumerate}
 El resultado de la evaluación es la siguiente:
-TABLA
+\begin{table}[H]
+	\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 2            & 12 \\
+		& Negativo & 2        & 14                        
+	\end{tabular}
+	\caption{Matriz de confusión del resultado.}
+	\label{table:mt_ori}
+\end{table}
+
+Como podemos observar en la tabla \ref{table:mt_ori} se producen 12 falsos negativos(se espera que salga positivo pero sale negativo) y 2 falsos positivos(se espera que salga positivo y sale negativo). La cantidad de falsos positivos indica que la herramienta está detectando errores en imágenes donde no debería aparecer errores, esto es un problema para nuestra herramienta ya que nuestro fin es minimizar trabajo de un ser humano y este tipo de error aumenta el trabajo teniendo que evaluar las imágenes cuando en realidad no tiene ningún error. Y los falsos negativos indica que la herramienta no detecta ningún error en la imagen cuando en realidad existen errores. Para obtener más detalle de la evaluación, generaremos una matriz de confusión para cada test.
+
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 16  & 7 \\
+		& Negativo & 4    & 3                         
+	\end{tabular}
+	\caption{Matriz de confusión del resultado de solapamiento.}
+	\label{table:mt_ori_sol}
+\end{table}
+
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 5  & 20 \\
+		& Negativo & 0    & 5                         
+	\end{tabular}
+	\caption{Matriz de confusión del resultado de truncamiento.}
+	\label{table:mt_ori_trun}
+\end{table}
+
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 25  & 0 \\
+		& Negativo & 5    & 0                         
+	\end{tabular}
+	\caption{Matriz de confusión del resultado de placeholders.}
+	\label{table:mt_ori_place}
+\end{table}
+Mirando los resultados de cada test, podemos observar en la tabla \ref{table:mt_ori_sol}, se producen 11 errores(falso positivo + falso negativo) al detectar solapamiento pero en un rango aceptable y que de los 7 errores que había, ha conseguido detectar 3. Sin embargo en las otras dos existen errores graves. En la tabla \ref{table:mt_ori_trun} podemos observar que se detectan 20 casos de falsos positivos que es un valor bastante alto. En la tabla \ref{table:mt_ori_place} observamos que se produce 25 casos de verdadero positivo y 5 casos de falso positivo, aunque parezca que tiene buenos resultados, recordamos que existe 5 errores de placeholders solamente, lo cual significa que no ha conseguido detectar ninguno de ellos. 
+Lo que tienen en común estos últimos dos test es que usan el texto reconocido en la salida del OCR lo cual el problema puede encontrarse allí.
+
+Observando el informe los resultados de salida, de las 30 imágenes de prueba, el porcentaje de similitud de 17 imágenes son menores del 50\% y entre ellas, 14 son 0\%, esto significa que no se esta reconociendo de forma correcta el texto de las imágenes produciendo todo ese error en los tests.
+
+Haciendo una investigación del problema, se detecta que el problema puede ser producido en el proceso de preprocesamiento, por lo cual mostramos por salida el resultado de la imagen después del preprocesamiento de la figura \ref{fig:Eva_2} (imagen original) obteniendo el resultado como se muestra en la figura \ref{fig:Eva_2P}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.6\textwidth]{Imagenes/Evaluacion_OCR/2.png}
+	\caption{Imagen ejemplo de prueba.}
+	\label{fig:Eva_2}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.6\textwidth]{Imagenes/Evaluacion_OCR/2_prepro.png}
+	\caption{Resultado de la imagen de prueba después de preprocesamiento.}
+	\label{fig:Eva_2P}
+\end{figure}
+
+Podemos ver que la imagen preprocesada se ve borroso en la parte del texto incluso a ojo humano, por tanto es de lo esperado que el OCR no consiga reconocer el texto de la imagen.
+Este problema es debido a que en la sección \ref{sec:Mejoras en el reconocimiento}, la evaluación del CER de los preprocesamientos se ha hecho sin tener en cuenta la distancia levenshtein que fue implementado y evaluado posteriormente del preprocesamiento. El bajo CER que se obtuvo es debido a que el OCR reconocía menos caracteres basura pero sin reconocer el texto. Puede darse el caso de que el OCR reconozca el texto pero con mucha basura, lo que  aumenta el CER, algo que se soluciona aplicando la distancia levenshtein.
+
+Para intentar resolver este problema, evaluaremos la herramienta quitando los preprocesamientos que hagan que la imagen se vea más borroso que son:
+\begin{itemize}
+	\item Denoising
+	\item Blurring
+	\item Dilatar y erosionar.
+\end{itemize}
+Se obtiene la imagen que se muestra en la figura \ref{fig:Eva_2PP} y los siguientes nuevos resultados.
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 2            & 12 \\
+		& Negativo & 1        & 15                        
+	\end{tabular}
+	\caption{Matriz de confusión del resultado.}
+	\label{table:mt_pos}
+\end{table}
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 16  & 7 \\
+		& Negativo & 4    & 3                         
+	\end{tabular}
+	\caption{Matriz de confusión del resultado de solapamiento.}
+	\label{table:mt_pos_sol}
+\end{table}
+
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 5  & 20 \\
+		& Negativo & 0    & 5                         
+	\end{tabular}
+	\caption{Matriz de confusión del resultado de truncamiento.}
+	\label{table:mt_pos_trun}
+\end{table}
+\begin{table}[H]
+		\centering
+	\begin{tabular}{llll}
+		&          & \multicolumn{1}{c}{Real} &                            \\
+		&          & Positivo                 & Negativo                   \\
+		Esperado & Positivo & 25  & 0 \\
+		& Negativo & 4    & 1                         
+	\end{tabular}
+	\caption{Matriz de confusión del resultado de placeholders.}
+	\label{table:mt_pos_place}
+\end{table}
+
+Vemos que no ha mejorado mucho en la matriz de confusión, sin embargo si tenemos en cuenta el porcentaje de similitud como se observa en la tabla \ref{table:simi}, si que se ha mejorado de forma genérica teniendo 15 imágenes por debajo del 50\% y entre ellas 9 imágenes de 0\%.
+
+También observamos que en algunos casos ha empeorado, como puede ser la imagen 1 que tenía un 85\% y que ahora está a 0\%. Con esto podemos llegar a la conclusión de que es necesario diferente preprocesamiento dependiendo de las características de las imágenes.
+\begin{table}[H]
+		\centering
+	\begin{tabular}{lll} Imagen & Antes        & Despues \\
+        1&  85.71       & 0     \\     
+        2&  0       & 0     \\  
+        3&  0       & 0     \\  
+        4&  0       & 100     \\  
+        5&  0       & 70.32     \\  
+        6&  0       & 81.63     \\  
+        7&  91       & 60.60     \\  
+        8&  86.66       & 86.66     \\  
+        9&  53.84       & 57.69     \\  
+        10&  75.67       & 59.35     \\  
+        11&  10.09       & 35.77     \\  
+        12&  54.92       & 54.92     \\  
+        13&  0       & 0     \\  
+        14&  0       & 0     \\  
+        15&  0       & 0     \\  
+        16&  0       & 0     \\  
+        17&  100       & 100     \\    
+        18&  0       & 0     \\     
+        19&  76.92       & 76.92     \\  
+        20&  54.05       & 51.35     \\  
+        21&  0       & 26.60     \\  
+        22&  0       & 35.77     \\  
+        23&  10       & 34.86     \\  
+        24&  69       & 47.88     \\  
+        25&  67       & 54.92     \\  
+        26&  0       & 0     \\  
+        27&  96       & 96     \\  
+        28&  30       & 30.30    \\  
+        29&  96.42       & 94.64     \\  
+        30&  0       & 77.77     \\  
+
+	\end{tabular}
+	\caption{Comparación de porcentaje de similitud entre los dos preprocesamientos.}
+	\label{table:simi}
+\end{table}
+
+En conclusión, la herramienta no obtiene buenos resultados debido a que no se reconoce el texto de forma correcta en el proceso de OCR por lo que perjudica en los tests haciendo que la herramienta sea imprecisa e ineficaz.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.6\textwidth]{Imagenes/Evaluacion_OCR/2_p.png}
+	\caption{Resultado de la imagen de prueba después del nuevo preprocesamiento.}
+	\label{fig:Eva_2PP}
+\end{figure}
+\section{Conclusión}
+En este capitulo se ha evaluado el modulo de OCR y el modulo del test, seguido de una evaluación completa de la herramienta. En la evaluación de OCR ha salido mejor para nuestro caso Tesseract. Para mejorar el reconocimiento de OCR, se aplican técnicas como el preprocesamiento de imagenes para facilitar el reconocimiento de texto y técnicas como distancia levenshtein para medir el grado de diferencia entre dos cadenas para eliminar aquellos caracteres basura. Para la evaluación de los tests se ha creado un test de unidad y los resultados han sido positivos. En cuanto la evaluación de la herramienta, debido a problemas con el reconocimiento del texto en imágenes de los juegos, los resultados no han sido buenas.

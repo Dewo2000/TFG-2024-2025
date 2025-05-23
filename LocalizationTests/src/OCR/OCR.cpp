@@ -53,26 +53,51 @@ std::vector<std::string> OCR::splitIntoLines(const std::string& text)
 	return lines;
 }
 
-bool OCR::preprocessing(std::string iName , imageInfo& imageOutput)
+bool OCR::preprocessing(imageInfo& imageOutput, std::string imgPath, std::string imageName)
 {
+	string iName = imgPath + "/" + imageName;
 	cv::Mat image;
-	image = cv::imread(iName, cv::IMREAD_GRAYSCALE);
+	image = cv::imread(iName);
 	if (image.empty()) {
 		std::cerr << "Error al leer la imagen" << std::endl;
 		return false;
 	}
-	
+	cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
 	float factor = 1.5;
 	cv::resize(image, image, cv::Size(int(image.cols * factor), int(image.rows * factor)), factor, factor, cv::INTER_LINEAR);
-	cv::threshold(image, image, 127, 255, cv::THRESH_BINARY);
-	cv::fastNlMeansDenoising(image, image, 10, 7, 21);
-	cv::medianBlur(image, image, 5);
-	cv::GaussianBlur(image, image, cv::Size(5, 5), 0);
-	cv::Mat kernel = cv::Mat::ones(5, 5, CV_8UC1);  // Kernel de 5x5 de unos
-		//Dilatar la imagen
-	cv::dilate(image, image, kernel);
-		//Erosionar la imagen
-	cv::erode(image, image, kernel);   // Configurar los valores de salida
+
+	cv::Ptr<cv::CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+
+
+	clahe->apply(image, image);
+	double meanIntensity = cv::mean(image)[0];
+
+	// Asumimos: si la imagen es mayormente clara -> texto oscuro, sino texto claro
+	int thresholdType;
+	if (meanIntensity > 127) {
+		// Fondo claro -> texto oscuro -> umbral binario normal
+		thresholdType = cv::THRESH_BINARY;
+	}
+	else {
+		// Fondo oscuro -> texto claro -> umbral invertido
+		thresholdType = cv::THRESH_BINARY_INV;
+	}
+	cv::threshold(image, image, 160, 255, cv::THRESH_BINARY_INV);
+
+	string oPath = imgPath+"/"+"prepro";
+	std::string command = "sudo mkdir -p " + oPath;
+	std::system(command.c_str());
+	command = "sudo chmod 777 " + oPath;
+	std::system(command.c_str());
+	string oName = imageName;
+	size_t pos = oName.rfind(".png");
+	if (pos != std::string::npos) {
+		oName.erase(pos, 4);  // ".png" tiene 4 caracteres
+	}
+	oName += "_prepro.png";
+
+	cv::imwrite(oPath +"/"+oName, image);
+
 	imageOutput.cols = image.cols;
 	imageOutput.rows = image.rows;
 	imageOutput.step = image.step;
