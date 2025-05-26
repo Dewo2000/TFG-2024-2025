@@ -37,6 +37,12 @@ RUN apt-get install -y tesseract-ocr-spa
 RUN apt-get install -y tesseract-ocr-eng
 RUN apt-get install git -y
 
+# Instalar Node.js y npm
+RUN apt-get update && \
+    apt-get install -y curl ca-certificates gnupg && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
 #install catch2
 RUN mkdir $CATCH2
 RUN git clone --branch v2.13.8 https://github.com/catchorg/Catch2.git $CATCH2

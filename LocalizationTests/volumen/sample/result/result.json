@@ -1,0 +1,518 @@
+{
+    "1.png": {
+        "tests": {
+            "overall_pass": true,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 67.0,
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "An air raid.",
+        "texto_reconocido": "An air raid. . Z S"
+    },
+    "10.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 0.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "you been busy?",
+        "texto_reconocido": ""
+    },
+    "2.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 67.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "You really are an\r\n\r\nunpleasant cat.",
+        "texto_reconocido": "= S===You reallyare anl l\n= inpleasant cat!"
+    },
+    "3.png": {
+        "tests": {
+            "overall_pass": true,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 100.0,
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "People got sick, and died...",
+        "texto_reconocido": "People got sick, and died..."
+    },
+    "4.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 0.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Here you are again! Did you have time to think of how to behave during the \r\ninterrogation?",
+        "texto_reconocido": ""
+    },
+    "5.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 68.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Can´t talk right now,kid,I´m busy.\r\n\r\n",
+        "texto_reconocido": "Can’t tak right now, kid, Pm busu."
+    },
+    "6.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 89.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Every culture worldwide has its classics",
+        "texto_reconocido": "“ Every culture worldwide has its classics."
+    },
+    "7.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 58.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Agumon\r\nStill,a \"smahrt fown\" is cool! It really can\r\ndo anything!",
+        "texto_reconocido": "Agumon p |\nStill, a “smahrt c}i‘\\ It really can\ndo anythi , i <"
+    },
+    "C.png": {
+        "tests": {
+            "overall_pass": true,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 87.0,
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\n",
+        "texto_reconocido": "Empezar jugar"
+    },
+    "C1.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 0.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Wow\r\nReach level 15!\r\nOK\r\n",
+        "texto_reconocido": ""
+    },
+    "C2.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 54.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Confirm\r\nDo you want to quit?\r\nNo Yes",
+        "texto_reconocido": "Do you want to quit?"
+    },
+    "C3.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 38.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "how to play\r\nThere are 3 different types of games!\r\nAnswer the question Multiple choice Complete the word\r\n\r\n",
+        "texto_reconocido": "There are 3 different types of games! . i ="
+    },
+    "C4.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 74.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "My Figure\r\nThis is your figure. Select it to see\r\nyour play records !\r\n",
+        "texto_reconocido": "- My Figure \\ =\ni 28| This is your figure. Select it to see g\n\\ your play records ! s ( FN"
+    },
+    "E1.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 0.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Wow\r\nReach level 15!\r\nOK\r\n",
+        "texto_reconocido": ""
+    },
+    "E10.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 70.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Hi Dewo, what are you doing here.",
+        "texto_reconocido": "Hi & Player_&,what are you doing here"
+    },
+    "E11.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 82.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Hi Dewo, what are you doing here.",
+        "texto_reconocido": "% Hi Dewo,what are you doi here"
+    },
+    "E12.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 61.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Hi Dewo, what are you doing here.",
+        "texto_reconocido": "- Hi Dewo,what re you do"
+    },
+    "E13.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 65.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Im looking for The Council",
+        "texto_reconocido": "Im looking for the"
+    },
+    "E14.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "errors": [
+                    {
+                        "contenido": "&_Building_&",
+                        "pos": 19
+                    }
+                ],
+                "test_pass": false
+            },
+            "similarity": 65.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Im looking for The Council",
+        "texto_reconocido": "Im looking for the &_Building_&"
+    },
+    "E15.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 73.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Im looking for The Council",
+        "texto_reconocido": "Im looking for the C"
+    },
+    "E2.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 65.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Confirm\r\nDo you want to quit?\r\nNo Yes",
+        "texto_reconocido": "Confirm ) 4\nDo you wan to quit?"
+    },
+    "E3.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 28.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "how to play\r\nThere are 3 different types of games!\r\nAnswer the question Multiple choice Complete the word\r\n\r\n",
+        "texto_reconocido": "There are & number_& different types of games! i"
+    },
+    "E4.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 38.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "how to play\r\nThere are 3 different types of games!\r\nAnswer the question Multiple choice Complete the word\r\n\r\n",
+        "texto_reconocido": "There are 3 different types of games! . i ="
+    },
+    "E5.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 38.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "how to play\r\nThere are 3 different types of games!\r\nAnswer the question Multiple choice Complete the word\r\n\r\n",
+        "texto_reconocido": "There are 3 different types of games! . i ="
+    },
+    "E6.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 70.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "My Figure\r\nThis is your figure. Select it to see\r\nyour play records !\r\n",
+        "texto_reconocido": "My Figure \\ =\nd , This is your figure. Select it ¢ B¢\n: your play records! — ( #A)"
+    },
+    "E7.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 49.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "My Figure\r\nThis is your figure. Select it to see\r\nyour play records !\r\n",
+        "texto_reconocido": "My Figure . =5\n/ ® 8 | This is your figure. Select it to see NG"
+    },
+    "E8.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 28.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "My Figure\r\nThis is your figure. Select it to see\r\nyour play records !\r\n",
+        "texto_reconocido": "[ see your play records! ( FAN"
+    },
+    "F.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": false
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 96.0,
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "Empezar jugar a no se que",
+        "texto_reconocido": "Empezar jugar a no sg que"
+    },
+    "Multi_Correct.png": {
+        "tests": {
+            "overall_pass": false,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 30.0,
+            "truncamiento": {
+                "test_pass": false
+            }
+        },
+        "texto_esperado": "Empezar jugar\r\nSalir\r\nSoy untexto",
+        "texto_reconocido": "Soy un texto"
+    },
+    "Multi_Fail.png": {
+        "tests": {
+            "overall_pass": true,
+            "overlap": {
+                "test_pass": true
+            },
+            "placeholders": {
+                "test_pass": true
+            },
+            "similarity": 96.0,
+            "truncamiento": {
+                "test_pass": true
+            }
+        },
+        "texto_esperado": "Empezar jugar a no se que\r\nEmpezar jugar\r\nSoy otro texto",
+        "texto_reconocido": "Empezar jugar a no se que\nEmpezar jugar\nSoy otro texto"
+    }
+}

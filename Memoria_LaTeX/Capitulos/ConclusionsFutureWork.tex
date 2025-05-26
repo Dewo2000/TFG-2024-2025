@@ -2,29 +2,28 @@
 \label{cap:conclusions}
 \addcontentsline{toc}{chapter}{Conclusions and Future Work}
 
-Conclusions and future lines of work. This chapter contains the translation of Chapter \ref{cap:conclusiones}.
+Due to the significant growth of the video game industry, there is an increasing need to adapt games to languages and regions different from their original design. This is achieved through the processes of internationalization and localization, where internationalization refers to adding support for multiple languages, and localization is the process of translating and adapting texts, graphics, and other assets.
 
-In conclusion, due to the significant evolution of the video game industry, there arises a need to adapt a video game to different language or region from the one in which it was originally developed. For this purpose, the processes of internationalization and localization are followed, where internationalization refers to providing support for different languages, and localization is the process in which the texts, graphics and game assets are translated and adapted.
+To ensure that a video game is ready to be released in other regions, the Localization Quality Assurance (LQA) process is applied. LQA is responsible for verifying that there are no localization-related errors.
 
-To ensure that the game is ready to be published in other regions, \textit{Localization Quality Assurance} (LQA) is carried out to verify that there are no localization errors.
+To assist with the LQA process, a tool has been developed that allows users to provide screenshots from the game along with a configuration file. The tool will then detect whether any localization errors are present. This tool consists of two main modules: the OCR module and the testing module.
 
-To assist the LQA process, a tool is designed where the user provides game screenshots and a configuration file, and the tool detects whether any localization errors exist. This tool consists of two parts: an OCR module and a test module.
+For the OCR module, several OCR libraries were evaluated, and Tesseract was selected for use in the tool. To improve text recognition accuracy, techniques such as image preprocessing are applied to enhance text clarity in images. Additionally, methods like the Levenshtein distance are used to filter out noisy characters incorrectly recognized by the OCR.
 
-For the OCR module, several OCR libraries are evaluated, and for our tool, Tesseract is used. To improve text recognition results, techniques such as image preprocessing are applied to better identify text in images, as well as methods like Levenshtein distance to remove noisy characters recognized by the OCR.
+For the testing module, tests were designed and implemented to detect localization issues. In this project, the following tests were developed: text overlap detection, text truncation detection, and placeholder detection.
 
-For the test module, tests are designed and implemented to detect localization errors. In our case, the implemented tests include text overlap, text truncation, and placeholder detection.
+The tool generates a result file, which is later interpreted to produce a final report.
 
-The tool will generate a result file that will later be interpreted to create a report.
+The evaluation results of the tool were acceptable, although there is clear room for improvement. The main limitation observed lies in the OCR’s ability to recognize text, especially in complex images such as those generated within video game environments.
 
-The evaluation results of the tool were not very promising. There is a problem in recognizing text in complex images such as those from video games, which leads to poor test results due to the quality of the input data.
-
-To improve the tool, the following future work is proposed:
+To enhance the tool, the following future work is proposed:
 
 \begin{enumerate}
-	\item Image classification to detect the necessary preprocessing according to the characteristics of the images.
-	\item Decision tree to configure a specific preprocessing pipeline based on image features.
-	\item Integration of other OCR libraries as options for the user.
-	\item Implementation of new tests to address other localization issues.
-	\item Layout detection in images to recognize text regions and crop out irrelevant areas to improve recognition.
-	\item A tool that captures video game screen data and generates the necessary assets for the localization error detection tool.
+	\item Image classification to determine the most appropriate preprocessing based on image characteristics.
+	\item A decision tree to apply specific preprocessing steps depending on the input image’s features.
+	\item Training the OCR model with the game’s specific font.
+	\item Integration of alternative OCR libraries to provide users with more options.
+	\item Implementation of additional tests to detect other types of localization issues.
+	\item Layout detection in images to identify text areas and crop out irrelevant zones, improving recognition accuracy.
+	\item A tool to automatically collect game screen data and generate the necessary assets for the localization error detection tool.
 \end{enumerate}

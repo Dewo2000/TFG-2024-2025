@@ -111,7 +111,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)bin\</OutDir>
-    <TargetName>$(ProjectName)_d</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin/</RemoteOutRelDir>
     <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
     <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(ProjectName)/$(Platform)/$(Configuration)</RemoteIntRelDir>

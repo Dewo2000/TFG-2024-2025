@@ -5,17 +5,19 @@ En este capítulo se describirá el diseño de la herramienta detallando las fun
 
 \section{Diseño de la herramienta}
 \label{sec:Descripción de la herramienta}
-Se desea diseñar una herramienta donde dado el usuario unas imágenes, unas configuraciones y el texto esperado, el programa pueda reconocer el texto de la imagen y detectar si existe algún error de localización de las que hemos seleccionado.
-La idea es que esta herramienta sea utilizado como ayuda al personal de LQA como parte del desarrollo del videojuego.
-El usuario proporciona los datos necesarios para la ejecución de la herramienta, seguido la herramienta recoge los datos, estos datos son enviados al OCR para el reconocimiento de texto y otras informaciones relevantes (p.ej posición del texto), después, se envia toda la información a los tests para detectar la existencia de algún error y esto será enviado de nuevo al programa principal generando así un informe de los resultados.(Figura \ref{fig:Descripcion_Herramienta})
+Se plantea el diseño de una herramienta que, a partir de imágenes capturadas del videojuego en desarrollo, permita realizar pruebas de localización. El usuario debe proporcionar las imágenes, una configuración específica y el texto esperado. A partir de estos datos, la herramienta será capaz de reconocer el texto presente en la imagen y detectar posibles errores de localización entre los previamente definidos.
+
+El objetivo es que esta herramienta sirva de apoyo al personal de LQA (Language Quality Assurance) durante el proceso de desarrollo del videojuego.
+
+El flujo de trabajo comienza con la introducción de los datos por parte del usuario. A continuación, la herramienta procesa estos datos y los envía al sistema OCR, que se encarga del reconocimiento del texto y de la extracción de información relevante, como la posición del mismo. Posteriormente, esta información es transferida al módulo de tests, encargado de identificar posibles errores de localización. Finalmente, los resultados obtenidos se devuelven al programa principal, el cual genera un informe con el diagnóstico completo del análisis (Figura \ref{fig:Descripcion_Herramienta}).
 \begin{figure}[h]
 	\centering
 	\includegraphics[width = 1\textwidth]{Imagenes/Descripcion_Herramienta.png}
-	\caption{Dibujo con los módulos y la información que se pasa.}
+	\caption{Workflow de la herramienta y módulos que la componen.}
 	\label{fig:Descripcion_Herramienta}
 \end{figure}
 
-Para ello la herramienta además del programa principal, constará de dos módulos:
+Para ello la herramienta constará de dos módulos:
 \begin{itemize}
 	\item Modulo del OCR.
 	\item Modulo del test.
@@ -27,16 +29,16 @@ El modulo de OCR se encarga de todo lo relacionado con la detección de texto en
 En este modulo se elegirá una librería de OCR para la detección de texto y tendrá principalmente dos funcionalidades: 
 \begin{itemize}
 	\item Entrenar modelo: Dado una fuente y un idioma, el OCR entrena un modelo especifico para esa fuente en concreta y ese idioma en concreto, mejorando así el resultado obtenido. Este proceso se hace una sola vez como preparación previa de la herramienta, pero si el usuario desea o necesita varias fuentes o idiomas, puede generarlas las veces que sea necesario.
-	\item Reconocer texto: Dado una imagen o una ruta de imagen, el OCR reconoce texto de todas la imágenes y los guarda en la ruta destino y se los pasa al programa. 
+	\item Reconocer texto: El OCR reconoce texto de todas la imágenes y se los pasa al módulo de test. 
 \end{itemize}
-En este módulo, recibirá los datos proporcionado por el usuario y se procesará multiples imagenes con un modelo en concreto ya sea entrenado o el por defecto de la herramienta. En la configuración es necesario que el usuario proporcione información como:
+En este módulo, recibirá los datos proporcionado por el usuario y procesará multiples imagenes con un modelo concreto ya sea entrenado o el por defecto de la herramienta. En la configuración es necesario que el usuario proporcione información como:
 \begin{itemize}
-	\item La ruta de la imagen.
+	\item La ruta de las imágenes.
 	\item La ruta del texto esperado.
 	\item La ruta del modelo a utilizar.
 	\item Nombre del modelo a utilizar.
 \end{itemize}
-Con las imágenes, pasará por un proceso de preprocesado para mejorar la calidad de la imagen en el sentido de que el OCR reconozca mejor los caractéres y generará un texto.
+En este módulo, cada imagen para por un proceso de preprocesado para mejorar la calidad de la imagen en el sentido de que el OCR reconozca mejor los caractéres y generará un texto.
 Ese texto antes de ser pasado como entrada al siguiente modulo será procesado otra vez para minimizar el error producido por el OCR.
 Debido a la necesidad de algunos test, también se ha considerado obtener informaciones como posición del texto en la imagen en este modulo.
 \section{Modulo de test}
@@ -44,10 +46,9 @@ El modulo de test se cargará de verificar si existe algún error de localizaci�
 
 Usará como entrada el texto reconocido del modulo de OCR y el texto esperado, proporcionado para validar los tests. Pasará por una serie de tests para verificar si existe o no algún error de localización. La salida de este modulo será el resultado de los tests indicando si ha pasado el tests y en caso negativo indicar (si es posible) donde se produce el fallo.
 
-Con esa salida se generará un archivo con la información de los resultados que luego será interpretado para que sea entendible por un ser humano.
+Con esa salida se generará un archivo con la información de los resultados que luego será transformado en un informe para que sea entendible por un ser humano.
 
-No se va a atacar todos los tests de descritos en la sección \ref{sec:Errores de localizacion}. 
-Se elegirá unos de los tests de todos los errores comunes de localización y como se atacará ese error. Se ha elegido estos errores considerando la importancia y la relevancia con nuestra herramienta(p.ej atacar el error de audio no tiene sentido en este trabajo).
+No se van a abordar todos los tests de descritos en la sección \ref{sec:Errores de localizacion}. A continuación se describen los errores para los que se han creado tests,  considerando la importancia y la relevancia con nuestra herramienta(p.ej atacar el error de audio no tiene sentido en este trabajo).
 \subsection{Similitud}
 \label{test:Simi}
 Este es el test ``master'', la cual es ejecutado antes de todos los tests que viene a continuación. Su principal funcionalidad es para obviar la ejecución de algunos tests y mejorar el rendimiento del programa obviando ejecuciones innecesarias. En este test se obtiene la cadena reconocida por el OCR y lo compara con la cadena esperada obteniendo un porcentaje de similitud. Si ambas cadenas son iguales, significa que no existe errores en cuanto al contenido del texto, por lo que se puede obviar algunos test como el de truncamiento(subsección \ref{test:trunc}) y el de placeholder(subsección \ref{test:placeholder}). Tests como el de solapamiento(subsección \ref{test:overlap}), no tiene que ver con el contenido del texto, sino de la posición, estas se siguen ejecutandose con normalidad.
@@ -67,7 +68,7 @@ La salida indicará si existe o no solapamiento en la imagen.
 
 \subsection{Implementación Incorrecta}
 \label{test:placeholder}
-Este error aparece cuando por algún error del desarrollador aparecen placeholders en la pantalla del juego en vez del texto(p.ej si en el juego me llamo ``pepe'', en vez de aparecer en el dialogo ``Hola pepe'', aparece un ``Hola      \texttt{\%*player\_name*\%''}).
+Este error aparece cuando por algún error del desarrollador aparecen placeholders en la pantalla del juego en vez del texto (p.ej si en el juego me llamo ``pepe'', en vez de aparecer en el dialogo ``Hola pepe'', aparece un ``Hola      \texttt{\%*player\_name*\%''}).
 Para resolver este problema es necesario especificar como entrada cuál es el formato utilizado para el placeholder indicando su apertura y cierre. Con los datos, hacer una búsqueda del placeholder en el texto reconocido por el OCR.
 
 Se tiene en cuenta las siguientes restrincciones:
@@ -84,11 +85,11 @@ Para resolver este problema se plantea obtener la cadena esperada y la cadena re
 La salida indicara si existe o no truncamiento en el texto.
 
 \section{Informe de resultados}
-Se ejecutarán todos los test sobre cada imagen, generando así un informe con los resultados donde tendrá:
+Una vez que se han ejecutado todos los tests sobre cada imagen, se generará un informe con los resultados, donde se especificará: 
 \begin{enumerate}
 	\item Nombre de la imagen.
 	\item Texto esperado y texto reconocido.
-	\item Pass/fail de los tests y información extra de los tests dependiendo de cada test.
+	\item Pass/fail de los tests e información extra de los tests dependiendo de cada test.
 \end{enumerate}
 Con este informe se generará un html con la información de los resultados como se muestra en la figura \ref{fig:Descripcion_Informe}.
 \begin{figure}[H]
@@ -98,7 +99,7 @@ Con este informe se generará un html con la información de los resultados como
 	\label{fig:Descripcion_Informe}
 \end{figure}
 \section{Conclusión}
-En este capítulo se ha descrito las partes de la herramienta detallando cada módulo, una para el reconocimiento de texto en imágenes usando OCR y otra para la comprobación de errores de localización usando tests. Donde el modulo de OCR recibirá como entrada las imágenes y una determinada configuración, reconocerá el texto y esta será pasado al modulo de tests para comprobar si existe algún error generando así un informe.
+En este capítulo se ha descrito las partes de la herramienta detallando cada módulo, uno para el reconocimiento de texto en imágenes usando OCR y otro para la comprobación de errores de localización usando tests. El modulo de OCR recibirá como entrada las imágenes y una determinada configuración, reconocerá el texto y esta será pasado al modulo de tests para comprobar si existe algún error generando así un informe.
 Una vez realizado el diseño de la herramienta, pasamos a describir como ha sido implementada en el siguiente capítulo.
  
 

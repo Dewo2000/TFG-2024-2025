@@ -1,11 +1,11 @@
 \chapter{Conclusiones y Trabajo Futuro}
 \label{cap:conclusiones}
 
-En conclusión, debido a la gran evolución en la industria de los videojuegos, surge la necesidad de adaptar un videojuego a otro idioma/región diferente del que fue creado. Para ello, se siguen los procesos de internacionalización y localización, donde la internacionalización es la realización de soporte para diferentes idiomas y la localización es el proceso la cual se traducen y se adaptan los textos, gráficos, etc.
+Debido a la gran evolución en la industria de los videojuegos, surge la necesidad de adaptar un videojuego a otro idioma/región diferente del que fue creado. Para ello, se siguen los procesos de internacionalización y localización, donde la internacionalización es la realización de soporte para diferentes idiomas y la localización es el proceso la cual se traducen y se adaptan los textos, gráficos, etc.
 
 Para asegurar de que el videojuego está preparado para ser publicado en otras regiones, entra el \textit{Localization Quality Assurance} (o LQA) para asegurar de que no exista ningún error de localización.
 
-Para facilitar el trabajo de LQA, se diseña una herramienta donde el usuario proporciona unas imágenes del juego y una configuración, la herramienta detecte si existe algún error de localización. Esta herramienta constará de dos partes, modulo de OCR y modulo de tests.
+Para facilitar el trabajo de LQA, se ha diseñado una herramienta donde el usuario proporciona unas imágenes del juego y una configuración, la herramienta detecte si existe algún error de localización. Esta herramienta constará de dos partes, modulo de OCR y modulo de tests.
 
 Para el modulo de OCR, se evalua diferentes librerías de OCR y para nuestra herramienta, utilizaremos Tesseract. Para mejorar los resultados de reconocimiento, se aplica técnicas como preprocesamiento de imágenes para mejor identificación de texto en imágenes y técnicas como la distancia levenshtein para eliminar caracteres basuras reconocidas por el OCR.
 
@@ -13,13 +13,14 @@ Para el modulo de tests, que diseña y se implementa tests que puedan detectar e
 
 La herramienta generará un archivos con los resultados que será luego interpretado generando así un informe.
 
-Los resultados de evaluación de la herramienta no ha sido tan buenas. Existe un problema a la hora de reconocer el texto en imágenes complejas como las de un videojuego por lo que los tests no se obtienen buenos resultados ya que la entrada en sí no es buena.
+Los resultados de la evaluación de la herramienta han sido aceptables, aunque claramente mejorables. La principal limitación observada reside en el reconocimiento de texto por parte del OCR, especialmente en imágenes complejas como las que se generan en un entorno de videojuego.
 
 Para mejorar la herramienta se propone los siguiente trabajos futuros:
 
 \begin{enumerate}
 	\item Clasificación de imágenes para detectar el preprocesamiento necesario según las características de las imágenes.
 	\item Árbol de decisión que configure un determinado preprocesamiento según las características de las imágenes.
+	\item Entreno del modelo con la fuente específica.
 	\item Integración de otras librerías de OCR como opción al usuario.
 	\item Implementación de test que solucione otros problemas de localización.
 	\item Detección de layout en las imágenes para reconocer las zonas de texto y hacer un recorte para eliminar zonas sin texto y mejorar el reconocimiento.

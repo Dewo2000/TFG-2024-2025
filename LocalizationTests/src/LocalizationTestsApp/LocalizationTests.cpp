@@ -30,13 +30,12 @@ bool LocalizationTests::init(const std::vector<std::string>& args)
 	}
 	return false;
 }
-
-//TODO: ¿Refactorizar el estado a un patrón Strategy/State?
 void LocalizationTests::run()
 {
 	switch (state_) {
 		case State::TRAINING:
 		{
+			//Crea la clase OCR y hace el entreno
 			Tesseract tess = Tesseract();
 			if (tess.trainModel(_trainInfo.lan, _trainInfo.font, _trainInfo.iter,_trainInfo.clear)) {
 				std::cout << "yes\n";
@@ -46,6 +45,7 @@ void LocalizationTests::run()
 		}
 		case State::TESTING:
 		{
+			//Inicia el testing
 			if (initTesting()) {
 			}
 			break;
@@ -65,8 +65,12 @@ void LocalizationTests::release()
 
 bool LocalizationTests::parseArguments(const std::vector<std::string>& args)
 {
-	if (args.size() < 2) return false;
+	if (args.size() < 2) {
+		usage();
+		return false;
+	}
 
+	//En el caso de test
 	if (args[1] == "--test") {
 		state_ = State::TESTING;
 		if (args.size() >= 4 && args[2] == "-c") { //Si se proporciona un archivo de config
@@ -74,6 +78,7 @@ bool LocalizationTests::parseArguments(const std::vector<std::string>& args)
 		}
 		getConfig();
 	}
+	//En el caso de entreno
 	else if (args[1] == "--train") {
 		if (args.size() < 6 || args[2] != "-f" || args[4] != "-l") {
 			std::cerr << "Uso incorrecto: --train -f <font> -l <language>\n";
@@ -122,7 +127,7 @@ void LocalizationTests::printTime()
 }
 
 void LocalizationTests::usage() {
-	std::cout << "Usage: LocalizationTests Option\n" << "Options: --train for training the tesseract OCR --test for testing\n"
+	std::cerr << "Usage: LocalizationTests Option\n" << "Options: --train for training the tesseract OCR --test for testing\n"
 		<< "  --test [-c <configfile>]\n"
 		<< "  --train -f <font> -l <language> [-i <iteraciones>] [--clear]\n";
 }
@@ -171,6 +176,9 @@ bool LocalizationTests::initTesting()
 {
 	//Seleccion de ocr;
 	if (_configInfo.ocr == "Tesseract") {
+		_ocr = new Tesseract();
+	}
+	else if (_configInfo.ocr == "") {
 		_ocr = new Tesseract();
 	}
 
@@ -230,10 +238,11 @@ bool LocalizationTests::initTesting()
 				if (!recog.empty() && recog.back() == '\n') {
 					recog.pop_back();  // elimina el último carácter
 				}
+				//Crea el json y guarda los textos
 				json imageResult;
 				imageResult["texto_esperado"] = gt;
 				imageResult["texto_reconocido"] = recog;
-
+				//Ejecuta el test en todo
 				testAll(rutaImagen, gt, recog,imageResult);
 				jsonResult[entry.path().filename()] = imageResult;
 				
@@ -242,12 +251,12 @@ bool LocalizationTests::initTesting()
 			
 		}
 	}
+	// Escribir el objeto JSON en un archivo
 	std::string command = "sudo chmod 777 " + _configInfo.outputPath;
 	std::system(command.c_str());
-	// Escribir el objeto JSON en un archivo
 	std::ofstream archivo(_configInfo.outputPath + "result.json");
 	if (archivo.is_open()) {
-		archivo << jsonResult.dump(4);  // 'dump(4)' para escribir el JSON con formato bonito (indentación de 4 espacios)
+		archivo << jsonResult.dump(4); 
 		archivo.close();
 		std::cout << "JSON guardado exitosamente en 'result.json'" << std::endl;
 	}
@@ -260,12 +269,14 @@ bool LocalizationTests::initTesting()
 
 void LocalizationTests::testAll(std::string img, std::string gt,std::string recog,json& imageResult)
 {
+	//Test de similarity
 	json tests;
 	bool overallpass = true;
 	Similarity sim = Similarity(gt);
 	sim.test(recog);
 	double simi=sim.getSimilarity();
 
+	//Json de los tests
 	json overlapJson;
 	overlapJson["test_pass"] = true;
 	json truncationJson;
@@ -273,6 +284,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 	json holdersJson;
 	holdersJson["test_pass"] = true;
 	
+	//Test de solapamiento
 	Overlap lap = Overlap();
 	lap.Init(img, _ocr);
 	lap.test();
@@ -281,7 +293,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 		overlapJson["test_pass"] = false;
 	overallpass = false;
 	}
-
+	//Si son iguales las cadenas se salta los tests
 	if (simi == 100.0) {
 		tests["overlap"] = overlapJson;
 		tests["truncamiento"] = truncationJson;
@@ -291,7 +303,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 		imageResult["tests"] = tests;
 		return;
 	}
-
+	//Test de truncamiento
 	Truncation trun = Truncation(gt);
 	
 	trun.test(recog);
@@ -299,7 +311,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 	else { truncationJson["test_pass"] = false; 
 	overallpass = false;
 	}
-
+	//Test de placeholders
 	Placeholders holder = Placeholders(_configInfo.placeholders);
 
 	holder.test(recog);
@@ -317,6 +329,7 @@ void LocalizationTests::testAll(std::string img, std::string gt,std::string reco
 		}
 		holdersJson["errors"] = error;
 	}
+	//Escritura en json de los resultados
 	tests["overlap"] = overlapJson;
 	tests["truncamiento"] = truncationJson;
 	tests["placeholders"] = holdersJson;

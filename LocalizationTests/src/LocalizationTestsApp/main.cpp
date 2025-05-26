@@ -17,21 +17,21 @@ using json = nlohmann::json;
 
 int main(int argc, char* argv[]) {
 
-	//Para testear paso de argumentos
-	std::vector<std::vector<std::string>> testCases = {
-		{"program", "--test"},
-		{"program", "--test", "-c", "/home/localizationtests/volumen/config.json"},
-		{"program", "--train", "-f", "Arial", "-l", "eng"},
-		{"program", "--train", "-f", "Dogica", "-l", "eng", "-i", "1000"},
-		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "100", "--clear"},
-		{"program", "--train", "-f", "Arial", "-l", "eng", "--clear"},
-		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "abc"} // Caso con error
-	};
+	////Para testear paso de argumentos
+	//std::vector<std::vector<std::string>> testCases = {
+	//	{"program", "--test"},
+	//	{"program", "--test", "-c", "/home/localizationtests/sample/config.json"},
+	//	{"program", "--train", "-f", "Arial", "-l", "eng"},
+	//	{"program", "--train", "-f", "Dogica", "-l", "eng", "-i", "1000"},
+	//	{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "100", "--clear"},
+	//	{"program", "--train", "-f", "Arial", "-l", "eng", "--clear"},
+	//	{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "abc"} // Caso con error
+	//};
 
 	LocalizationTests* test = new LocalizationTests();
-	test->init(testCases[1]);
-	//std::vector<std::string> args(argv, argv + argc);
-	//test->init(args);
+	//test->init(testCases[1]);
+	std::vector<std::string> args(argv, argv + argc);
+	test->init(args);
 	test->run();
 	test->release();
 	delete test;

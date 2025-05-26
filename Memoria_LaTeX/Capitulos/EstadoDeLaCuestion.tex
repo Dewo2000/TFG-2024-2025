@@ -68,7 +68,7 @@ Según \cite{LQAPSM2017} existe numerosos errores de localización en los videoj
 
 \subsection{Problema de fuente} \label{ErrorFuente}
 Este error se da comúnmente cuando la fuente utilizada en el videojuego no incluye algunos caracteres especiales de un idioma, como puede ser la ñ en español o caracteres del chino, normalmente se presentan como se muestra en la figura \ref{fig:EFontC}
-Un ejemplo podría ser como se muestra en la figura \ref{fig:EFont} donde algunos caracteres chino no se muestra correctamente. 
+Un ejemplo podría ser como se muestra en la figura \ref{fig:EFont} donde algunos caracteres chinos no se muestran correctamente. 
 
 \begin{figure}[H]
 	\centering
@@ -78,7 +78,7 @@ Un ejemplo podría ser como se muestra en la figura \ref{fig:EFont} donde alguno
 \end{figure}
 
 \subsection{Implementación de texto incorrecta}\label{ErrorImpIncorrecta}
-Este error se ilustra cuando el texto que debería aparecer en un idioma, aparece en otro diferente o aparece en forma de ``placeholder''(Figura \ref{fig:E_Implementacion}). Este error se produce debido a que hay un error en el documento de localización o porque el programa en si tiene algún error. Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el
+Este error se ilustra cuando el texto que debería aparecer en un idioma, aparece en otro diferente o aparece en forma de ``placeholder''(Figura \ref{fig:E_Implementacion}). Este error se produce debido a que hay un error en el documento de localización o porque el programa en sí tiene algún error. Debido a esto, el \textit{tester} tiene que verificar que la celda del documento tiene el
 texto adecuado.
 \begin{figure}[H]
 	\centering
@@ -96,7 +96,7 @@ Este error se produce cuando un texto no está traducido como se muestra en la f
 \end{figure}
 
 \subsection{Error tipográfico o de ortografía}\label{ErrorTypo}
-Surge cuando existe alguna falta de ortografía en el texto traducido. Por ejemplo en el juego de GhostBusters, los jugadores se encuentran con ``Conglatulation'' donde lo correcto sería ``Congratulations'' como se muestra en la figura \ref{E_Tipo}
+Surge cuando existe alguna falta de ortografía en el texto traducido. Por ejemplo en el juego de GhostBusters, los jugadores se encuentran con ``Conglatulation'' donde lo correcto sería ``Congratulations'' como se muestra en la figura \ref{fig:E_Tipo}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Tipo.png}
@@ -127,7 +127,7 @@ Este error sucede cuando el texto se sale de los limites fijados para él, puede
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Imagenes/Errores_Localizacion/E_Solapamiento.png}
-	\caption{El texto se sobresale de la caja delimitadora.}
+	\caption{El texto sobresale de la caja delimitadora.}
 	\label{fig:E_Solapa}
 \end{figure}
 
@@ -235,20 +235,20 @@ Según \cite{TesseractOCR} y \cite{OcropusOCR} para llegar al objetivo de recono
 		\item Métodos basados en aprendizaje automático o redes neuronales: Las técnicas modernas de OCR suelen usar redes neuronales entrenadas con miles de ejemplos de texto. El sistema ``aprende'' a identificar caracteres y a hacer distinciones más sutiles en base a sus experiencias pasadas.
 	\end{itemize}
 \end{enumerate}
-\section{Librerías de OCR (Optical Character Recognition)}
-\label{sec:Seleccion de libreria de OCR}
-Durante el desarrollo de este trabajo, se evaluarán varias herramientas de OCR para seleccionar la más adecuada para nuestras necesidades. Las herramientas que probaremos serán Ocropus	\footnote{(repositorio github de Ocropus) \url{https://github.com/ocropus-archive/DUP-ocropy} }, EasyOCR	\footnote{(repositorio github de EasyOCR) \url{https://github.com/JaidedAI/EasyOCR} } y Tesseract	\footnote{(repositorio github de Tesseract) \url{https://github.com/tesseract-ocr/tesseract} }. A continuación, se describe brevemente cada una de ellas.
+\subsection{Librerías de OCR}
+\label{subsec:Seleccion de libreria de OCR}
+Durante el desarrollo de este trabajo, se evaluarán varias herramientas de OCR para seleccionar la más adecuada para nuestras necesidades. Las herramientas que probaremos serán OCRopus\footnote{Repositorio github de OCRopus:  \url{https://github.com/ocropus-archive/DUP-ocropy} }, EasyOCR\footnote{Repositorio github de EasyOCR:  \url{https://github.com/JaidedAI/EasyOCR} } y Tesseract\footnote{Repositorio github de Tesseract:  \url{https://github.com/tesseract-ocr/tesseract} }. A continuación, se describe brevemente cada una de ellas.
 \begin{enumerate}
 	\item \textbf{OCRopus}
 	Es un sistema de OCR basado en redes neuronales con un enfoque modular.
 	Principalmente esta disponible para Linux. Proporciona diferentes módulos para la binarización, segmentación, generación del ground-truth y el entreno del modelo.
-	Una de las razones por la que esta herramienta fue descartado es que el lenguaje de programación principal con la que trabaja es \emph{python} y en nuestro proyecto trabajamos principalmente con \emph{C++}. Además la última actualización de esta librería fue en 16 de Diciembre de 2017
+	La última actualización de esta librería fue en 16 de Diciembre de 2017
 	
 	\item \textbf{EasyOCR}
 	EasyOCR es una biblioteca de reconocimiento óptico de caracteres (OCR) desarrollada en Python que facilita la extracción de texto de imágenes y documentos. Diseñada con el objetivo de ser fácil de usar y accesible, una de las características de EasyOCR es que es capaz de reconocer texto en más de 80 idiomas y soporta múltiples scripts, lo que la convierte en una herramienta versátil para diversas aplicaciones.
 	Proporciona gran variedad de modelos entrenados y también ofrece la opción de entrenar tu propio modelo.
 	
-	La herramienta en resumen se adapta muy bien a nuestras necesidades. El único problema esta en el idioma de programación con la que trabaja , al igual que OCRopus , EasyOCR está implementada con \emph{python} y nosotros con \emph{C++}.
+	La herramienta en resumen se adapta muy bien a nuestras necesidades.
 	
 	\item \textbf{Tesseract}
 	
@@ -260,9 +260,9 @@ Durante el desarrollo de este trabajo, se evaluarán varias herramientas de OCR 
 	
 	El motor puede integrarse fácilmente en aplicaciones de procesamiento de imágenes y visión por computadora. Tesseract se utiliza comúnmente en combinación con bibliotecas como OpenCV para preprocesar imágenes antes de la etapa de reconocimiento, lo que mejora la precisión de los resultados.
 	
-	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo y una de ellas es C++, por lo que esta herramienta cumple con todos los requisitos para nuestro proyecto y es la razón por la que hemos optado por Tesseract.
+	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo.
 \end{enumerate}
 \section{Conclusión}
-En conclusión, la internacionalización se trata de preparar el producto para que sea fácilmente admitir diferentes idiomas y para ello es necesario seguir algunas pautas como la separación del texto traducible de código fuente. La localización es el proceso de la cual un producto se adapta a un cierto idioma o cultura, esto es esencial en videojuegos para que los jugadores de otras regiones tengan una experiencia inmersiva y auténtica. QA(\textit{Quality Assurance}) se trata de un proceso sistemático para garantizar que un producto cumpla los requisitos y LQA(\textit{Localization Quality Assurance}) es el mismo proceso centrándose en aspectos de la localización como los aspectos lingüísticos, visuales, funcionales y culturares. El OCR es una tecnología que consigue convertir imágenes con texto en datos de texto que la computadora pueda entender.
+En conclusión, la internacionalización trata de preparar el producto para que sea fácilmente admitir diferentes idiomas y para ello es necesario seguir algunas pautas como la separación del texto traducible de código fuente. La localización es el proceso por la cual un producto se adapta a un cierto idioma o cultura, esto es esencial en videojuegos para que los jugadores de otras regiones tengan una experiencia inmersiva y auténtica. QA(\textit{Quality Assurance}) se trata de un proceso sistemático para garantizar que un producto cumpla los requisitos y LQA(\textit{Localization Quality Assurance}) es el mismo proceso centrándose en aspectos de la localización como los aspectos lingüísticos, visuales, funcionales y culturares. El OCR es una tecnología que consigue convertir imágenes con texto en datos de texto que la computadora pueda entender.
 
-Con todo este estudio en esta sección, ayuda a entender el funcionamiento de una OCR, la existencia de errores de localización que se necesitan resolver y como se muestra los errores en pantalla, ayudando a diseñar las distintas partes de la herramienta(tests y OCR) que se detallan en el siguiente capitulo.
+Esta sección contribuye a comprender el funcionamiento de un sistema OCR, así como la existencia de errores de localización que deben ser resueltos. Además, se analiza cómo se representan visualmente estos errores en pantalla, lo que resulta fundamental para el diseño de las distintas partes de la herramienta tanto los tests como el propio OCR que se detallan en el siguiente capítulo.

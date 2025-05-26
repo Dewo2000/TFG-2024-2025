@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <nlohmann/json.hpp>
+//Información del archivo de configuración
 struct ConfigInfo {
 	std::string imgPath;
 	std::string gtPath;
@@ -15,6 +16,7 @@ struct ConfigInfo {
 	std::string ocr;
 	std::vector<std::pair<std::string, std::string>> placeholders;
 };
+//Información de entreno
 struct TrainInfo {
 	std::string font;
 	std::string lan;
@@ -37,6 +39,7 @@ private:
 	};
 	State state_;
 	std::chrono::system_clock::time_point initTime_;
+	//Parsea los argumentos
 	bool parseArguments(const std::vector<std::string>& args);
 	void printTime();
 	void usage();
@@ -45,6 +48,7 @@ private:
 	std::string _configFile;
 	ConfigInfo _configInfo;
 	bool initTesting();
+	//Ejecuta todos los tests
 	void testAll(std::string img,std::string gt,std::string recog, nlohmann::json &imageResult);
 	OCR* _ocr;
 };

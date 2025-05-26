@@ -1,6 +1,6 @@
 \chapter{Introducción}
 \label{cap:introduccion}
-Hoy en día debido a la gran cantidad de usuarios en los videojuegos en diferentes regiones, surge la necesidad de adaptar el videojuego a otras regiones o países diferentes al origen, para ello existe una serie de pasos o estrategias que se puede seguir, en mi caso diseñare una herramienta que ayude a este proceso.
+Hoy en día debido a la gran cantidad de usuarios en los videojuegos en diferentes regiones, surge la necesidad de adaptar el videojuego a otras regiones o países diferentes al origen, para ello existe una serie de pasos o estrategias que se puede seguir, para ello se diseñará una herramienta que ayude a este proceso.
 \section{Motivación}
 Con el paso de los años, los videojuegos se han convertido en una de las industrias de entretenimiento más grandes del mundo. Según un informe de \cite{NZIngreso2024}, en 2024, el mercado global de los videojuegos ha alcanzado un valor estimado de 187.7 miles de millones de ingreso como se muestra en la figura \ref{fig:NewZooRevenues}. En el mismo informe aparece el crecimiento jugadores (Figura \ref{fig:NewzooPlayers}), desde 3.14 billones en 2022 a 3.422 billones 2024 y su predicción en 2027 es de 3.759 billones.
 \begin{figure}[H]
@@ -52,13 +52,14 @@ Para lograr el objetivo principal, se plantea los siguientes objetivos secundari
 \section{Plan de trabajo}
 Para conseguir nuestros objetivos, seguiremos los siguientes pasos:
 \begin{enumerate}
-	\item Investigar y entender como funciona el proceso de internacionalización, localización, el proceso de LQA y los errores de lingüísticos más comunes que se producen a la hora de elaborar un videojuego en el capítulo \ref{cap:estadoDeLaCuestion}.
-	\item Elegir de los errores más comunes de localización aquellas que estén relacionados con errores de caracteres o posiciones que sea posible ser detectado utilizando una OCR.(Capitulo \ref{cap:descripcionTrabajo})
-	\item Elaborar una serie de tests que sean capaz de detectar si existe algún error de localización específico teniendo información de entrada de la OCR.(Capitulo \ref{cap:implementacion})
-	\item Investigar sobre distintos OCRs, ver como funcionan, como usarlos para detectar texto en imágenes, como entrenar un modelo sabiendo el idioma y la fuente usada en la sección(\ref{sec:Seleccion de libreria de OCR})
-	\item Hacer una evaluación con los OCRs seleccionados teniendo en cuenta el tiempo y el porcentaje de acierto.Buscar formas que aumente ese porcentaje de acierto.(Capitulo \ref{cap:evaluacion})
-	\item Hacer una evaluación por separado del funcionamiento de cada módulo (OCR, test).(Capitulo \ref{cap:evaluacion})
-	\item Unificar ambos módulos y hacer una evaluación completa de la herramienta.(Capitulo \ref{cap:evaluacion})
-	\item Generar una salida que sea fácilmente interpretado por un ser humano. (Sección \ref{sec:Generación informe})
+	\item Investigar y entender como funciona el proceso de internacionalización, localización, el proceso de LQA y los errores de lingüísticos más comunes que se producen a la hora de elaborar un videojuego (Capítulo \ref{cap:estadoDeLaCuestion}).
+	\item Investigar sobre distintos OCRs, ver como funcionan, como usarlos para detectar texto en imágenes, como entrenar un modelo sabiendo el idioma y la fuente usada (Capítulo \ref{cap:estadoDeLaCuestion}).
+	\item Elegir de los errores más comunes de localización aquellas que estén relacionados con errores de caracteres o posiciones que sea posible ser detectado utilizando una OCR (Capítulo \ref{cap:descripcionTrabajo}).
+	\item Hacer un diseño de la herramienta detallando los test, el uso de OCR y la salida de la herramienta (Capítulo \ref{cap:descripcionTrabajo}).
+	\item Elaborar una serie de tests que sean capaz de detectar si existe algún error de localización específico teniendo información de entrada de la OCR (Capitulo \ref{cap:implementacion}).
+	\item Integrar la librería de OCR usada y otras librerías y técnicas auxiliares de la herramienta (Capitulo \ref{cap:implementacion}).
+	\item Hacer una evaluación con los OCRs seleccionados teniendo en cuenta el tiempo y el porcentaje de acierto (Capitulo \ref{cap:evaluacion}).
+	\item Hacer una evaluación por separado del funcionamiento de cada módulo (OCR, test) (Capitulo \ref{cap:evaluacion}).
+	\item Unificar ambos módulos y hacer una evaluación completa de la herramienta (Capitulo \ref{cap:evaluacion}).
 	
 \end{enumerate}

@@ -37,7 +37,9 @@ public:
 	virtual std::vector<LBox> getBoundingBoxes(std::string imageUrl) {};
 	std::vector<ButtonLimits> getButtonsFromImage(std::string imgPath,int butMinW, int butMinH);
 protected:
+	//Lee el texto esperado
 	std::string readGT(const std::string& rutaArchivo);
+	//Limpieza de caracteres basura
 	std::string findMostSimilarLine(const std::string& target, const std::vector<std::string>& recognizedLines, double threshold);
 	std::vector<std::string> splitIntoLines(const std::string& text);
 	std::string _volumen = "/home/localizationtests/volumen/";

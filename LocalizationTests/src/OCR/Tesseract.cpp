@@ -12,6 +12,7 @@
 
 bool Tesseract::init(std::string modelPath, std::string font)
 {
+    //Borra el espacio en el nombre de la fuente para evitar conflictos
     font.erase(std::remove_if(font.begin(), font.end(), ::isspace), font.end());
     _ocr = new tesseract::TessBaseAPI();
     	if (_ocr->Init(modelPath.c_str(), font.c_str())) {
@@ -70,19 +71,20 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
             imageName = pngFiles[i].substr(0, pos);  // Obtener solo la parte antes del punto
         }
         std::string gtName = gtPath + imageName + "-gt.txt";        
+        //Obtencion del texto esperado
         if (std::filesystem::exists(gtName)) {
             std::string expected = readGT(gtName);
             std::vector<std::string> expectedLines = splitIntoLines(expected);
             std::vector<std::string> outputLines = splitIntoLines(outText);
             std::string cleanOutPut;
+            //Limpieza de caracteres basura
             for (const auto& expectedLine : expectedLines) {
-                std::string bestMatch = findMostSimilarLine(expectedLine, outputLines, 0.7);
+                std::string bestMatch = findMostSimilarLine(expectedLine, outputLines, 0.6);
                 if (!bestMatch.empty()) {
                     cleanOutPut += bestMatch + "\n";
                 }
             }
             std::ofstream outFile(outputPath + "/" + imageName + ".txt");
-            //std::ofstream outFile2(outputPath + "/" + imageName + "-nl.txt");
             if (outFile.is_open()) {
                 outFile << cleanOutPut;
                 outFile.close();
@@ -91,14 +93,6 @@ bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath, std::
             else {
                 std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
             }
-            /*if (outFile2.is_open()) {
-                outFile2 << outText;
-                outFile2.close();
-                std::cout << "Texto guardado" << std::endl;
-            }*/
-            //else {
-            //    std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
-            //}
         }
         else {
             std::ofstream outFile(outputPath + "/" + imageName + ".txt");
@@ -129,18 +123,20 @@ bool Tesseract::trainModel(std::string lan, std::string font, int iteration, boo
 }
 std::vector<LBox> Tesseract::getBoundingBoxes(std::string imageUrl)
 {
+    //Lee la imagen y se lo pasa al OCR
     std::vector<LBox> boxes;
     Pix* image = pixRead(imageUrl.c_str());
     if (!image) {
-        std::cout << "fallo img" << std::endl;
+        //std::cout << "fallo img" << std::endl;
         return boxes;
     }
     _ocr->SetImage(image);
     int result = _ocr->Recognize(0);
     if (result != 0) {
-    	std::cout << "Recognition failed with error code: " << result << std::endl;
+    	//std::cout << "Recognition failed with error code: " << result << std::endl;
         return boxes;
     }
+    //Itera sobre los resultados de tesseract en busca de las posiciones de texto
     tesseract::ResultIterator* ri = _ocr->GetIterator();
     tesseract::PageIteratorLevel level = tesseract::RIL_TEXTLINE;
     if (ri != nullptr) {
@@ -149,10 +145,8 @@ std::vector<LBox> Tesseract::getBoundingBoxes(std::string imageUrl)
     		float conf = ri->Confidence(level);
     		int x1, y1, x2, y2;
     		ri->BoundingBox(level, &x1, &y1, &x2, &y2);
-    		/*std::cout << "Word: '" << word << "' at (" << x1 << ", " << y1 << ") -> ("
-    			<< x2 << ", " << y2 << "), Confidence: " << conf << "\n";*/
             boxes.push_back({ x1, y1, x2, y2 });
-    		delete[] word;
+    		delete [] word;
 
     		// Avanza al siguiente nivel de iteración
     		if (!ri->Next(level)) {
@@ -161,8 +155,8 @@ std::vector<LBox> Tesseract::getBoundingBoxes(std::string imageUrl)
     		word = ri->GetUTF8Text(level);
     	}
     }
+    if(image)
     pixDestroy(&image);
-    delete image;
 }
 bool Tesseract::train(std::string lan, std::string font, int iteration ,bool clear)
 {
@@ -204,9 +198,6 @@ bool Tesseract::train(std::string lan, std::string font, int iteration ,bool cle
     //Se elimina el log temporal y se escribe la salida
     std::remove(output_file);
     std::remove(error_file);
-    /*std::cout << output_message << std::endl;
-    std::cout << error_message << std::endl;*/
-
     //Error de fuente
     for (const auto& indicator : errorIndicators) {
         if (output_message.find(indicator) != std::string::npos || error_message.find(indicator) != std::string::npos) {
