@@ -17,3 +17,6 @@ passwd localizationtests
 ### Añadir fuente para el entreno:
 Poner la fuente en la carpeta fonts y volver a buildear la imagen en docker.
 Si ya esta el contenedor creado, poner la fuentes en la carpeta fonts del volumen y ejecutar copyFonts.sh
+
+
+### Usar la herramienta
