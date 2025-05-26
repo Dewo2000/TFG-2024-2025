@@ -10,14 +10,16 @@ los videojuegos se quieren vender y publicar en distintos países y culturas. Pa
 es necesario adaptar los videojuegos a diferentes lenguajes y a diferentes culturas.
 Ese proceso lo llamamos localización. El trabajo del equipo de localización puede
 llevar varias iteraciones para evitar errores que puedan aparecer.
-Hoy en día no existen programas que veriquen si un videojuego tiene errores de
+Hoy en día no existen programas que verifiquen si un videojuego tiene errores de
 localización, ya sean de traducción o de internacionalización, por lo que es necesario
 personal que tenga que hacer esa tarea de verificación, esto supone un alto coste en
 tiempo y dinero.
+
 El objetivo de este trabajo es tratar de automatizar esas tareas empezando por
 reconocer y recoger el texto que aparece en el videojuego, seguido de unos tests que
-verican si el texto reconocido tiene algún error de localización, generando así un
+verifican si el texto reconocido tiene algún error de localización, generando así un
 informe que indique los posibles fallos de la localización.
+
 ### Palabras clave
 Videojuegos, Localización, Internacionalización, Automatización, QA, LQA, OCR,
 Tesseract.
